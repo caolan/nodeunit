@@ -263,6 +263,25 @@ nodeunit.runTest(test14, {
     }
 });
 
+var call_order15 = [];
+var test15 = function(test){
+    test.expect(1);
+    call_order15.push('test15');
+    test.ok(false, 'test.ok');
+    test.done();
+};
+nodeunit.runTest(test15, {
+    log: function(assertion){
+        assert.equal(assertion.method, 'ok', 'assertion.method');
+        call_order15.push('log');
+    },
+    testDone: function(failures, total){
+        call_order15.push('testDone');
+        assert.equal(failures, 1, 'failures');
+        assert.equal(total, 1, 'total');
+    }
+});
+
 
 // callbacks are async, so test call order after callbacks have executed
 setTimeout(function(){
@@ -280,5 +299,6 @@ setTimeout(function(){
     assert.deepEqual(call_order12, ['test12', 'log', 'testDone']);
     assert.deepEqual(call_order13, ['test13', 'log', 'testDone']);
     assert.deepEqual(call_order14, ['test14', 'testDone']);
+    assert.deepEqual(call_order15, ['test15', 'log', 'testDone']);
     sys.puts('test-runtest OK');
 }, 100);
