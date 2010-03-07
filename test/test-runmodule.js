@@ -27,6 +27,10 @@ nodeunit.runModule(testmodule, {
         call_order.push('log');
     },
     testStart: function(name){
+        assert.ok(
+            name == 'test1' || name == 'test2' || name == 'test3',
+            'testStart called with test name'
+        );
         call_order.push('testStart');
     },
     testDone: function(failures, total){
