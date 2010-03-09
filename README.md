@@ -181,11 +181,12 @@ callbacks:
   the number of failed and total assertions across all test/modules
 
 The __assertion__ object:
-* passed() - did the assertion pass?
-* failed() - did the assertion fail?
-* error - the AssertionError if the assertion failed
-* method - the nodeunit assertion method used (ok, same, equals...)
-* message - the message the assertion method was called with (optional)
+
+* __passed()__ - did the assertion pass?
+* __failed()__ - did the assertion fail?
+* __error__ - the AssertionError if the assertion failed
+* __method__ - the nodeunit assertion method used (ok, same, equals...)
+* __message__ - the message the assertion method was called with (optional)
 
 For a reference implementation of a test runner, see lib/testrunner.js in the
 nodeunit project directory.
