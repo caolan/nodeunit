@@ -70,12 +70,12 @@ Asynchronous Testing
 Testing asyncronous functions in nodeunit _just works_ for the most part, since
 tests are only considered complete once test.done() is called and each test
 gets its own object with assertion methods to use. This allows nodeunit
-to track which assertions comes from which test functions.
+to track which assertion came from which test.
 
-Despite this, there are still some gotacha's when testing asynchronous code.
+Despite this, there are still some gotcha's when testing asynchronous code.
 Be sure to use the test.expect() method at the start of your tests to make
-sure callbacks actually fired and assertions were run. Otherwise, through not
-calling the callbacks you expect, a test may accidentally pass.
+sure the callbacks actually fired and assertions were run. Otherwise, through
+not calling the callbacks you expect, a test may accidentally pass.
 
 
 Running Tests
@@ -101,7 +101,7 @@ available to all your projects by copying it to ~/.node-libraries
 Adding nodeunit to Your Projects
 --------------------------------
 
-Usually, you'll want to create a script for running the tests for your project
+Usually, you'll want to create a script that runs the tests for your project
 with the correct require paths set up. Here's an example test script, with
 deps, lib and test directories:
 
@@ -116,8 +116,9 @@ deps, lib and test directories:
     testrunner.run(['test']);
 
 If you're using git, you might find it useful to include nodeunit as a
-submodule, making it easy to download for users wanting to run your project's
-test suite. To add nodeunit as a git submodule do the following:
+submodule. Using submodules makes it easy for developers to download nodeunit
+and run your test suite, without cluttering up your repository with
+the source code. To add nodeunit as a git submodule do the following:
 
     git submodule add git://github.com/caolan/nodeunit.git deps/nodeunit
 
@@ -153,6 +154,9 @@ if its missing:
     process.chdir(__dirname);
     testrunner.run(['test']);
 
+Now if someone attempts to run your test suite without nodeunit installed they
+will be prompted to download the submodules for your project.
+
 
 Writing a Test Runner
 ---------------------
@@ -176,11 +180,12 @@ callbacks:
 * __done(result)__ - called after all tests/modules are complete (see result object reference below)
 
 The __assertion__ object:
-* passed() - did the assertion pass?
-* failed() - did the assertion fail?
-* error - the AssertionError if the assertion failed
-* method - the nodeunit assertion method used (ok, same, equals...)
-* message - the message the assertion method was called with (optional)
+
+* __passed()__ - did the assertion pass?
+* __failed()__ - did the assertion fail?
+* __error__ - the AssertionError if the assertion failed
+* __method__ - the nodeunit assertion method used (ok, same, equals...)
+* __message__ - the message the assertion method was called with (optional)
 
 The __test_result__ object:
 * passed() - did the test pass?
