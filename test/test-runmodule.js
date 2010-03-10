@@ -46,6 +46,8 @@ nodeunit.runModule(testmodule, {
         assert.equal(module.name, 'testmodule');
         assert.deepEqual(module.tests, test_results);
         assert.ok(typeof module.duration == "number");
+        assert.equal(module.passed(), false);
+        assert.equal(module.failed(), true);
         call_order.push('moduleDone');
     }
 });
