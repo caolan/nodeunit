@@ -29,6 +29,8 @@ var opts = {
         assert.equal(result.total, 4, 'total');
         assert.deepEqual(result.modules, modules);
         assert.ok(typeof result.duration == "number");
+        assert.equal(result.passed(), true);
+        assert.equal(result.failed(), false);
     }
 };
 
