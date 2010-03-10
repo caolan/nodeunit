@@ -26,9 +26,9 @@ nodeunit.runTest(test1, {
     log: function(assertion){
         throw assertion.error;
     },
-    testDone: function(failures, total){
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 0, 'total');
+    testDone: function(test){
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 0, 'total');
         call_order1.push('testDone');
     }
 });
@@ -45,9 +45,9 @@ nodeunit.runTest(test2, {
         call_order2.push('log');
         assert.deepEqual(assertion.error, err, 'assertion.error');
     },
-    testDone: function(failures, total){
-        assert.equal(failures, 1);
-        assert.equal(total, 1);
+    testDone: function(test){
+        assert.equal(test.failures, 1);
+        assert.equal(test.total, 1);
         call_order2.push('testDone');
     }
 });
@@ -63,9 +63,9 @@ nodeunit.runTest(test3, {
     log: function(assertion){
         call_order3.push('log ' + assertion.message);
     },
-    testDone: function(failures, total){
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 1, 'total');
+    testDone: function(test){
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 1, 'total');
         call_order3.push('testDone');
     }
 });
@@ -84,9 +84,9 @@ nodeunit.runTest(test4, {
         assert.ok(true, 'log called');
         throw ignored_error;
     },
-    testDone: function(failures, total){
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 1, 'total');
+    testDone: function(test){
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 1, 'total');
         call_order4.push('testDone');
     }
 });
@@ -103,9 +103,9 @@ nodeunit.runTest(test5, {
         call_order5.push('log');
         assert.ok(false, 'log should not be called');
     },
-    testDone: function(failures, total){
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 0, 'total');
+    testDone: function(test){
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 0, 'total');
         call_order5.push('testDone');
         throw ignored_error;
     }
@@ -128,10 +128,10 @@ nodeunit.runTest(test7, {
         );
         call_order7.push('log');
     },
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order7.push('testDone');
-        assert.equal(failures, 1, 'failures');
-        assert.equal(total, 1, 'total');
+        assert.equal(test.failures, 1, 'failures');
+        assert.equal(test.total, 1, 'total');
     }
 });
 
@@ -146,10 +146,10 @@ nodeunit.runTest(test8, {
     log: function(assertion){
         call_order8.push('log');
     },
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order8.push('testDone');
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 1, 'total');
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 1, 'total');
     }
 });
 
@@ -240,10 +240,10 @@ nodeunit.runTest(test13, {
         assert.strictEqual(assertion.passed(), true, 'assertion.passed');
         assert.strictEqual(assertion.failed(), false, 'assertion.failed');
     },
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order13.push('testDone');
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 1, 'total');
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 1, 'total');
     }
 });
 
@@ -256,10 +256,10 @@ var test14 = function(test){
     test.done();
 };
 nodeunit.runTest(test14, {
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order14.push('testDone');
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 1, 'total');
+        assert.equal(test.failures, 0, 'failures');
+        assert.equal(test.total, 1, 'total');
     }
 });
 
@@ -275,10 +275,10 @@ nodeunit.runTest(test15, {
         assert.equal(assertion.method, 'ok', 'assertion.method');
         call_order15.push('log');
     },
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order15.push('testDone');
-        assert.equal(failures, 1, 'failures');
-        assert.equal(total, 1, 'total');
+        assert.equal(test.failures, 1, 'failures');
+        assert.equal(test.total, 1, 'total');
     }
 });
 

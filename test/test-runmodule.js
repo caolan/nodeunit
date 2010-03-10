@@ -33,7 +33,7 @@ nodeunit.runModule(testmodule, {
         );
         call_order.push('testStart');
     },
-    testDone: function(failures, total){
+    testDone: function(test){
         call_order.push('testDone');
     },
     moduleDone: function(failures, total){
