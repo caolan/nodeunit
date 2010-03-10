@@ -21,10 +21,10 @@ var opts = {
     moduleStart: function(){
         call_order.push('moduleStart');
     },
-    done: function(failures, total){
+    done: function(result){
         call_order.push('done');
-        assert.equal(failures, 0, 'failures');
-        assert.equal(total, 4, 'total');
+        assert.equal(result.failures, 0, 'failures');
+        assert.equal(result.total, 4, 'total');
     }
 };
 
