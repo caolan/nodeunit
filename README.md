@@ -164,17 +164,16 @@ contain callbacks which run during testing. nodeunit provides the following
 callbacks:
 
 * __moduleStart(name)__ - called before a module is tested
-* __moduleDone(failures, total)__ - called once all test functions within the
-  module have completed, with the failed and total number of assertions across
+* __moduleDone(module_result)__ - called once all test functions within the
+  module have completed (see module_result object reference below)
   ALL tests within the module
 * __testStart(name)__ - called before a test function is run
-* __testDone(failures, total)__ - called once a test function has completed
+* __testDone(test_result)__ - called once a test function has completed (see test_result object reference below)
   (by calling test.done()), with the number of failed and total assertions
   which were run
 * __log(assertion)__ - called whenever an assertion is made (see assertion
   object reference below)
-* __done(failures, total)__ - called after all tests/modules are complete, with
-  the number of failed and total assertions across all test/modules
+* __done(result)__ - called after all tests/modules are complete (see result object reference below)
 
 The __assertion__ object:
 * passed() - did the assertion pass?
@@ -182,6 +181,32 @@ The __assertion__ object:
 * error - the AssertionError if the assertion failed
 * method - the nodeunit assertion method used (ok, same, equals...)
 * message - the message the assertion method was called with (optional)
+
+The __test_result__ object:
+* passed() - did the test pass?
+* failed() - did the test fail?
+* name - the name of the test
+* assertions - the assertions which were run (see assertion object above)
+* total - the total number of assertions which ran
+* failures - the number of assertions which failed
+* duration - the time taken for the test to complete in msecs
+
+The __module_result__ object:
+* passed() - did all assertions in the module pass?
+* failed() - did any assertions fail?
+* name - the name of the module
+* tests - the tests which were run (see test_result object above)
+* total - the total number of assertions which ran
+* failures - the number of assertions which failed
+* duration - the time taken for all tests in the module to complete in msecs
+
+The __result__ object:
+* passed() - did all assertions pass?
+* failed() - did any assertions fail?
+* modules - the modules which were run (see module_result object above)
+* total - the total number of assertions which ran
+* failures - the number of assertions which failed
+* duration - the time taken for all modules to complete in msecs
 
 For a reference implementation of a test runner, see lib/testrunner.js in the
 nodeunit project directory.
