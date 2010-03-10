@@ -23,6 +23,7 @@ var test1 = function(test){
     test.done();
 };
 nodeunit.runTest(test1, {
+    name: 'test1',
     log: function(assertion){
         throw assertion.error;
     },
@@ -30,6 +31,7 @@ nodeunit.runTest(test1, {
         assert.equal(test.failures, 0, 'failures');
         assert.equal(test.total, 0, 'total');
         assert.ok(typeof test.duration == "number", "duration is number");
+        assert.equal(test.name, 'test1');
         call_order1.push('testDone');
     }
 });
