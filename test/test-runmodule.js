@@ -36,9 +36,9 @@ nodeunit.runModule(testmodule, {
     testDone: function(test){
         call_order.push('testDone');
     },
-    moduleDone: function(failures, total){
-        assert.equal(failures, 2);
-        assert.equal(total, 3);
+    moduleDone: function(module){
+        assert.equal(module.failures, 2);
+        assert.equal(module.total, 3);
         call_order.push('moduleDone');
     }
 });

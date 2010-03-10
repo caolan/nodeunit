@@ -31,7 +31,7 @@ var opts = {
 nodeunit.runModule = function(mod, options){
     call_order.push('runModule');
     runModule_calls.push(mod);
-    options.moduleDone(0,1);
+    options.moduleDone({failures: 0, total: 1});
 };
 
 nodeunit.runFiles(
