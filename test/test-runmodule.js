@@ -23,6 +23,7 @@ var testmodule = {
     }
 };
 nodeunit.runModule(testmodule, {
+    name: 'testmodule',
     log: function(assertion){
         call_order.push('log');
     },
@@ -39,6 +40,7 @@ nodeunit.runModule(testmodule, {
     moduleDone: function(module){
         assert.equal(module.failures, 2);
         assert.equal(module.total, 3);
+        assert.equal(module.name, 'testmodule');
         call_order.push('moduleDone');
     }
 });
