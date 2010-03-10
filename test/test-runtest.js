@@ -55,6 +55,7 @@ nodeunit.runTest(test2, {
 
 
 var call_order3 = [];
+var assertion3;
 var test3 = function(test){
     call_order3.push('test3');
     test.ok(true, 'test.ok');
@@ -62,11 +63,13 @@ var test3 = function(test){
 };
 nodeunit.runTest(test3, {
     log: function(assertion){
+        assertion3 = assertion;
         call_order3.push('log ' + assertion.message);
     },
     testDone: function(test){
         assert.equal(test.failures, 0, 'failures');
         assert.equal(test.total, 1, 'total');
+        assert.deepEqual(test.assertions, [assertion3]);
         call_order3.push('testDone');
     }
 });
