@@ -29,6 +29,7 @@ nodeunit.runTest(test1, {
     testDone: function(test){
         assert.equal(test.failures, 0, 'failures');
         assert.equal(test.total, 0, 'total');
+        assert.ok(typeof test.duration == "number", "duration is number");
         call_order1.push('testDone');
     }
 });
@@ -301,4 +302,4 @@ setTimeout(function(){
     assert.deepEqual(call_order14, ['test14', 'testDone']);
     assert.deepEqual(call_order15, ['test15', 'log', 'testDone']);
     sys.puts('test-runtest OK');
-}, 100);
+}, 200);
