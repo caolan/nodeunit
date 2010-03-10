@@ -188,6 +188,7 @@ The __assertion__ object:
 * __message__ - the message the assertion method was called with (optional)
 
 The __test_result__ object:
+
 * passed() - did the test pass?
 * failed() - did the test fail?
 * name - the name of the test
@@ -197,6 +198,7 @@ The __test_result__ object:
 * duration - the time taken for the test to complete in msecs
 
 The __module_result__ object:
+
 * passed() - did all assertions in the module pass?
 * failed() - did any assertions fail?
 * name - the name of the module
@@ -206,6 +208,7 @@ The __module_result__ object:
 * duration - the time taken for all tests in the module to complete in msecs
 
 The __result__ object:
+
 * passed() - did all assertions pass?
 * failed() - did any assertions fail?
 * modules - the modules which were run (see module_result object above)
