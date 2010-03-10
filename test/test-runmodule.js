@@ -5,6 +5,8 @@ var assert = require('assert'),
 
 
 var call_order = [];
+var test_results = [];
+
 var testmodule = {
     test1: function(test){
         call_order.push('test1');
@@ -35,12 +37,14 @@ nodeunit.runModule(testmodule, {
         call_order.push('testStart');
     },
     testDone: function(test){
+        test_results.push(test);
         call_order.push('testDone');
     },
     moduleDone: function(module){
         assert.equal(module.failures, 2);
         assert.equal(module.total, 3);
         assert.equal(module.name, 'testmodule');
+        assert.deepEqual(module.tests, test_results);
         assert.ok(typeof module.duration == "number");
         call_order.push('moduleDone');
     }
