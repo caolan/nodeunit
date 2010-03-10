@@ -17,6 +17,8 @@ var runModule_copy = nodeunit.runModule;
 
 var call_order = [];
 var runModule_calls = [];
+var modules = [];
+
 var opts = {
     moduleStart: function(){
         call_order.push('moduleStart');
@@ -25,13 +27,16 @@ var opts = {
         call_order.push('done');
         assert.equal(result.failures, 0, 'failures');
         assert.equal(result.total, 4, 'total');
+        assert.deepEqual(result.modules, modules);
     }
 };
 
 nodeunit.runModule = function(mod, options){
     call_order.push('runModule');
     runModule_calls.push(mod);
-    options.moduleDone({failures: 0, total: 1});
+    var m = {failures: 0, total: 1};
+    modules.push(m);
+    options.moduleDone(m);
 };
 
 nodeunit.runFiles(
