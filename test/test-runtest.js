@@ -69,6 +69,8 @@ nodeunit.runTest(test3, {
     testDone: function(test){
         assert.equal(test.failures, 0, 'failures');
         assert.equal(test.total, 1, 'total');
+        assert.equal(test.passed(), true, 'passed()');
+        assert.equal(test.failed(), false, 'failed()');
         assert.deepEqual(test.assertions, [assertion3]);
         call_order3.push('testDone');
     }
@@ -283,6 +285,8 @@ nodeunit.runTest(test15, {
         call_order15.push('testDone');
         assert.equal(test.failures, 1, 'failures');
         assert.equal(test.total, 1, 'total');
+        assert.equal(test.passed(), false, 'passed()');
+        assert.equal(test.failed(), true, 'failed()');
     }
 });
 
