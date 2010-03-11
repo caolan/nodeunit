@@ -23,6 +23,9 @@ var opts = {
     moduleStart: function(){
         call_order.push('moduleStart');
     },
+    testDone: function(){return 'testDone';},
+    testStart: function(){return 'testStart';},
+    log: function(){return 'log';},
     done: function(result){
         call_order.push('done');
         assert.equal(result.failures, 0, 'failures');
@@ -35,6 +38,10 @@ var opts = {
 };
 
 nodeunit.runModule = function(mod, options){
+    assert.equal(options.testDone, opts.testDone);
+    assert.equal(options.testStart, opts.testStart);
+    assert.equal(options.log, opts.log);
+    assert.ok(typeof options.name == "string");
     call_order.push('runModule');
     runModule_calls.push(mod);
     var m = {failures: 0, total: 1};
@@ -47,6 +54,8 @@ nodeunit.runFiles(
     opts
 );
 
+// restore runModule function
+nodeunit.runModule = runModule_copy;
 
 setTimeout(function(){
 
@@ -65,9 +74,6 @@ setTimeout(function(){
     assert.ok(called_with('mock_module3'), 'mock_module3 ran');
     assert.ok(called_with('mock_module4'), 'mock_module4 ran');
     assert.equal(runModule_calls.length, 4);
-
-    // restore runModule function
-    nodeunit.runModule = runModule_copy;
 
     sys.puts('test-runfiles OK');
 

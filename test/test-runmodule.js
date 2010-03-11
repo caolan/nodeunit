@@ -38,6 +38,7 @@ nodeunit.runModule(testmodule, {
     },
     testDone: function(test){
         test_results.push(test);
+        assert.ok(typeof test.name == "string");
         call_order.push('testDone');
     },
     moduleDone: function(module){
