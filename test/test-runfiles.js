@@ -26,14 +26,11 @@ var opts = {
     testDone: function(){return 'testDone';},
     testStart: function(){return 'testStart';},
     log: function(){return 'log';},
-    done: function(result){
+    done: function(assertions){
         call_order.push('done');
-        assert.equal(result.failures, 0, 'failures');
-        assert.equal(result.total, 4, 'total');
-        assert.deepEqual(result.modules, modules);
-        assert.ok(typeof result.duration == "number");
-        assert.equal(result.passed(), true);
-        assert.equal(result.failed(), false);
+        assert.equal(assertions.failures, 0, 'failures');
+        assert.equal(assertions.length, 4, 'length');
+        assert.ok(typeof assertions.duration == "number");
     }
 };
 
@@ -44,9 +41,9 @@ nodeunit.runModule = function(mod, options){
     assert.ok(typeof options.name == "string");
     call_order.push('runModule');
     runModule_calls.push(mod);
-    var m = {failures: 0, total: 1};
+    var m = [{failed: function(){return false;}}];
     modules.push(m);
-    options.moduleDone(m);
+    options.moduleDone(options.name, m);
 };
 
 nodeunit.runFiles(

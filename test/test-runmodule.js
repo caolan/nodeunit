@@ -36,19 +36,19 @@ nodeunit.runModule(testmodule, {
         );
         call_order.push('testStart');
     },
-    testDone: function(test){
-        test_results.push(test);
-        assert.ok(typeof test.name == "string");
+    testDone: function(name, assertions){
+        test_results.push(assertions);
+        assert.ok(
+            name == 'test1' || name == 'test2' || name == 'test3',
+            'testDone called with test name'
+        );
         call_order.push('testDone');
     },
-    moduleDone: function(module){
-        assert.equal(module.failures, 2);
-        assert.equal(module.total, 3);
-        assert.equal(module.name, 'testmodule');
-        assert.deepEqual(module.tests, test_results);
-        assert.ok(typeof module.duration == "number");
-        assert.equal(module.passed(), false);
-        assert.equal(module.failed(), true);
+    moduleDone: function(name, assertions){
+        assert.equal(assertions.length, 3);
+        assert.equal(assertions.failures, 2);
+        assert.equal(name, 'testmodule');
+        assert.ok(typeof assertions.duration == "number");
         call_order.push('moduleDone');
     }
 });
