@@ -1,6 +1,12 @@
 nodeunit
 ========
 
+If you're looking for a full-featured and descriptive specification framework
+you might want to checkout a project like the excellent
+[jspec](http://github.com/visionmedia/jspec). If, like me, you just want to
+dive into writing some code and don't want to learn an extensive framework
+before writing tests, then nodeunit could be for you.
+
 nodeunit offers easy unit testing based on a simplified version of the
 [QUnit](http://docs.jquery.com/QUnit) API. However, unlike QUnit, it assumes
 all your tests are asynchronous, and plays nicely with the existing module
@@ -23,6 +29,10 @@ Here is an example unit test module:
         test.ok(false, "this assertion should fail");
         test.done();
     };
+
+When run using the included testrunner, this will output the following:
+
+<img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
 Tests are simply exported from the module, but they are still run in the order
 they are defined. The module() call from QUnit can be omitted, since it is
@@ -85,6 +95,14 @@ nodeunit comes with a basic command-line test runner, which exists in the lib
 folder. Example usage:
 
     node nodeunit/lib/testrunner.js testmodule1.js testfolder [...]
+
+The testrunner uses color output, because I think that's more fun :) I intend
+to add a no-color option in future. To give you a feeling of the fun you'll be
+having writing tests, lets fix the example at the start of the README:
+
+<img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
+
+Ahhh, Doesn't that fell better?
 
 You can also add some code to the bottom of your test modules so they can be
 run directly from the command-line:
