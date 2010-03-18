@@ -34,7 +34,15 @@ When run using the included testrunner, this will output the following:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
-Tests are simply exported from the module, but they are still run in the order
+
+Aims
+----
+
+nodeunit aims to be simple and quick to pick up. This is achieved through using
+existing structures (such as node.js modules) to maximum effect, and reducing
+the API where possible, to make it easier to digest.
+
+Tests are simply exported from a module, but they are still run in the order
 they are defined. The module() call from QUnit can be omitted, since it is
 inside a module file, and we can refer to it by filename.
 
@@ -102,7 +110,7 @@ having writing tests, lets fix the example at the start of the README:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
 
-Ahhh, Doesn't that fell better?
+Ahhh, Doesn't that feel better?
 
 You can also add some code to the bottom of your test modules so they can be
 run directly from the command-line:
