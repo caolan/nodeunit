@@ -51,6 +51,20 @@ nodeunit.runFiles(
     opts
 );
 
+var runfiles_empty_called = false;
+nodeunit.runFiles([], {
+    moduleStart: function(){assert.ok(false, 'should not be called');},
+    testDone: function(){assert.ok(false, 'should not be called');},
+    testStart: function(){assert.ok(false, 'should not be called');},
+    log: function(){assert.ok(false, 'should not be called');},
+    done: function(assertions){
+        assert.equal(assertions.failures, 0, 'failures');
+        assert.equal(assertions.length, 0, 'length');
+        assert.ok(typeof assertions.duration == "number");
+        runfiles_empty_called = true;
+    }
+});
+
 // restore runModule function
 nodeunit.runModule = runModule_copy;
 
@@ -71,6 +85,8 @@ setTimeout(function(){
     assert.ok(called_with('mock_module3'), 'mock_module3 ran');
     assert.ok(called_with('mock_module4'), 'mock_module4 ran');
     assert.equal(runModule_calls.length, 4);
+
+    assert.ok(runfiles_empty_called);
 
     sys.puts('test-runfiles OK');
 

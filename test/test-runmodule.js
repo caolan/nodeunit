@@ -53,6 +53,27 @@ nodeunit.runModule(testmodule, {
     }
 });
 
+var module2_called = false;
+nodeunit.runModule({}, {
+    name: 'module with no exports',
+    log: function(assertion){
+        assert.ok(false, 'log should not be called');
+    },
+    testStart: function(name){
+        assert.ok(false, 'testStart should not be called');
+    },
+    testDone: function(name, assertions){
+        assert.ok(false, 'testDone should not be called');
+    },
+    moduleDone: function(name, assertions){
+        assert.equal(assertions.length, 0);
+        assert.equal(assertions.failures, 0);
+        assert.equal(name, 'module with no exports');
+        assert.ok(typeof assertions.duration == "number");
+        module2_called = true;
+    }
+});
+
 
 // callbacks are async, so test call order after callbacks have executed
 setTimeout(function(){
@@ -62,5 +83,6 @@ setTimeout(function(){
         'testStart', 'test3', 'testDone',
         'moduleDone'
     ]);
+    assert.ok(module2_called);
     sys.puts('test-runmodule OK');
 }, 100);
