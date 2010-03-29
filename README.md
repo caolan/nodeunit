@@ -135,7 +135,7 @@ deps, lib and test directories:
 
     require.paths.push(__dirname);
     require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/libs');
+    require.paths.push(__dirname + '/lib');
     var testrunner = require('nodeunit').testrunner;
 
     process.chdir(__dirname);
@@ -161,7 +161,7 @@ if its missing:
 
     require.paths.push(__dirname);
     require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/libs');
+    require.paths.push(__dirname + '/lib');
 
     try {
         var testrunner = require('nodeunit').testrunner;

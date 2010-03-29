@@ -1,5 +1,7 @@
 var assert = require('assert'),
     sys = require('sys'),
+    fs = require('fs'),
+    path = require('path'),
     nodeunit = require('nodeunit');
 
 
@@ -65,6 +67,29 @@ nodeunit.runFiles([], {
     }
 });
 
+
+var dir2 = __dirname + '/fixtures/dir2';
+var runfiles_emptydir_called = false;
+
+// git doesn't like empty directories, so we have to create one
+path.exists(dir2, function(exists){
+    if(!exists) fs.mkdirSync(dir2, 0777);
+
+    // runFiles on empty directory:
+    nodeunit.runFiles([dir2], {
+        moduleStart: function(){assert.ok(false, 'should not be called');},
+        testDone: function(){assert.ok(false, 'should not be called');},
+        testStart: function(){assert.ok(false, 'should not be called');},
+        log: function(){assert.ok(false, 'should not be called');},
+        done: function(assertions){
+            assert.equal(assertions.failures, 0, 'failures');
+            assert.equal(assertions.length, 0, 'length');
+            assert.ok(typeof assertions.duration == "number");
+            runfiles_emptydir_called = true;
+        }
+    });
+});
+
 // restore runModule function
 nodeunit.runModule = runModule_copy;
 
@@ -87,6 +112,7 @@ setTimeout(function(){
     assert.equal(runModule_calls.length, 4);
 
     assert.ok(runfiles_empty_called);
+    assert.ok(runfiles_emptydir_called);
 
     sys.puts('test-runfiles OK');
 
