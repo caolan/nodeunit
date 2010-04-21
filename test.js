@@ -1,14 +1,8 @@
 #!/usr/local/bin/node
 
-var path = require('path'),
-    fs = require('fs');
+require.paths.push(__dirname);
+require.paths.push(__dirname + '/lib');
+var testrunner = require('nodeunit').testrunner;
 
-require.paths.push(process.cwd());
-require.paths.push(path.join(process.cwd(), 'deps'));
-require.paths.push(path.join(process.cwd(), 'lib'));
-
-fs.readdirSync('test').filter(function(filename){
-    return /\.js$/.exec(filename);
-}).forEach(function(filename){
-    require('test/' + filename.replace(/\.js$/,''));
-});
+process.chdir(__dirname);
+testrunner.run(['test']);
