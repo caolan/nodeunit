@@ -225,8 +225,9 @@ nodeunit project directory.
 Running the nodeunit Tests
 --------------------------
 
-The tests for nodeunit itself use the old-fashioned assert module. Even though
-writing tests for nodeunit in nodeunit syntax would be all cool and meta, this
-approach doesn't lend itself to TDD and easy debugging ;).
+The tests for nodeunit are written using nodeunit itself as the test framework.
+However, the module test-base.js first does some basic tests using the assert
+module to ensure that test functions are actually run, and a basic level of
+nodeunit functionality is available.
 
 To run the nodeunit tests do: node test.js
