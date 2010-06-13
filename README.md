@@ -35,37 +35,6 @@ When run using the included testrunner, this will output the following:
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
 
-Aims
-----
-
-nodeunit aims to be simple and quick to pick up. This is achieved through using
-existing structures (such as node.js modules) to maximum effect, and reducing
-the API where possible, to make it easier to digest.
-
-Tests are simply exported from a module, but they are still run in the order
-they are defined. The module() call from QUnit can be omitted, since it is
-inside a module file, and we can refer to it by filename.
-
-One feature you might expect from a unit test framework is the ability to setup
-an envrionment for tests to run in. In QUnit this is done as an argument to the
-module() function. However, nodeunit avoids implementing this functionality
-since running tests with a specific context is fairly simple in javascript:
-
-    var setup = function(fn){
-        return function(test){
-            fn.call({hello: "world"}, test);
-        }
-    };
-
-    exports.testSetup = setup(function(test){
-        test.equals(this.hello, "world", "test run with env");
-        test.done();
-    });
-
-If you wanted the setup to occur when the test is run (instead of when the
-module is loaded), you could have setup() return a continuation instead.
-
-
 API Documentation
 -----------------
 
@@ -82,18 +51,55 @@ API Documentation
 These 5 functions are all you need to know!
 
 
+nodeunit aims to be simple and easy to learn. This is achieved through using
+existing structures (such as node.js modules) to maximum effect, and reducing
+the API where possible, to make it easier to digest.
+
+Tests are simply exported from a module, but they are still run in the order
+they are defined. The module() call from QUnit can be omitted, since it is
+inside a module file, and we can refer to it by filename.
+
+
 Asynchronous Testing
 --------------------
 
-Testing asyncronous functions in nodeunit _just works_ for the most part, since
-tests are only considered complete once test.done() is called and each test
-gets its own object with assertion methods to use. This allows nodeunit
-to track which assertion came from which test.
+When testing asynchronous code, there are a number of sharp edges to watch out
+for. Thankfully, nodeunit is designed to help you avoid as many of these
+pitfalls as possible. For the most part, testing asynchronous code in nodeunit
+_just works_.
 
-Despite this, there are still some gotcha's when testing asynchronous code.
-Be sure to use the test.expect() method at the start of your tests to make
-sure the callbacks actually fired and assertions were run. Otherwise, through
-not calling the callbacks you expect, a test may accidentally pass.
+
+### Tests run in series
+
+While running tests in parallel seems like a good idea for speeding up your
+test suite, in practice I've found it means writing much more complicated
+tests. Because of node's module cache, running tests in parallel means mocking
+and stubbing is pretty much impossible. One of the nicest things about testing
+in javascript is the ease of doing stubs:
+
+    var _readFile = fs.readFile;
+    fs.readFile = function(path, callback){
+        // its a stub!
+    };
+    // test function that uses fs.readFile
+
+    // we're done
+    fs.readFile = _readFile;
+
+You cannot do this when running tests in parallel. In order to keep testing as
+simple as possible, nodeunit avoids it. Thankfully, most unit-test suites run
+fast anyway.
+
+
+### Explicit ending of tests
+
+When testing async code its important that tests end at the correct point, not
+just after a given number of assertions. Otherwise your tests can run short,
+ending before all assertions have completed. Its important to detect too
+many assertions as well as too few. Combining explicit ending of tests with
+an expected number of assertions helps to avoid false test passes, so be sure
+to use the test.expect() method at the start of your test functions, and
+test.done() when finished.
 
 
 Running Tests
@@ -123,6 +129,9 @@ run directly from the command-line:
 NOTE: this requires nodeunit to be in your require paths. You can make nodeunit
 available to all your projects by copying it to ~/.node-libraries
 
+When using the included test runner, it will exit using the failed number of
+assertions as the exit code. Exiting with 0 when all tests pass.
+
 
 Adding nodeunit to Your Projects
 --------------------------------
@@ -149,7 +158,7 @@ the source code. To add nodeunit as a git submodule do the following:
     git submodule add git://github.com/caolan/nodeunit.git deps/nodeunit
 
 This will add nodeunit to the deps folder of your project. Now, when cloning
-the repositiory, nodeunit can be downloaded by doing the following:
+the repository, nodeunit can be downloaded by doing the following:
 
     git submodule init
     git submodule update
