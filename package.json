@@ -1,0 +1,5 @@
+{ "name": "nodeunit"
+, "description": "Easy unit testing in node.js, loosely based on the QUnit API"
+, "main": "./index"
+, "author": "Caolan McMahon"
+}
