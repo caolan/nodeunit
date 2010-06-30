@@ -13,6 +13,10 @@ all your tests are asynchronous, and plays nicely with the existing module
 system. Because of these assumptions, the already minimal API offered by QUnit
 can be further reduced.
 
+__nodeunit is available as an npm package:__
+
+    npm install nodeunit
+
 
 Usage
 -----
