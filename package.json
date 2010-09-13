@@ -13,4 +13,5 @@
     , "url" : "http://github.com/caolan/nodeunit/raw/master/LICENSE"
     }
   ]
+ , "bin" : { "nodeunit" : "./bin/nodeunit" }
 }
