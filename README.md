@@ -17,6 +17,10 @@ __nodeunit is available as an npm package:__
 
     npm install nodeunit
 
+__Contributors__
+
+* [gerad](http://github.com/gerad)
+
 
 Usage
 -----
