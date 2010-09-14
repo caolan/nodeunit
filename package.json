@@ -2,7 +2,7 @@
 , "description": "Easy unit testing in node.js, loosely based on the QUnit API"
 , "main": "./index"
 , "author": "Caolan McMahon"
-, "version": "0.1.0"
+, "version": "0.1.1"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
