@@ -127,6 +127,71 @@ exports.testEmptyDir = function(test){
         });
     });
 };
+
+
+var CoffeeScript;
+try {
+    CoffeeScript = require('coffee-script');
+} catch (e) {
+}
+
+if (CoffeeScript) {
+    exports.testCoffeeScript = function(test){
+        process.chdir(__dirname);
+        require.paths.push(__dirname);
+        var env = {
+            mock_coffee_module: require('./fixtures/coffee/mock_coffee_module')
+        }
+
+        test.expect(10);
+        var runModule_copy = nodeunit.runModule;
+
+        var runModule_calls = [];
+        var modules = [];
+
+        var opts = {
+            moduleStart: function(){
+                test.ok(true, 'moduleStart called');
+            },
+            testDone: function(){return 'testDone';},
+            testStart: function(){return 'testStart';},
+            log: function(){return 'log';},
+            done: function(assertions){
+                test.equals(assertions.failures, 0, 'failures');
+                test.equals(assertions.length, 1, 'length');
+                test.ok(typeof assertions.duration == "number");
+
+                var called_with = function(name){
+                    return runModule_calls.some(function(m){
+                        return m.name == name;
+                    });
+                };
+                test.ok(called_with('mock_coffee_15'), 'mock_coffee_module ran');
+                test.equals(runModule_calls.length, 1);
+
+                nodeunit.runModule = runModule_copy;
+                test.done();
+            }
+        };
+
+        nodeunit.runModule = function(mod, options){
+            test.equals(options.testDone, opts.testDone);
+            test.equals(options.testStart, opts.testStart);
+            test.equals(options.log, opts.log);
+            test.ok(typeof options.name == "string");
+            runModule_calls.push(mod);
+            var m = [{failed: function(){return false;}}];
+            modules.push(m);
+            options.moduleDone(options.name, m);
+        };
+
+        nodeunit.runFiles(
+            ['fixtures/coffee/mock_coffee_module.coffee'],
+            opts
+        );
+    };
+}
+
 /*
 // restore runModule function
 nodeunit.runModule = runModule_copy;
