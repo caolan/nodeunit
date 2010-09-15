@@ -19,7 +19,8 @@ __nodeunit is available as an npm package:__
 
 __Contributors__
 
-* [gerad](http://github.com/gerad)
+* [gerad](http://github.com/gerad) - command-line tool
+* [sstephenson](http://github.com/sstephenson) - coffee-script support
 
 
 Usage
@@ -248,3 +249,5 @@ module to ensure that test functions are actually run, and a basic level of
 nodeunit functionality is available.
 
 To run the nodeunit tests do: node test.js
+
+__Note:__ The tests hang when using node v0.2.0, upgrading to v0.2.1 fixes this.
