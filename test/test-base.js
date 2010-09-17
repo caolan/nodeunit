@@ -5,7 +5,7 @@
  */
 
 var assert = require('assert'),
-    nodeunit = require('nodeunit');
+    nodeunit = require('../lib/nodeunit');
 
 
 // NOT A TEST - util function to make testing faster.

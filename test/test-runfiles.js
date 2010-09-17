@@ -2,7 +2,7 @@ var assert = require('assert'),
     sys = require('sys'),
     fs = require('fs'),
     path = require('path'),
-    nodeunit = require('nodeunit');
+    nodeunit = require('../lib/nodeunit');
 
 
 var setup = function(fn){

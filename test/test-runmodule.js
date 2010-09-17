@@ -1,4 +1,4 @@
-var nodeunit = require('nodeunit');
+var nodeunit = require('../lib/nodeunit');
 
 
 exports.testRunModule = function(test){
