@@ -21,8 +21,7 @@ exports.testRunModule = function(test){
             test.done();
         }
     };
-    nodeunit.runModule(testmodule, {
-        name: 'testmodule',
+    nodeunit.runModule('testmodule', testmodule, {
         log: function(assertion){
             call_order.push('log');
         },
@@ -52,14 +51,12 @@ exports.testRunModule = function(test){
                 'testStart', 'test3', 'testDone',
                 'moduleDone'
             ]);
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testRunModuleEmpty = function(test){
-    nodeunit.runModule({}, {
-        name: 'module with no exports',
+    nodeunit.runModule('module with no exports', {}, {
         log: function(assertion){
             test.ok(false, 'log should not be called');
         },
@@ -74,7 +71,6 @@ exports.testRunModuleEmpty = function(test){
             test.equals(assertions.failures, 0);
             test.equals(name, 'module with no exports');
             test.ok(typeof assertions.duration == "number");
-            test.done();
         }
-    });
+    }, test.done);
 };

@@ -21,19 +21,17 @@ var setup = function(fn){
 
 
 exports.testRunFiles = setup(function(test){
-    test.expect(28);
+    test.expect(24);
     var runModule_copy = nodeunit.runModule;
 
     var runModule_calls = [];
     var modules = [];
 
     var opts = {
-        moduleStart: function(){
-            test.ok(true, 'moduleStart called');
-        },
-        testDone: function(){return 'testDone';},
-        testStart: function(){return 'testStart';},
-        log: function(){return 'log';},
+        moduleStart: function(){ return 'moduleStart'; },
+        testDone: function(){ return 'testDone'; },
+        testStart: function(){ return 'testStart'; },
+        log: function(){ return 'log'; },
         done: function(assertions){
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 4, 'length');
@@ -55,15 +53,15 @@ exports.testRunFiles = setup(function(test){
         }
     };
 
-    nodeunit.runModule = function(mod, options){
+    nodeunit.runModule = function(name, mod, options, callback){
         test.equals(options.testDone, opts.testDone);
         test.equals(options.testStart, opts.testStart);
         test.equals(options.log, opts.log);
-        test.ok(typeof options.name == "string");
+        test.ok(typeof name == "string");
         runModule_calls.push(mod);
         var m = [{failed: function(){return false;}}];
         modules.push(m);
-        options.moduleDone(options.name, m);
+        callback(null, m);
     };
 
     nodeunit.runFiles(
@@ -143,16 +141,14 @@ if (CoffeeScript) {
             mock_coffee_module: require('./fixtures/coffee/mock_coffee_module')
         }
 
-        test.expect(10);
+        test.expect(9);
         var runModule_copy = nodeunit.runModule;
 
         var runModule_calls = [];
         var modules = [];
 
         var opts = {
-            moduleStart: function(){
-                test.ok(true, 'moduleStart called');
-            },
+            moduleStart: function(){return 'moduleStart';},
             testDone: function(){return 'testDone';},
             testStart: function(){return 'testStart';},
             log: function(){return 'log';},
@@ -166,7 +162,10 @@ if (CoffeeScript) {
                         return m.name == name;
                     });
                 };
-                test.ok(called_with('mock_coffee_15'), 'mock_coffee_module ran');
+                test.ok(
+                    called_with('mock_coffee_15'),
+                    'mock_coffee_module ran'
+                );
                 test.equals(runModule_calls.length, 1);
 
                 nodeunit.runModule = runModule_copy;
@@ -174,15 +173,15 @@ if (CoffeeScript) {
             }
         };
 
-        nodeunit.runModule = function(mod, options){
+        nodeunit.runModule = function(name, mod, options, callback){
             test.equals(options.testDone, opts.testDone);
             test.equals(options.testStart, opts.testStart);
             test.equals(options.log, opts.log);
-            test.ok(typeof options.name == "string");
+            test.ok(typeof name == "string");
             runModule_calls.push(mod);
             var m = [{failed: function(){return false;}}];
             modules.push(m);
-            options.moduleDone(options.name, m);
+            callback(null, m);
         };
 
         nodeunit.runFiles(
@@ -191,33 +190,3 @@ if (CoffeeScript) {
         );
     };
 }
-
-/*
-// restore runModule function
-nodeunit.runModule = runModule_copy;
-
-setTimeout(function(){
-
-    assert.deepEqual(call_order, [
-        'moduleStart', 'runModule', 'moduleStart', 'runModule', 'moduleStart',
-        'runModule', 'moduleStart', 'runModule', 'done'
-    ], 'call_order');
-
-    var called_with = function(name){
-        return runModule_calls.some(function(m){
-            return m.name == name;
-        });
-    };
-    assert.ok(called_with('mock_module1'), 'mock_module1 ran');
-    assert.ok(called_with('mock_module2'), 'mock_module2 ran');
-    assert.ok(called_with('mock_module3'), 'mock_module3 ran');
-    assert.ok(called_with('mock_module4'), 'mock_module4 ran');
-    assert.equal(runModule_calls.length, 4);
-
-    assert.ok(runfiles_empty_called);
-    assert.ok(runfiles_emptydir_called);
-
-    sys.puts('test-runfiles OK');
-
-}, 100);
-*/

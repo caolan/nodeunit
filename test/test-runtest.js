@@ -12,16 +12,14 @@ exports.testArgs = function(test){
 
 exports.testDoneCallback = function(test){
     test.expect(4);
-    nodeunit.runTest(exports.testArgs, {
-        name: 'testname',
+    nodeunit.runTest('testname', exports.testArgs, {
         testDone: function(name, assertions){
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 5, 'length');
             test.ok(typeof assertions.duration == "number");
             test.equals(name, 'testname');
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testThrowError = function(test){
@@ -30,16 +28,15 @@ exports.testThrowError = function(test){
     var testfn = function(test){
         throw err;
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         log: function(assertion){
             test.same(assertion.error, err, 'assertion.error');
         },
         testDone: function(name, assertions){
             test.equals(assertions.failures, 1);
             test.equals(assertions.length, 1);
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testFailingLog = function(test){
@@ -60,7 +57,7 @@ exports.testFailingLog = function(test){
         test.ok(true, 'test.ok');
         test.done();
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         log: function(assertion){
             test.ok(true, 'log called');
             throw ignored_error;
@@ -69,9 +66,8 @@ exports.testFailingLog = function(test){
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 1, 'total');
             process.removeListener('uncaughtException', err_handler);
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testFailingTestDone = function(test){
@@ -89,7 +85,7 @@ exports.testFailingTestDone = function(test){
     var testfn = function(test){
         test.done();
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         log: function(assertion){
             test.ok(false, 'log should not be called');
         },
@@ -102,7 +98,7 @@ exports.testFailingTestDone = function(test){
             });
             throw ignored_error;
         }
-    });
+    }, function () {});
 };
 
 exports.testAssertionObj = function(test){
@@ -111,7 +107,7 @@ exports.testAssertionObj = function(test){
         test.ok(true, 'ok true');
         test.done();
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         log: function(assertion){
             test.ok(assertion.passed() === true, 'assertion.passed');
             test.ok(assertion.failed() === false, 'assertion.failed');
@@ -119,9 +115,8 @@ exports.testAssertionObj = function(test){
         testDone: function(name, assertions){
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 1, 'total');
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testLogOptional = function(test){
@@ -130,13 +125,12 @@ exports.testLogOptional = function(test){
         test.ok(true, 'ok true');
         test.done();
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         testDone: function(name, assertions){
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 1, 'total');
-            test.done();
         }
-    });
+    }, test.done);
 };
 
 exports.testExpectWithFailure = function(test){
@@ -146,14 +140,13 @@ exports.testExpectWithFailure = function(test){
         test.ok(false, 'test.ok');
         test.done();
     };
-    nodeunit.runTest(testfn, {
+    nodeunit.runTest('testname', testfn, {
         log: function(assertion){
             test.equals(assertion.method, 'ok', 'assertion.method');
         },
         testDone: function(name, assertions){
             test.equals(assertions.failures, 1, 'failures');
             test.equals(assertions.length, 1, 'total');
-            test.done();
         }
-    });
+    }, test.done);
 };

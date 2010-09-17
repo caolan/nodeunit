@@ -60,6 +60,7 @@ var makeTest = function(method, args_pass, args_fail){
 
         // test pass
         nodeunit.runTest(
+            'testname',
             function(test){
                 test[method].apply(test, args_pass);
                 test.done();
@@ -67,12 +68,15 @@ var makeTest = function(method, args_pass, args_fail){
             {testDone: function(name, assertions){
                 assert.equal(assertions.length, 1);
                 assert.equal(assertions.failures, 0);
+            }},
+            function () {
                 test1_called = true;
             }
-        });
+        );
 
         // test failure
         nodeunit.runTest(
+            'testname',
             function(test){
                 test[method].apply(test, args_fail);
                 test.done();
@@ -80,9 +84,11 @@ var makeTest = function(method, args_pass, args_fail){
             {testDone: function(name, assertions){
                 assert.equal(assertions.length, 1);
                 assert.equal(assertions.failures, 1);
+            }},
+            function () {
                 test2_called = true;
             }
-        });
+        );
 
         // ensure tests were run
         waitFor(function(){
@@ -108,6 +114,7 @@ exports.testExpect = function(test){
 
     // correct number of tests run
     nodeunit.runTest(
+        'testname',
         function(test){
             test.expect(2);
             test.ok(true);
@@ -117,12 +124,15 @@ exports.testExpect = function(test){
         {testDone: function(name, assertions){
             test.equals(assertions.length, 2);
             test.equals(assertions.failures, 0);
+        }},
+        function () {
             test1_called = true;
         }
-    });
+    );
 
     // no tests run
     nodeunit.runTest(
+        'testname',
         function(test){
             test.expect(2);
             test.done();
@@ -130,12 +140,15 @@ exports.testExpect = function(test){
         {testDone: function(name, assertions){
             test.equals(assertions.length, 1);
             test.equals(assertions.failures, 1);
+        }},
+        function () {
             test2_called = true;
         }
-    });
+    );
 
     // incorrect number of tests run
     nodeunit.runTest(
+        'testname',
         function(test){
             test.expect(2);
             test.ok(true);
@@ -146,9 +159,11 @@ exports.testExpect = function(test){
         {testDone: function(name, assertions){
             test.equals(assertions.length, 4);
             test.equals(assertions.failures, 1);
+        }},
+        function () {
             test3_called = true;
         }
-    });
+    );
 
     // ensure callbacks fired
     waitFor(function(){
