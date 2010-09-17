@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node
 
 var testrunner = require('./lib/nodeunit').testrunner;
 
