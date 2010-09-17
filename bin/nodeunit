@@ -2,7 +2,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var lib = path.join(path.dirname(__filename), '../lib');
+var lib = path.join(__dirname, '../lib');
 
 var testrunner = require(lib + '/testrunner.js');
 testrunner.run(process.argv.slice(2));
