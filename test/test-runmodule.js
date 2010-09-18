@@ -74,3 +74,42 @@ exports.testRunModuleEmpty = function(test){
         }
     }, test.done);
 };
+
+exports.testNestedTests = function(test){
+    var call_order = [];
+    var m = {
+        test1: function(test){
+            test.done();
+        },
+        suite: {
+            t1: function(test){
+                test.done();
+            },
+            t2: function(test){
+                test.done();
+            },
+            another_suite: {
+                t3: function(test){
+                    test.done();
+                }
+            }
+        }
+    };
+    nodeunit.runModule('modulename', m, {
+        testStart: function(name){
+            call_order.push('testStart ' + name);
+        },
+        testDone: function(name, assertions){
+            call_order.push('testDone ' + name);
+        }
+    }, function(){
+        test.same(call_order, [
+            'testStart test1', 'testDone test1',
+            'testStart suite - t1', 'testDone suite - t1',
+            'testStart suite - t2', 'testDone suite - t2',
+            'testStart suite - another_suite - t3',
+            'testDone suite - another_suite - t3'
+        ]);
+        test.done();
+    });
+};

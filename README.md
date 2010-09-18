@@ -111,6 +111,54 @@ to use the test.expect() method at the start of your test functions, and
 test.done() when finished.
 
 
+Groups, setUp and tearDown
+--------------------------
+
+Nodeunit allows the nesting of test functions:
+
+    exports.test1 = function (test) {
+        ...
+    }
+
+    exports.group = {
+        test2: function (test) {
+            ...
+        },
+        test3: function (test) {
+            ...
+        }
+    }
+
+This would be run as:
+
+    test1
+    group - test2
+    group - test3
+
+Using these groups its possible to add setUp and tearDown functions to your
+tests. Nodeunit has a utility function called testCase which allows you to define
+a setUp function, which is run before each test, and a tearDown function, which is
+run after each test calls test.done():
+
+    var testCase = require('nodeunit').testCase;
+
+    module.exports = testCase({
+        setUp: function () {
+            this.foo = 'bar';
+        },
+        tearDown: function () {
+            // clean up
+        },
+        test1: function (test) {
+            test.equals(this.foo, 'bar');
+            test.done();
+        }
+    });
+
+In this way, its possible to have multiple groups of tests in a module, each group
+with its own setUp and tearDown functions.
+
+
 Running Tests
 -------------
 
