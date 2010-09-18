@@ -248,6 +248,26 @@ However, the module test-base.js first does some basic tests using the assert
 module to ensure that test functions are actually run, and a basic level of
 nodeunit functionality is available.
 
-To run the nodeunit tests do: node test.js
+To run the nodeunit tests do:
+    
+    make test
 
-__Note:__ The tests hang when using node v0.2.0, upgrading to v0.2.1 fixes this.
+__Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
+to v0.2.1 fixes this.
+
+
+Installing the command-line tool
+--------------------------------
+
+If you have installed nodeunit via npm, the command line tool should already be
+available. Otherwise you can do:
+
+    make install
+
+to install nodeunit to /usr/local. You can then use nodeunit on the command-line:
+
+    nodeunit PATH
+
+To uninstall nodeunit, do:
+
+    make uninstall
