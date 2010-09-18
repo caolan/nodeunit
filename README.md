@@ -114,10 +114,10 @@ test.done() when finished.
 Running Tests
 -------------
 
-nodeunit comes with a basic command-line test runner, which exists in the lib
-folder. Example usage:
+nodeunit comes with a basic command-line test runner, which can be installed
+using 'make install'. Example usage:
 
-    node nodeunit/lib/testrunner.js testmodule1.js testfolder [...]
+    nodeunit testmodule1.js testfolder [...]
 
 The testrunner uses color output, because I think that's more fun :) I intend
 to add a no-color option in future. To give you a feeling of the fun you'll be
@@ -136,7 +136,8 @@ run directly from the command-line:
     }
 
 NOTE: this requires nodeunit to be in your require paths. You can make nodeunit
-available to all your projects by copying it to ~/.node-libraries
+available to all your projects by copying it to ~/.node-libraries or installing
+it via npm.
 
 When using the included test runner, it will exit using the failed number of
 assertions as the exit code. Exiting with 0 when all tests pass.
@@ -145,11 +146,12 @@ assertions as the exit code. Exiting with 0 when all tests pass.
 Adding nodeunit to Your Projects
 --------------------------------
 
-Usually, you'll want to create a script that runs the tests for your project
-with the correct require paths set up. Here's an example test script, with
-deps, lib and test directories:
+If you don't want people to have to install the nodeunit command-line tool,
+you'll want to create a script that runs the tests for your project with the
+correct require paths set up. Here's an example test script, with deps, lib and
+test directories:
 
-    #!/usr/local/bin/node
+    #!/usr/bin/env node
 
     require.paths.push(__dirname);
     require.paths.push(__dirname + '/deps');
@@ -175,7 +177,7 @@ the repository, nodeunit can be downloaded by doing the following:
 Let's update the test script above with a helpful hint on how to get nodeunit,
 if its missing:
 
-    #!/usr/local/bin/node
+    #!/usr/bin/env node
 
     require.paths.push(__dirname);
     require.paths.push(__dirname + '/deps');
@@ -230,7 +232,7 @@ The __assertion__ object:
 * __method__ - the nodeunit assertion method used (ok, same, equals...)
 * __message__ - the message the assertion method was called with (optional)
 
-The __assertions__ object:
+The __assertionList__ object:
 
 * An array-like object with the following new attributes:
   * __failures__ - the number of assertions which failed
