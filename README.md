@@ -25,6 +25,9 @@ __Contributors__
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
 
+Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
+project, which implements a 'pretty dsl on top of nodeunit'.
+
 
 Usage
 -----
