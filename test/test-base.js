@@ -107,6 +107,28 @@ exports.testSame = makeTest('same',
     [{test:'test'},{monkey:'penguin'}]
 );
 
+// from the assert module:
+exports.testEqual = makeTest('equal', [1,1], [1,2]);
+exports.testNotEqual = makeTest('notEqual', [1,2], [1,1]);
+exports.testDeepEqual = makeTest('deepEqual',
+    [{one:1}, {one:1}], [{one:1}, {two:2}]
+);
+exports.testNotDeepEqual = makeTest('notDeepEqual',
+    [{one:1}, {two:2}], [{one:1}, {one:1}]
+);
+exports.testStrictEqual = makeTest('strictEqual', [1,1], [1,true]);
+exports.testNotStrictEqual = makeTest('notStrictEqual', [true,1], [1,1]);
+exports.testThrows = makeTest('throws',
+    [function(){throw new Error('test');}],
+    [function(){return;}]
+);
+exports.testDoesNotThrows = makeTest('doesNotThrow',
+    [function(){return;}],
+    [function(){throw new Error('test');}]
+);
+exports.testIfError = makeTest('ifError', [false], [new Error('test')]);
+
+
 exports.testExpect = function(test){
     var test1_called = false,
         test2_called = false,
