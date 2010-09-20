@@ -1,21 +1,13 @@
 nodeunit
 ========
 
-If you're looking for a full-featured and descriptive specification framework
-you might want to checkout a project like the excellent
-[jspec](http://github.com/visionmedia/jspec). If, like me, you just want to
-dive into writing some code and don't want to learn an extensive framework
-before writing tests, then nodeunit could be for you.
+A simple unit testing tool based on the node.js assert module.
 
-nodeunit offers easy unit testing based on a simplified version of the
-[QUnit](http://docs.jquery.com/QUnit) API. However, unlike QUnit, it assumes
-all your tests are asynchronous, and plays nicely with the existing module
-system. Because of these assumptions, the already minimal API offered by QUnit
-can be further reduced.
-
-__nodeunit is available as an npm package:__
-
-    npm install nodeunit
+* Simple to use
+* Just export the tests from a module
+* Helps you avoid common pitfalls when testing asynchronous code
+* Easy to add test cases with setUp and tearDown functions if you wish
+* Allows the use of mocks and stubs
 
 __Contributors__
 
@@ -27,7 +19,6 @@ __Contributors__
 
 Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
-
 
 Usage
 -----
@@ -49,30 +40,63 @@ When run using the included testrunner, this will output the following:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
+Installation
+------------
+
+There are two options for installing nodeunit:
+
+1. Clone / download nodeunit from [github](http://github.com/caolan/nodeunit),
+   then:
+
+    make && sudo make install
+
+2. Install via npm:
+
+    npm install nodeunit
 
 API Documentation
 -----------------
 
+Nodeunit uses the functions available in the node.js
+[assert module](http://nodejs.org/api.html#assert-280):
+
+* __ok(value, [message])__ - Tests if value is a true value.
+* __equal(actual, expected, [message])__ - Tests shallow, coercive equality
+  with the equal comparison operator ( == ).
+* __notEqual(actual, expected, [message])__ - Tests shallow, coercive
+  non-equality with the not equal comparison operator ( != ).
+* __deepEqual(actual, expected, [message])__ - Tests for deep equality.
+* __notDeepEqual(actual, expected, [message])__ - Tests for any deep
+  inequality.
+* __strictEqual(actual, expected, [message])__ - Tests strict equality, as
+  determined by the strict equality operator ( === )
+* __notStrictEqual(actual, expected, [message])__ - Tests strict non-equality,
+  as determined by the strict not equal operator ( !== )
+* __throws(block, [error], [message])__ - Expects block to throw an error.
+* __doesNotThrow(block, [error], [message])__ - Expects block not to throw an
+  error.
+* __ifError(value)__ - Tests if value is not a false value, throws if it is a
+  true value. Useful when testing the first argument, error in callbacks.
+
+Nodeunit also provides the following functions within tests:
+
 * __expect(amount)__ - Specify how many assertions are expected to run within a
-  test.
-* __ok(state, message)__ - A boolean assertion, equivalent to [assert.ok](http://nodejs.org/api.html#_assert_module)
-* __equals(actual, expected, message)__ - A comparison assertion, equivalent
-  to [assert.equal](http://nodejs.org/api.html#_assert_module)
-* __same(actual, expected, message)__ - A deep recursive comparison, equivalent
-  to [assert.deepEquals](http://nodejs.org/api.html#_assert_module)
-* __done()__ - Finish this test function, and move on to the next. ALL tests
-  should call this!
+  test. Very useful for ensuring that all your callbacks and assertions are
+  run.
+* __done()__ - Finish the current test function, and move on to the next. ALL
+  tests should call this!
 
-These 5 functions are all you need to know!
-
-
-nodeunit aims to be simple and easy to learn. This is achieved through using
+Nodeunit aims to be simple and easy to learn. This is achieved through using
 existing structures (such as node.js modules) to maximum effect, and reducing
 the API where possible, to make it easier to digest.
 
 Tests are simply exported from a module, but they are still run in the order
-they are defined. The module() call from QUnit can be omitted, since it is
-inside a module file, and we can refer to it by filename.
+they are defined.
+
+__Note:__ Users of old nodeunit versions may remember using ok, equals and same
+in the style of qunit, instead of the assert functions above. These functions
+still exist for backwards compatibility, and are simply aliases to their assert
+module counterparts.
 
 
 Asynchronous Testing
@@ -142,9 +166,9 @@ This would be run as:
     group - test3
 
 Using these groups its possible to add setUp and tearDown functions to your
-tests. Nodeunit has a utility function called testCase which allows you to define
-a setUp function, which is run before each test, and a tearDown function, which is
-run after each test calls test.done():
+tests. Nodeunit has a utility function called testCase which allows you to
+define a setUp function, which is run before each test, and a tearDown
+function, which is run after each test calls test.done():
 
     var testCase = require('nodeunit').testCase;
 
@@ -161,15 +185,15 @@ run after each test calls test.done():
         }
     });
 
-In this way, its possible to have multiple groups of tests in a module, each group
-with its own setUp and tearDown functions.
+In this way, its possible to have multiple groups of tests in a module, each
+group with its own setUp and tearDown functions.
 
 
 Running Tests
 -------------
 
 nodeunit comes with a basic command-line test runner, which can be installed
-using 'make install'. Example usage:
+using 'sudo make install'. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
 
@@ -310,20 +334,3 @@ To run the nodeunit tests do:
 
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
 to v0.2.1 fixes this.
-
-
-Installing the command-line tool
---------------------------------
-
-If you have installed nodeunit via npm, the command line tool should already be
-available. Otherwise you can do:
-
-    make install
-
-to install nodeunit to /usr/local. You can then use nodeunit on the command-line:
-
-    nodeunit PATH
-
-To uninstall nodeunit, do:
-
-    make uninstall
