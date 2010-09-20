@@ -1,4 +1,4 @@
-nodeunit
+Nodeunit
 ========
 
 A simple unit testing tool based on the node.js assert module.
@@ -192,7 +192,7 @@ group with its own setUp and tearDown functions.
 Running Tests
 -------------
 
-nodeunit comes with a basic command-line test runner, which can be installed
+Nodeunit comes with a basic command-line test runner, which can be installed
 using 'sudo make install'. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
@@ -285,10 +285,10 @@ will be prompted to download the submodules for your project.
 Writing a Test Runner
 ---------------------
 
-nodeunit exports runTest(fn, options), runModule(mod, options) and
+Nodeunit exports runTest(fn, options), runModule(mod, options) and
 runFiles(paths, options). You'll most likely want to run test suites from
 files, which can be done using the latter function. The _options_ argument can
-contain callbacks which run during testing. nodeunit provides the following
+contain callbacks which run during testing. Nodeunit provides the following
 callbacks:
 
 * __moduleStart(name)__ - called before a module is tested
