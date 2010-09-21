@@ -11,7 +11,6 @@ A simple unit testing tool based on the node.js assert module.
 
 __Contributors__
 
-* [gerad](http://github.com/gerad) - command-line tool
 * [sstephenson](http://github.com/sstephenson) - coffee-script support
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
