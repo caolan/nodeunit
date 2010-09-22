@@ -1,6 +1,5 @@
 PACKAGE = nodeunit
-
-NODEJS = nodejs
+NODEJS = $(if $(shell test -f /usr/bin/nodejs && echo "true"),nodejs,node)
 
 PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
@@ -20,9 +19,9 @@ stamp-build: $(wildcard  deps/* lib/*.js)
 	touch $@;
 	mkdir -p $(BUILDDIR)/nodeunit
 	cp -R deps lib/*.js $(BUILDDIR)/nodeunit
-	find $(BUILDDIR)/nodeunit/ -type f | xargs perl -pi -e "s{require\('\.\.\/deps/(.*?)'\)}{require('./deps/\$$1')}g" 
-	echo -e '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/testrunner.js $$@' > $(BUILDDIR)/nodeunit.sh
-	echo -e "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
+	find $(BUILDDIR)/nodeunit/ -type f | xargs sed -i 's/\.\.\/deps/.\/deps/'
+	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/testrunner.js $$@' > $(BUILDDIR)/nodeunit.sh
+	printf "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
 
 test:
 	./bin/nodeunit test
