@@ -12,6 +12,8 @@ A simple unit testing tool based on the node.js assert module.
 __Contributors__
 
 * [sstephenson](http://github.com/sstephenson) - coffee-script support
+* [azatoth](http://github.com/azatoth) - debian-friendly Makefile, now
+  supports both 'node' and 'nodejs' executables
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
