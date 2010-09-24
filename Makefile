@@ -38,4 +38,7 @@ uninstall:
 clean:
 	rm -rf $(BUILDDIR) stamp-build
 
+lint:
+	nodelint ./*.js ./lib/*.js ./test/*.js
+
 .PHONY: test install uninstall build all
