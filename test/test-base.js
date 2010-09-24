@@ -24,7 +24,6 @@ var waitFor = function (fn, timeout, callback, start) {
       var now = new Date().getTime();
       if (now - start >= timeout) {
         throw e;
-        callback();
       }
       else {
         process.nextTick(function () {
@@ -34,7 +33,6 @@ var waitFor = function (fn, timeout, callback, start) {
     }
     else {
       throw e;
-      callback();
     }
   }
 };

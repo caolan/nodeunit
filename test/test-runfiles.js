@@ -23,44 +23,43 @@ var setup = function (fn) {
 
 exports.testRunFiles = setup(function (test) {
   test.expect(24);
-  var runModule_copy = nodeunit.runModule;
+  var
+    runModule_copy = nodeunit.runModule,
+    runModule_calls = [],
+    modules = [],
+    opts = {
+      moduleStart: function () {
+        return 'moduleStart';
+      },
+      testDone: function () {
+        return 'testDone';
+      },
+      testStart: function () {
+        return 'testStart';
+      },
+      log: function () {
+        return 'log';
+      },
+      done: function (assertions) {
+        test.equals(assertions.failures, 0, 'failures');
+        test.equals(assertions.length, 4, 'length');
+        test.ok(typeof assertions.duration === "number");
 
-  var runModule_calls = [];
-  var modules = [];
+        var called_with = function (name) {
+          return runModule_calls.some(function (m) {
+            return m.name === name;
+          });
+        };
+        test.ok(called_with('mock_module1'), 'mock_module1 ran');
+        test.ok(called_with('mock_module2'), 'mock_module2 ran');
+        test.ok(called_with('mock_module3'), 'mock_module3 ran');
+        test.ok(called_with('mock_module4'), 'mock_module4 ran');
+        test.equals(runModule_calls.length, 4);
 
-  var opts = {
-    moduleStart: function () {
-      return 'moduleStart';
-    },
-    testDone: function () {
-      return 'testDone';
-    },
-    testStart: function () {
-      return 'testStart';
-    },
-    log: function () {
-      return 'log';
-    },
-    done: function (assertions) {
-      test.equals(assertions.failures, 0, 'failures');
-      test.equals(assertions.length, 4, 'length');
-      test.ok(typeof assertions.duration === "number");
-
-      var called_with = function (name) {
-        return runModule_calls.some(function (m) {
-          return m.name === name;
-        });
-      };
-      test.ok(called_with('mock_module1'), 'mock_module1 ran');
-      test.ok(called_with('mock_module2'), 'mock_module2 ran');
-      test.ok(called_with('mock_module3'), 'mock_module3 ran');
-      test.ok(called_with('mock_module4'), 'mock_module4 ran');
-      test.equals(runModule_calls.length, 4);
-
-      nodeunit.runModule = runModule_copy;
-      test.done();
-    }
-  };
+        nodeunit.runModule = runModule_copy;
+        test.done();
+      }
+    };
 
   nodeunit.runModule = function (name, mod, options, callback) {
     test.equals(options.testDone, opts.testDone);
@@ -111,7 +110,7 @@ exports.testEmptyDir = function (test) {
   // git doesn't like empty directories, so we have to create one
   path.exists(dir2, function (exists) {
     if (!exists) {
-      fs.mkdirSync(dir2, 0777);
+      fs.mkdirSync(dir2, 777);
     }
 
     // runFiles on empty directory:
@@ -149,49 +148,49 @@ if (CoffeeScript) {
   exports.testCoffeeScript = function (test) {
     process.chdir(__dirname);
     require.paths.push(__dirname);
-    var env = {
-      mock_coffee_module: require('./fixtures/coffee/mock_coffee_module')
-    };
 
     test.expect(9);
-    var runModule_copy = nodeunit.runModule;
 
-    var runModule_calls = [];
-    var modules = [];
+    var
+      env = {
+        mock_coffee_module: require('./fixtures/coffee/mock_coffee_module')
+      },
+      runModule_copy = nodeunit.runModule,
+      runModule_calls = [],
+      modules = [],
+      opts = {
+        moduleStart: function () {
+          return 'moduleStart';
+        },
+        testDone: function () {
+          return 'testDone';
+        },
+        testStart: function () {
+          return 'testStart';
+        },
+        log: function () {
+          return 'log';
+        },
+        done: function (assertions) {
+          test.equals(assertions.failures, 0, 'failures');
+          test.equals(assertions.length, 1, 'length');
+          test.ok(typeof assertions.duration === "number");
 
-    var opts = {
-      moduleStart: function () {
-        return 'moduleStart';
-      },
-      testDone: function () {
-        return 'testDone';
-      },
-      testStart: function () {
-        return 'testStart';
-      },
-      log: function () {
-        return 'log';
-      },
-      done: function (assertions) {
-        test.equals(assertions.failures, 0, 'failures');
-        test.equals(assertions.length, 1, 'length');
-        test.ok(typeof assertions.duration === "number");
+          var called_with = function (name) {
+            return runModule_calls.some(function (m) {
+              return m.name === name;
+            });
+          };
+          test.ok(
+            called_with('mock_coffee_15'),
+            'mock_coffee_module ran'
+          );
+          test.equals(runModule_calls.length, 1);
 
-        var called_with = function (name) {
-          return runModule_calls.some(function (m) {
-            return m.name === name;
-          });
-        };
-        test.ok(
-          called_with('mock_coffee_15'),
-          'mock_coffee_module ran'
-        );
-        test.equals(runModule_calls.length, 1);
-
-        nodeunit.runModule = runModule_copy;
-        test.done();
-      }
-    };
+          nodeunit.runModule = runModule_copy;
+          test.done();
+        }
+      };
 
     nodeunit.runModule = function (name, mod, options, callback) {
       test.equals(options.testDone, opts.testDone);

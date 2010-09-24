@@ -3,24 +3,26 @@ var nodeunit = require('../lib/nodeunit');
 
 exports.testRunModule = function (test) {
   test.expect(11);
-  var call_order = [];
-  var testmodule = {
-    test1: function (test) {
-      call_order.push('test1');
-      test.ok(true, 'ok true');
-      test.done();
-    },
-    test2: function (test) {
-      call_order.push('test2');
-      test.ok(false, 'ok false');
-      test.ok(false, 'ok false');
-      test.done();
-    },
-    test3: function (test) {
-      call_order.push('test3');
-      test.done();
-    }
-  };
+  var
+    call_order = [],
+    testmodule = {
+      test1: function (test) {
+        call_order.push('test1');
+        test.ok(true, 'ok true');
+        test.done();
+      },
+      test2: function (test) {
+        call_order.push('test2');
+        test.ok(false, 'ok false');
+        test.ok(false, 'ok false');
+        test.done();
+      },
+      test3: function (test) {
+        call_order.push('test3');
+        test.done();
+      }
+    };
+
   nodeunit.runModule('testmodule', testmodule, {
     log: function (assertion) {
       call_order.push('log');
@@ -76,25 +78,26 @@ exports.testRunModuleEmpty = function (test) {
 };
 
 exports.testNestedTests = function (test) {
-  var call_order = [];
-  var m = {
-    test1: function (test) {
-      test.done();
-    },
-    suite: {
-      t1: function (test) {
+  var
+    call_order = [],
+    m = {
+      test1: function (test) {
         test.done();
       },
-      t2: function (test) {
-        test.done();
-      },
-      another_suite: {
-        t3: function (test) {
+      suite: {
+        t1: function (test) {
           test.done();
+        },
+        t2: function (test) {
+          test.done();
+        },
+        another_suite: {
+          t3: function (test) {
+            test.done();
+          }
         }
       }
-    }
-  };
+    };
   nodeunit.runModule('modulename', m, {
     testStart: function (name) {
       call_order.push('testStart ' + name);

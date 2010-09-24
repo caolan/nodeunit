@@ -24,8 +24,9 @@ exports.testDoneCallback = function (test) {
 
 exports.testThrowError = function (test) {
   test.expect(3);
-  var err = new Error('test');
-  var testfn = function (test) {
+  var
+    err = new Error('test'),
+    testfn = function (test) {
     throw err;
   };
   nodeunit.runTest('testname', testfn, {
@@ -44,16 +45,18 @@ exports.testFailingLog = function (test) {
 
   // this is meant to bubble to the top, and will be ignored for the purposes
   // of testing:
-  var ignored_error = new Error('ignore this callback error');
-  var err_handler = function (err) {
-    if (err && err.message !== ignored_error.message) {
-      throw err;
-    }
-  };
+  var
+    ignored_error = new Error('ignore this callback error'),
+    testfn,
+    err_handler = function (err) {
+      if (err && err.message !== ignored_error.message) {
+        throw err;
+      }
+    };
   process.addListener('uncaughtException', err_handler);
 
   // A failing callback should not affect the test outcome
-  var testfn = function (test) {
+  testfn = function (test) {
     test.ok(true, 'test.ok');
     test.done();
   };
@@ -73,16 +76,18 @@ exports.testFailingLog = function (test) {
 exports.testFailingTestDone = function (test) {
   test.expect(2);
 
-  var ignored_error = new Error('ignore this callback error');
-  var err_handler = function (err) {
-    if (err && err.message !== ignored_error.message) {
-      throw err;
-    }
-  };
+  var
+    ignored_error = new Error('ignore this callback error'),
+    testfn,
+    err_handler = function (err) {
+      if (err && err.message !== ignored_error.message) {
+        throw err;
+      }
+    };
   process.addListener('uncaughtException', err_handler);
 
   // A failing callback should not affect the test outcome
-  var testfn = function (test) {
+  testfn = function (test) {
     test.done();
   };
   nodeunit.runTest('testname', testfn, {
