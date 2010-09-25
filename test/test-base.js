@@ -117,12 +117,20 @@ exports.testNotDeepEqual = makeTest('notDeepEqual',
 exports.testStrictEqual = makeTest('strictEqual', [1, 1], [1, true]);
 exports.testNotStrictEqual = makeTest('notStrictEqual', [true, 1], [1, 1]);
 exports.testThrows = makeTest('throws',
-    [function () {throw new Error('test');}],
-    [function () {return;}]
+    [function () {
+        throw new Error('test');
+    }],
+    [function () {
+        return;
+    }]
 );
 exports.testDoesNotThrows = makeTest('doesNotThrow',
-    [function () {return;}],
-    [function () {throw new Error('test');}]
+    [function () {
+        return;
+    }],
+    [function () {
+        throw new Error('test');
+    }]
 );
 exports.testIfError = makeTest('ifError', [false], [new Error('test')]);
 

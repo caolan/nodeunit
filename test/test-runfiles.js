@@ -15,7 +15,7 @@ var setup = function (fn) {
             mock_module3: require('./fixtures/dir/mock_module3'),
             mock_module4: require('./fixtures/dir/mock_module4')
         };
-        fn.call(env, test)
+        fn.call(env, test);
     };
 };
 
@@ -28,10 +28,18 @@ exports.testRunFiles = setup(function (test) {
     var modules = [];
 
     var opts = {
-        moduleStart: function () { return 'moduleStart'; },
-        testDone: function () { return 'testDone'; },
-        testStart: function () { return 'testStart'; },
-        log: function () { return 'log'; },
+        moduleStart: function () {
+            return 'moduleStart';
+        },
+        testDone: function () {
+            return 'testDone';
+        },
+        testStart: function () {
+            return 'testStart';
+        },
+        log: function () {
+            return 'log';
+        },
         done: function (assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 4, 'length');
@@ -59,7 +67,9 @@ exports.testRunFiles = setup(function (test) {
         test.equals(options.log, opts.log);
         test.ok(typeof name === "string");
         runModule_calls.push(mod);
-        var m = [{failed: function () {return false;}}];
+        var m = [{failed: function () {
+            return false;
+        }}];
         modules.push(m);
         callback(null, m);
     };
@@ -100,7 +110,9 @@ exports.testEmptyDir = function (test) {
 
     // git doesn't like empty directories, so we have to create one
     path.exists(dir2, function (exists) {
-        if (!exists) fs.mkdirSync(dir2, 777);
+        if (!exists) {
+            fs.mkdirSync(dir2, 777);
+        }
 
         // runFiles on empty directory:
         nodeunit.runFiles([dir2], {
@@ -148,10 +160,18 @@ if (CoffeeScript) {
         var modules = [];
 
         var opts = {
-            moduleStart: function () {return 'moduleStart';},
-            testDone: function () {return 'testDone';},
-            testStart: function () {return 'testStart';},
-            log: function () {return 'log';},
+            moduleStart: function () {
+                return 'moduleStart';
+            },
+            testDone: function () {
+                return 'testDone';
+            },
+            testStart: function () {
+                return 'testStart';
+            },
+            log: function () {
+                return 'log';
+            },
             done: function (assertions) {
                 test.equals(assertions.failures, 0, 'failures');
                 test.equals(assertions.length, 1, 'length');
@@ -179,7 +199,9 @@ if (CoffeeScript) {
             test.equals(options.log, opts.log);
             test.ok(typeof name === "string");
             runModule_calls.push(mod);
-            var m = [{failed: function () {return false;}}];
+            var m = [{failed: function () {
+                return false;
+            }}];
             modules.push(m);
             callback(null, m);
         };
