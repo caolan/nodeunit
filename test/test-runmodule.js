@@ -1,45 +1,45 @@
 var nodeunit = require('../lib/nodeunit');
 
 
-exports.testRunModule = function(test){
+exports.testRunModule = function (test) {
     test.expect(11);
     var call_order = [];
     var testmodule = {
-        test1: function(test){
+        test1: function (test) {
             call_order.push('test1');
             test.ok(true, 'ok true');
             test.done();
         },
-        test2: function(test){
+        test2: function (test) {
             call_order.push('test2');
             test.ok(false, 'ok false');
             test.ok(false, 'ok false');
             test.done();
         },
-        test3: function(test){
+        test3: function (test) {
             call_order.push('test3');
             test.done();
         }
     };
     nodeunit.runModule('testmodule', testmodule, {
-        log: function(assertion){
+        log: function (assertion) {
             call_order.push('log');
         },
-        testStart: function(name){
+        testStart: function (name) {
             call_order.push('testStart');
             test.ok(
                 name == 'test1' || name == 'test2' || name == 'test3',
                 'testStart called with test name'
             );
         },
-        testDone: function(name, assertions){
+        testDone: function (name, assertions) {
             call_order.push('testDone');
             test.ok(
                 name == 'test1' || name == 'test2' || name == 'test3',
                 'testDone called with test name'
             );
         },
-        moduleDone: function(name, assertions){
+        moduleDone: function (name, assertions) {
             call_order.push('moduleDone');
             test.equals(assertions.length, 3);
             test.equals(assertions.failures, 2);
@@ -55,18 +55,18 @@ exports.testRunModule = function(test){
     }, test.done);
 };
 
-exports.testRunModuleEmpty = function(test){
+exports.testRunModuleEmpty = function (test) {
     nodeunit.runModule('module with no exports', {}, {
-        log: function(assertion){
+        log: function (assertion) {
             test.ok(false, 'log should not be called');
         },
-        testStart: function(name){
+        testStart: function (name) {
             test.ok(false, 'testStart should not be called');
         },
-        testDone: function(name, assertions){
+        testDone: function (name, assertions) {
             test.ok(false, 'testDone should not be called');
         },
-        moduleDone: function(name, assertions){
+        moduleDone: function (name, assertions) {
             test.equals(assertions.length, 0);
             test.equals(assertions.failures, 0);
             test.equals(name, 'module with no exports');
@@ -75,34 +75,34 @@ exports.testRunModuleEmpty = function(test){
     }, test.done);
 };
 
-exports.testNestedTests = function(test){
+exports.testNestedTests = function (test) {
     var call_order = [];
     var m = {
-        test1: function(test){
+        test1: function (test) {
             test.done();
         },
         suite: {
-            t1: function(test){
+            t1: function (test) {
                 test.done();
             },
-            t2: function(test){
+            t2: function (test) {
                 test.done();
             },
             another_suite: {
-                t3: function(test){
+                t3: function (test) {
                     test.done();
                 }
             }
         }
     };
     nodeunit.runModule('modulename', m, {
-        testStart: function(name){
+        testStart: function (name) {
             call_order.push('testStart ' + name);
         },
-        testDone: function(name, assertions){
+        testDone: function (name, assertions) {
             call_order.push('testDone ' + name);
         }
-    }, function(){
+    }, function () {
         test.same(call_order, [
             'testStart test1', 'testDone test1',
             'testStart suite - t1', 'testDone suite - t1',

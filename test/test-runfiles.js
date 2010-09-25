@@ -5,8 +5,8 @@ var assert = require('assert'),
     nodeunit = require('../lib/nodeunit');
 
 
-var setup = function(fn){
-    return function(test){
+var setup = function (fn) {
+    return function (test) {
         process.chdir(__dirname);
         require.paths.push(__dirname);
         var env = {
@@ -20,7 +20,7 @@ var setup = function(fn){
 };
 
 
-exports.testRunFiles = setup(function(test){
+exports.testRunFiles = setup(function (test) {
     test.expect(24);
     var runModule_copy = nodeunit.runModule;
 
@@ -28,17 +28,17 @@ exports.testRunFiles = setup(function(test){
     var modules = [];
 
     var opts = {
-        moduleStart: function(){ return 'moduleStart'; },
-        testDone: function(){ return 'testDone'; },
-        testStart: function(){ return 'testStart'; },
-        log: function(){ return 'log'; },
-        done: function(assertions){
+        moduleStart: function () { return 'moduleStart'; },
+        testDone: function () { return 'testDone'; },
+        testStart: function () { return 'testStart'; },
+        log: function () { return 'log'; },
+        done: function (assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 4, 'length');
             test.ok(typeof assertions.duration == "number");
 
-            var called_with = function(name){
-                return runModule_calls.some(function(m){
+            var called_with = function (name) {
+                return runModule_calls.some(function (m) {
                     return m.name == name;
                 });
             };
@@ -53,13 +53,13 @@ exports.testRunFiles = setup(function(test){
         }
     };
 
-    nodeunit.runModule = function(name, mod, options, callback){
+    nodeunit.runModule = function (name, mod, options, callback) {
         test.equals(options.testDone, opts.testDone);
         test.equals(options.testStart, opts.testStart);
         test.equals(options.log, opts.log);
         test.ok(typeof name == "string");
         runModule_calls.push(mod);
-        var m = [{failed: function(){return false;}}];
+        var m = [{failed: function () {return false;}}];
         modules.push(m);
         callback(null, m);
     };
@@ -70,22 +70,22 @@ exports.testRunFiles = setup(function(test){
     );
 });
 
-exports.testRunFilesEmpty = function(test){
+exports.testRunFilesEmpty = function (test) {
     test.expect(3);
     nodeunit.runFiles([], {
-        moduleStart: function(){
+        moduleStart: function () {
             test.ok(false, 'should not be called');
         },
-        testDone: function(){
+        testDone: function () {
             test.ok(false, 'should not be called');
         },
-        testStart: function(){
+        testStart: function () {
             test.ok(false, 'should not be called');
         },
-        log: function(){
+        log: function () {
             test.ok(false, 'should not be called');
         },
-        done: function(assertions){
+        done: function (assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 0, 'length');
             test.ok(typeof assertions.duration == "number");
@@ -95,28 +95,28 @@ exports.testRunFilesEmpty = function(test){
 };
 
 
-exports.testEmptyDir = function(test){
+exports.testEmptyDir = function (test) {
     var dir2 = __dirname + '/fixtures/dir2';
 
     // git doesn't like empty directories, so we have to create one
-    path.exists(dir2, function(exists){
+    path.exists(dir2, function (exists) {
         if(!exists) fs.mkdirSync(dir2, 0777);
 
         // runFiles on empty directory:
         nodeunit.runFiles([dir2], {
-            moduleStart: function(){
+            moduleStart: function () {
                 test.ok(false, 'should not be called');
             },
-            testDone: function(){
+            testDone: function () {
                 test.ok(false, 'should not be called');
             },
-            testStart: function(){
+            testStart: function () {
                 test.ok(false, 'should not be called');
             },
-            log: function(){
+            log: function () {
                 test.ok(false, 'should not be called');
             },
-            done: function(assertions){
+            done: function (assertions) {
                 test.equals(assertions.failures, 0, 'failures');
                 test.equals(assertions.length, 0, 'length');
                 test.ok(typeof assertions.duration == "number");
@@ -134,7 +134,7 @@ try {
 }
 
 if (CoffeeScript) {
-    exports.testCoffeeScript = function(test){
+    exports.testCoffeeScript = function (test) {
         process.chdir(__dirname);
         require.paths.push(__dirname);
         var env = {
@@ -148,17 +148,17 @@ if (CoffeeScript) {
         var modules = [];
 
         var opts = {
-            moduleStart: function(){return 'moduleStart';},
-            testDone: function(){return 'testDone';},
-            testStart: function(){return 'testStart';},
-            log: function(){return 'log';},
-            done: function(assertions){
+            moduleStart: function () {return 'moduleStart';},
+            testDone: function () {return 'testDone';},
+            testStart: function () {return 'testStart';},
+            log: function () {return 'log';},
+            done: function (assertions) {
                 test.equals(assertions.failures, 0, 'failures');
                 test.equals(assertions.length, 1, 'length');
                 test.ok(typeof assertions.duration == "number");
 
-                var called_with = function(name){
-                    return runModule_calls.some(function(m){
+                var called_with = function (name) {
+                    return runModule_calls.some(function (m) {
                         return m.name == name;
                     });
                 };
@@ -173,13 +173,13 @@ if (CoffeeScript) {
             }
         };
 
-        nodeunit.runModule = function(name, mod, options, callback){
+        nodeunit.runModule = function (name, mod, options, callback) {
             test.equals(options.testDone, opts.testDone);
             test.equals(options.testStart, opts.testStart);
             test.equals(options.log, opts.log);
             test.ok(typeof name == "string");
             runModule_calls.push(mod);
-            var m = [{failed: function(){return false;}}];
+            var m = [{failed: function () {return false;}}];
             modules.push(m);
             callback(null, m);
         };

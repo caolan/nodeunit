@@ -11,9 +11,9 @@ var assert = require('assert'),
 // NOT A TEST - util function to make testing faster.
 // retries the assertion until it passes or the timeout is reached,
 // at which point it throws the assertion error
-var waitFor = function(fn, timeout, callback, start){
+var waitFor = function (fn, timeout, callback, start) {
     start = start || new Date().getTime();
-    callback = callback || function(){};
+    callback = callback || function () {};
     try {
         fn();
         callback();
@@ -26,7 +26,7 @@ var waitFor = function(fn, timeout, callback, start){
                 callback();
             }
             else {
-                process.nextTick(function(){
+                process.nextTick(function () {
                     waitFor(fn, timeout, callback, start);
                 });
             }
@@ -47,25 +47,25 @@ var tests_called = {};
 
 // most basic test that should run, the tests_called object is tested
 // at the end of this module to ensure the tests were actually run by nodeunit
-exports.testCalled = function(test){
+exports.testCalled = function (test) {
     tests_called['testCalled'] = true;
     test.done();
 };
 
 // generates test functions for nodeunit assertions
-var makeTest = function(method, args_pass, args_fail){
-    return function(test){
+var makeTest = function (method, args_pass, args_fail) {
+    return function (test) {
         var test1_called = false;
         var test2_called = false;
 
         // test pass
         nodeunit.runTest(
             'testname',
-            function(test){
+            function (test) {
                 test[method].apply(test, args_pass);
                 test.done();
             },
-            {testDone: function(name, assertions){
+            {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
                 assert.equal(assertions.failures, 0);
             }},
@@ -77,11 +77,11 @@ var makeTest = function(method, args_pass, args_fail){
         // test failure
         nodeunit.runTest(
             'testname',
-            function(test){
+            function (test) {
                 test[method].apply(test, args_fail);
                 test.done();
             },
-            {testDone: function(name, assertions){
+            {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
                 assert.equal(assertions.failures, 1);
             }},
@@ -91,7 +91,7 @@ var makeTest = function(method, args_pass, args_fail){
         );
 
         // ensure tests were run
-        waitFor(function(){
+        waitFor(function () {
             assert.ok(test1_called);
             assert.ok(test2_called);
             tests_called[method] = true;
@@ -119,17 +119,17 @@ exports.testNotDeepEqual = makeTest('notDeepEqual',
 exports.testStrictEqual = makeTest('strictEqual', [1,1], [1,true]);
 exports.testNotStrictEqual = makeTest('notStrictEqual', [true,1], [1,1]);
 exports.testThrows = makeTest('throws',
-    [function(){throw new Error('test');}],
-    [function(){return;}]
+    [function () {throw new Error('test');}],
+    [function () {return;}]
 );
 exports.testDoesNotThrows = makeTest('doesNotThrow',
-    [function(){return;}],
-    [function(){throw new Error('test');}]
+    [function () {return;}],
+    [function () {throw new Error('test');}]
 );
 exports.testIfError = makeTest('ifError', [false], [new Error('test')]);
 
 
-exports.testExpect = function(test){
+exports.testExpect = function (test) {
     var test1_called = false,
         test2_called = false,
         test3_called = false;
@@ -137,13 +137,13 @@ exports.testExpect = function(test){
     // correct number of tests run
     nodeunit.runTest(
         'testname',
-        function(test){
+        function (test) {
             test.expect(2);
             test.ok(true);
             test.ok(true);
             test.done();
         },
-        {testDone: function(name, assertions){
+        {testDone: function (name, assertions ){
             test.equals(assertions.length, 2);
             test.equals(assertions.failures, 0);
         }},
@@ -155,11 +155,11 @@ exports.testExpect = function(test){
     // no tests run
     nodeunit.runTest(
         'testname',
-        function(test){
+        function (test) {
             test.expect(2);
             test.done();
         },
-        {testDone: function(name, assertions){
+        {testDone: function (name, assertions) {
             test.equals(assertions.length, 1);
             test.equals(assertions.failures, 1);
         }},
@@ -171,14 +171,14 @@ exports.testExpect = function(test){
     // incorrect number of tests run
     nodeunit.runTest(
         'testname',
-        function(test){
+        function (test) {
             test.expect(2);
             test.ok(true);
             test.ok(true);
             test.ok(true);
             test.done();
         },
-        {testDone: function(name, assertions){
+        {testDone: function (name, assertions) {
             test.equals(assertions.length, 4);
             test.equals(assertions.failures, 1);
         }},
@@ -188,7 +188,7 @@ exports.testExpect = function(test){
     );
 
     // ensure callbacks fired
-    waitFor(function(){
+    waitFor(function () {
         assert.ok(test1_called);
         assert.ok(test2_called);
         assert.ok(test3_called);
@@ -198,7 +198,7 @@ exports.testExpect = function(test){
 
 
 // tests are async, so wait for them to be called
-waitFor(function(){
+waitFor(function () {
     assert.ok(tests_called.testCalled);
     assert.ok(tests_called.ok);
     assert.ok(tests_called.equals);
