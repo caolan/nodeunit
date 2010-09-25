@@ -65,7 +65,7 @@ exports.testRunFiles = setup(function (test) {
     };
 
     nodeunit.runFiles(
-        ['fixtures/mock_module1.js','fixtures/mock_module2.js','fixtures/dir'],
+        ['fixtures/mock_module1.js', 'fixtures/mock_module2.js', 'fixtures/dir'],
         opts
     );
 });

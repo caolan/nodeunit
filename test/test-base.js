@@ -19,9 +19,9 @@ var waitFor = function (fn, timeout, callback, start) {
         callback();
     }
     catch (e) {
-        if(e instanceof assert.AssertionError){
+        if (e instanceof assert.AssertionError) {
             var now = new Date().getTime();
-            if(now - start >= timeout){
+            if (now - start >= timeout) {
                 throw e;
             }
             else {
@@ -99,23 +99,23 @@ var makeTest = function (method, args_pass, args_fail) {
 
 // ensure basic assertions are working:
 exports.testOk = makeTest('ok', [true], [false]);
-exports.testEquals = makeTest('equals', [1,1], [1,2]);
+exports.testEquals = makeTest('equals', [1, 1], [1, 2]);
 exports.testSame = makeTest('same',
-    [{test:'test'},{test:'test'}],
-    [{test:'test'},{monkey:'penguin'}]
+    [{test: 'test'}, {test: 'test'}],
+    [{test: 'test'}, {monkey: 'penguin'}]
 );
 
 // from the assert module:
-exports.testEqual = makeTest('equal', [1,1], [1,2]);
-exports.testNotEqual = makeTest('notEqual', [1,2], [1,1]);
+exports.testEqual = makeTest('equal', [1, 1], [1, 2]);
+exports.testNotEqual = makeTest('notEqual', [1, 2], [1, 1]);
 exports.testDeepEqual = makeTest('deepEqual',
-    [{one:1}, {one:1}], [{one:1}, {two:2}]
+    [{one: 1}, {one: 1}], [{one: 1}, {two: 2}]
 );
 exports.testNotDeepEqual = makeTest('notDeepEqual',
-    [{one:1}, {two:2}], [{one:1}, {one:1}]
+    [{one: 1}, {two: 2}], [{one: 1}, {one: 1}]
 );
-exports.testStrictEqual = makeTest('strictEqual', [1,1], [1,true]);
-exports.testNotStrictEqual = makeTest('notStrictEqual', [true,1], [1,1]);
+exports.testStrictEqual = makeTest('strictEqual', [1, 1], [1, true]);
+exports.testNotStrictEqual = makeTest('notStrictEqual', [true, 1], [1, 1]);
 exports.testThrows = makeTest('throws',
     [function () {throw new Error('test');}],
     [function () {return;}]
@@ -141,7 +141,7 @@ exports.testExpect = function (test) {
             test.ok(true);
             test.done();
         },
-        {testDone: function (name, assertions ){
+        {testDone: function (name, assertions) {
             test.equals(assertions.length, 2);
             test.equals(assertions.failures, 0);
         }},
