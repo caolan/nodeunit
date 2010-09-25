@@ -23,7 +23,6 @@ var waitFor = function (fn, timeout, callback, start) {
             var now = new Date().getTime();
             if(now - start >= timeout){
                 throw e;
-                callback();
             }
             else {
                 process.nextTick(function () {
@@ -33,7 +32,6 @@ var waitFor = function (fn, timeout, callback, start) {
         }
         else {
             throw e;
-            callback();
         }
     }
 };
@@ -48,7 +46,7 @@ var tests_called = {};
 // most basic test that should run, the tests_called object is tested
 // at the end of this module to ensure the tests were actually run by nodeunit
 exports.testCalled = function (test) {
-    tests_called['testCalled'] = true;
+    tests_called.testCalled = true;
     test.done();
 };
 
@@ -192,7 +190,7 @@ exports.testExpect = function (test) {
         assert.ok(test1_called);
         assert.ok(test2_called);
         assert.ok(test3_called);
-        tests_called['expect'] = true;
+        tests_called.expect = true;
     }, 500, test.done);
 };
 

@@ -9,7 +9,7 @@ exports.testSimpleSandbox = function (test) {
 };
 
 exports.testSandboxContext = function (test) {
-    a_variable = 42; // should not be visible in the sandbox
+    var a_variable = 42; // should not be visible in the sandbox
     var raw_jscode2 = sandbox(__dirname + '/fixtures/raw_jscode2.js');
     a_variable = 42; // again for the win
     test.equal(

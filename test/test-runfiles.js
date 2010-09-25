@@ -14,7 +14,7 @@ var setup = function (fn) {
             mock_module2: require('./fixtures/mock_module2'),
             mock_module3: require('./fixtures/dir/mock_module3'),
             mock_module4: require('./fixtures/dir/mock_module4')
-        }
+        };
         fn.call(env, test)
     };
 };
@@ -35,11 +35,11 @@ exports.testRunFiles = setup(function (test) {
         done: function (assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 4, 'length');
-            test.ok(typeof assertions.duration == "number");
+            test.ok(typeof assertions.duration === "number");
 
             var called_with = function (name) {
                 return runModule_calls.some(function (m) {
-                    return m.name == name;
+                    return m.name === name;
                 });
             };
             test.ok(called_with('mock_module1'), 'mock_module1 ran');
@@ -57,7 +57,7 @@ exports.testRunFiles = setup(function (test) {
         test.equals(options.testDone, opts.testDone);
         test.equals(options.testStart, opts.testStart);
         test.equals(options.log, opts.log);
-        test.ok(typeof name == "string");
+        test.ok(typeof name === "string");
         runModule_calls.push(mod);
         var m = [{failed: function () {return false;}}];
         modules.push(m);
@@ -88,7 +88,7 @@ exports.testRunFilesEmpty = function (test) {
         done: function (assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 0, 'length');
-            test.ok(typeof assertions.duration == "number");
+            test.ok(typeof assertions.duration === "number");
             test.done();
         }
     });
@@ -100,7 +100,7 @@ exports.testEmptyDir = function (test) {
 
     // git doesn't like empty directories, so we have to create one
     path.exists(dir2, function (exists) {
-        if(!exists) fs.mkdirSync(dir2, 0777);
+        if (!exists) fs.mkdirSync(dir2, 777);
 
         // runFiles on empty directory:
         nodeunit.runFiles([dir2], {
@@ -119,7 +119,7 @@ exports.testEmptyDir = function (test) {
             done: function (assertions) {
                 test.equals(assertions.failures, 0, 'failures');
                 test.equals(assertions.length, 0, 'length');
-                test.ok(typeof assertions.duration == "number");
+                test.ok(typeof assertions.duration === "number");
                 test.done();
             }
         });
@@ -139,7 +139,7 @@ if (CoffeeScript) {
         require.paths.push(__dirname);
         var env = {
             mock_coffee_module: require('./fixtures/coffee/mock_coffee_module')
-        }
+        };
 
         test.expect(9);
         var runModule_copy = nodeunit.runModule;
@@ -155,11 +155,11 @@ if (CoffeeScript) {
             done: function (assertions) {
                 test.equals(assertions.failures, 0, 'failures');
                 test.equals(assertions.length, 1, 'length');
-                test.ok(typeof assertions.duration == "number");
+                test.ok(typeof assertions.duration === "number");
 
                 var called_with = function (name) {
                     return runModule_calls.some(function (m) {
-                        return m.name == name;
+                        return m.name === name;
                     });
                 };
                 test.ok(
@@ -177,7 +177,7 @@ if (CoffeeScript) {
             test.equals(options.testDone, opts.testDone);
             test.equals(options.testStart, opts.testStart);
             test.equals(options.log, opts.log);
-            test.ok(typeof name == "string");
+            test.ok(typeof name === "string");
             runModule_calls.push(mod);
             var m = [{failed: function () {return false;}}];
             modules.push(m);

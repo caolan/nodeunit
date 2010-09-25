@@ -16,7 +16,7 @@ exports.testDoneCallback = function (test) {
         testDone: function (name, assertions) {
             test.equals(assertions.failures, 0, 'failures');
             test.equals(assertions.length, 5, 'length');
-            test.ok(typeof assertions.duration == "number");
+            test.ok(typeof assertions.duration === "number");
             test.equals(name, 'testname');
         }
     }, test.done);
@@ -46,7 +46,7 @@ exports.testFailingLog = function (test) {
     // of testing:
     var ignored_error = new Error('ignore this callback error');
     var err_handler = function (err) {
-        if (err && err.message != ignored_error.message) {
+        if (err && err.message !== ignored_error.message) {
             throw err;
         }
     };
@@ -75,7 +75,7 @@ exports.testFailingTestDone = function (test) {
 
     var ignored_error = new Error('ignore this callback error');
     var err_handler = function (err) {
-        if (err && err.message != ignored_error.message) {
+        if (err && err.message !== ignored_error.message) {
             throw err;
         }
     };

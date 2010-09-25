@@ -28,14 +28,14 @@ exports.testRunModule = function (test) {
         testStart: function (name) {
             call_order.push('testStart');
             test.ok(
-                name == 'test1' || name == 'test2' || name == 'test3',
+                name === 'test1' || name === 'test2' || name === 'test3',
                 'testStart called with test name'
             );
         },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.ok(
-                name == 'test1' || name == 'test2' || name == 'test3',
+                name === 'test1' || name === 'test2' || name === 'test3',
                 'testDone called with test name'
             );
         },
@@ -44,7 +44,7 @@ exports.testRunModule = function (test) {
             test.equals(assertions.length, 3);
             test.equals(assertions.failures, 2);
             test.equals(name, 'testmodule');
-            test.ok(typeof assertions.duration == "number");
+            test.ok(typeof assertions.duration === "number");
             test.same(call_order, [
                 'testStart', 'test1', 'log', 'testDone',
                 'testStart', 'test2', 'log', 'log', 'testDone',
@@ -70,7 +70,7 @@ exports.testRunModuleEmpty = function (test) {
             test.equals(assertions.length, 0);
             test.equals(assertions.failures, 0);
             test.equals(name, 'module with no exports');
-            test.ok(typeof assertions.duration == "number");
+            test.ok(typeof assertions.duration === "number");
         }
     }, test.done);
 };
