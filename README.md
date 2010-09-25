@@ -14,6 +14,8 @@ __Contributors__
 * [sstephenson](http://github.com/sstephenson) - coffee-script support
 * [azatoth](http://github.com/azatoth) - debian-friendly Makefile, now
   supports both 'node' and 'nodejs' executables, also added sandbox utility
+* [Sannis](http://github.com/Sannis) - adding 'make lint' and fixing nodelint
+  errors.
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
@@ -335,3 +337,15 @@ To run the nodeunit tests do:
 
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
 to v0.2.1 fixes this.
+
+
+Contributing
+------------
+
+Contributions to the project are most welcome, so feel free to fork and
+improve. When submitting a pull request, please run 'make lint' first to ensure
+we're following a consistent coding style.
+
+When running 'make lint', you can ignore errors about 'global' and
+'console.log', they are prerequired variables not yet included in nodelint.
+[Sannis](http://github.com/Sannis) has sent a patch to include them.
