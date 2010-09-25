@@ -323,6 +323,22 @@ For a reference implementation of a test runner, see lib/testrunner.js in the
 nodeunit project directory.
 
 
+Sandbox utility
+---------------
+
+This is a function which evaluates JavaScript files in a sandbox and returns the
+context. The sandbox function can be used for testing client-side code or private
+un-exported functions within a module.
+
+    var sandbox = require('nodeunit').utils.sandbox;
+    var example = sandbox('example.js');
+
+__sandbox(files, sandbox)__ - Evaluates JavaScript files in a sandbox, returning
+the context. The first argument can either be a single filename or an array of
+filenames. If multiple filenames are given their contents are concatenated before
+evalution. The second argument is an optional context to use for the sandbox.
+
+
 Running the nodeunit Tests
 --------------------------
 
