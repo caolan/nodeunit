@@ -20,7 +20,7 @@ stamp-build: $(wildcard  deps/* lib/*.js)
 	mkdir -p $(BUILDDIR)/nodeunit
 	cp -R deps lib/*.js $(BUILDDIR)/nodeunit
 	find $(BUILDDIR)/nodeunit/ -type f | xargs sed -i 's/\.\.\/deps/.\/deps/'
-	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/testrunner.js $$@' > $(BUILDDIR)/nodeunit.sh
+	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/cli.js $$@' > $(BUILDDIR)/nodeunit.sh
 	printf "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
 
 test:

@@ -2,7 +2,7 @@
 , "description": "Easy unit testing in node.js, loosely based on the QUnit API"
 , "main": "./index"
 , "author": "Caolan McMahon"
-, "version": "0.2.2"
+, "version": "0.2.3"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
@@ -13,5 +13,5 @@
     , "url" : "http://github.com/caolan/nodeunit/raw/master/LICENSE"
     }
   ]
- , "bin" : { "nodeunit" : "./lib/testrunner.js" }
+ , "bin" : { "nodeunit" : "./lib/cli.js" }
 }

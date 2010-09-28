@@ -1,3 +1,0 @@
-#!/bin/sh
-REALPATH=`readlink -f $0`
-node `dirname $REALPATH`/../lib/testrunner.js $@
