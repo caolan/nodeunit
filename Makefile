@@ -39,6 +39,6 @@ clean:
 	rm -rf $(BUILDDIR) stamp-build
 
 lint:
-	nodelint --config nodelint.cfg ./index.js ./bin/nodeunit ./lib/*.js ./test/*.js
+	nodelint --config nodelint.cfg ./index.js ./bin/nodeunit{,.json} ./lib/*.js ./test/*.js
 
 .PHONY: test install uninstall build all

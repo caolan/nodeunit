@@ -1,43 +1,64 @@
 #!/usr/bin/env node
 
-var testrunner = require('../lib/testrunner'),
-    fs = require('fs');
+var
+    fs = require('fs'),
+    sys = require('sys');
 
 require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
 
-// load package.json and read version number
-if (args.length === 1 && (args[0] === '-v' || args[0] === '--version')) {
-    fs.readFile(__dirname + '/../package.json', function (err, content) {
-        if (err) {
-            throw err;
-        }
-        else {
-            var pkg = JSON.parse(content);
-            console.log(pkg.version);
-        }
-    });
-    return;
-}
+var files = [];
 
-var options;
-// check for --config argument
-if (args[0] === '--config' || args[0].slice(0, 9) === "--config=") {
-    var config_file;
-    if (args[0] === '--config') {
-        config_file = args[1];
-        args = args.slice(2);
+var testrunner,
+    config_file,
+    config_param_found = false,
+    reporter_file = 'default',
+    reporter_param_found = false;
+
+// a very basic pseudo --options parser
+args.forEach(function (arg) {
+    if (arg.slice(0, 9) === "--config=") {
+        config_file = arg.slice(9);
+    } else if (arg === '--config') {
+        config_param_found = true;
+    } else if (config_param_found) {
+        config_file = arg;
+        config_param_found = false;
+    } else if (arg === '--reporter') {
+        reporter_param_found = true;
+    } else if (reporter_param_found) {
+        reporter_file = arg;
+        reporter_param_found = false;
+    } else if ((arg === '-v') || (arg === '--version')) {
+        var content = fs.readFileSync(__dirname + '/../package.json', 'utf8');
+        var pkg = JSON.parse(content);
+        console.log(pkg.version);
+        process.exit(0);
     } else {
-        config_file = args[0].slice(9);
-        args = args.slice(1);
+        files.push(arg);
     }
+});
 
-    eval(fs.readFileSync(config_file, 'utf8'));
-    if (typeof options === 'undefined') {
-        sys.puts("Error: there's no `options` variable in the config file.");
-        process.exit(1);
+// load default options
+var content = fs.readFileSync(__dirname + '/nodeunit.json', 'utf8');
+var options = JSON.parse(content);
+
+if (config_file) {
+    content = fs.readFileSync(config_file, 'utf8');
+    var custom_options = JSON.parse(content);
+    
+    for (var option in custom_options) {
+        if (typeof option === 'string') {
+            options[option] = custom_options[option];
+        }
     }
 }
 
-testrunner.run(args, options);
+try {
+    testrunner = require('../lib/reporters/' + reporter_file);
+} catch (e) {
+    testrunner = require(reporter_file);
+}
+
+testrunner.run(files, options);
 
