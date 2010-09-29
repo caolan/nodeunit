@@ -16,6 +16,7 @@ __Contributors__
   supports both 'node' and 'nodejs' executables, also added sandbox utility
 * [Sannis](http://github.com/Sannis) - adding 'make lint' and fixing nodelint
   errors.
+* [coffeemate](http://github.com/coffeemate) - improvements to testrunner
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
