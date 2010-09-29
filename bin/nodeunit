@@ -15,6 +15,11 @@ var testrunner,
     reporter_file = 'default',
     reporter_param_found = false;
 
+var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
+            "Options:\n\n" +
+            "  --config FILE    the path to a JSON file with options\n" +
+            "  --reporter FILE  optional path to a reporter file to customize the output";
+
 // a very basic pseudo --options parser
 args.forEach(function (arg) {
     if (arg.slice(0, 9) === "--config=") {
@@ -24,6 +29,8 @@ args.forEach(function (arg) {
     } else if (config_param_found) {
         config_file = arg;
         config_param_found = false;
+    } else if (arg.slice(0, 11) === "--reporter=") {
+        reporter_file = arg.slice(11);
     } else if (arg === '--reporter') {
         reporter_param_found = true;
     } else if (reporter_param_found) {
@@ -34,10 +41,19 @@ args.forEach(function (arg) {
         var pkg = JSON.parse(content);
         console.log(pkg.version);
         process.exit(0);
+    } else if ((arg === '-h') || (arg === '--help')) {
+        sys.puts(usage);
+        process.exit(0);
     } else {
         files.push(arg);
     }
 });
+
+if (files.length === 0) {
+    sys.puts('Files required.');
+    sys.puts(usage);
+    process.exit(1);
+}
 
 // load default options
 var content = fs.readFileSync(__dirname + '/nodeunit.json', 'utf8');
