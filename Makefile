@@ -24,7 +24,7 @@ stamp-build: $(wildcard  deps/* lib/*.js)
 	printf "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
 
 test:
-	node ./lib/cli.js test
+	./bin/nodeunit test
 
 install: build
 	install --directory $(NODEJSLIBDIR)
@@ -39,6 +39,6 @@ clean:
 	rm -rf $(BUILDDIR) stamp-build
 
 lint:
-	nodelint --config nodelint.cfg ./index.js ./lib/*.js ./test/*.js
+	nodelint --config nodelint.cfg ./index.js ./bin/nodeunit ./lib/*.js ./test/*.js
 
 .PHONY: test install uninstall build all

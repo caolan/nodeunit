@@ -1,4 +1,6 @@
-var testrunner = require('./testrunner'),
+#!/usr/bin/env node
+
+var testrunner = require('../lib/testrunner'),
     fs = require('fs');
 
 require.paths.push(process.cwd());
@@ -23,11 +25,11 @@ var options;
 if (args[0] === '--config' || args[0].slice(0, 9) === "--config=") {
     var config_file;
     if (args[0] === '--config') {
-      config_file = args[1];
-      args = args.slice(2);
+        config_file = args[1];
+        args = args.slice(2);
     } else {
-      config_file = args[0].slice(9);
-      args = args.slice(1);
+        config_file = args[0].slice(9);
+        args = args.slice(1);
     }
 
     eval(fs.readFileSync(config_file, 'utf8'));
