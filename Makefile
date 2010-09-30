@@ -22,7 +22,7 @@ stamp-build: $(wildcard  deps/* lib/*.js)
 	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/bin/nodeunit $$@' > $(BUILDDIR)/nodeunit.sh
 
 test:
-	./bin/nodeunit test
+	$(NODEJS) ./bin/nodeunit test
 
 install: build
 	install --directory $(NODEJSLIBDIR)
