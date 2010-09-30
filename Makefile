@@ -24,7 +24,7 @@ stamp-build: $(wildcard  deps/* lib/*.js)
 	printf "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
 
 test:
-	node ./lib/cli.js test
+	$(NODEJS) ./lib/cli.js test
 
 install: build
 	install --directory $(NODEJSLIBDIR)
