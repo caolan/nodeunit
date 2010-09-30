@@ -1,5 +1,5 @@
 { "name": "nodeunit"
-, "description": "Easy unit testing in node.js, loosely based on the QUnit API"
+, "description": "Easy unit testing in node.js, based on the assert module."
 , "main": "./index"
 , "author": "Caolan McMahon"
 , "version": "0.2.4"
