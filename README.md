@@ -16,7 +16,7 @@ __Contributors__
   supports both 'node' and 'nodejs' executables, also added sandbox utility
 * [Sannis](http://github.com/Sannis) - adding 'make lint' and fixing nodelint
   errors.
-* [coffeemate](http://github.com/coffeemate) - improvements to testrunner
+* [coffeemate](http://github.com/coffeemate) - improvements to default test reporter
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
@@ -40,7 +40,7 @@ Here is an example unit test module:
         test.done();
     };
 
-When run using the included testrunner, this will output the following:
+When run using the included test runner, this will output the following:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
@@ -201,92 +201,31 @@ using 'sudo make install'. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
 
-The testrunner uses color output, because I think that's more fun :) I intend
-to add a no-color option in future. To give you a feeling of the fun you'll be
-having writing tests, lets fix the example at the start of the README:
+The default test reporter uses color output, because I think that's more fun :) I
+intend to add a no-color option in future. To give you a feeling of the fun you'll
+be having writing tests, lets fix the example at the start of the README:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
 
 Ahhh, Doesn't that feel better?
 
-You can also add some code to the bottom of your test modules so they can be
-run directly from the command-line:
-
-    if(module.id == '.'){
-        var testrunner = require('nodeunit').testrunner;
-        testrunner.run([__filename]);
-    }
-
-NOTE: this requires nodeunit to be in your require paths. You can make nodeunit
-available to all your projects by copying it to ~/.node-libraries or installing
-it via npm.
-
 When using the included test runner, it will exit using the failed number of
 assertions as the exit code. Exiting with 0 when all tests pass.
 
 
-Adding nodeunit to Your Projects
---------------------------------
+### Command-line Options
 
-If you don't want people to have to install the nodeunit command-line tool,
-you'll want to create a script that runs the tests for your project with the
-correct require paths set up. Here's an example test script, with deps, lib and
-test directories:
-
-    #!/usr/bin/env node
-
-    require.paths.push(__dirname);
-    require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/lib');
-    var testrunner = require('nodeunit').testrunner;
-
-    process.chdir(__dirname);
-    testrunner.run(['test']);
-
-If you're using git, you might find it useful to include nodeunit as a
-submodule. Using submodules makes it easy for developers to download nodeunit
-and run your test suite, without cluttering up your repository with
-the source code. To add nodeunit as a git submodule do the following:
-
-    git submodule add git://github.com/caolan/nodeunit.git deps/nodeunit
-
-This will add nodeunit to the deps folder of your project. Now, when cloning
-the repository, nodeunit can be downloaded by doing the following:
-
-    git submodule init
-    git submodule update
-
-Let's update the test script above with a helpful hint on how to get nodeunit,
-if its missing:
-
-    #!/usr/bin/env node
-
-    require.paths.push(__dirname);
-    require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/lib');
-
-    try {
-        var testrunner = require('nodeunit').testrunner;
-    }
-    catch(e) {
-        var sys = require('sys');
-        sys.puts("Cannot find nodeunit module.");
-        sys.puts("You can download submodules for this project by doing:");
-        sys.puts("");
-        sys.puts("    git submodule init");
-        sys.puts("    git submodule update");
-        sys.puts("");
-        process.exit();
-    }
-
-    process.chdir(__dirname);
-    testrunner.run(['test']);
-
-Now if someone attempts to run your test suite without nodeunit installed they
-will be prompted to download the submodules for your project.
+* __--reporter FILE__ - you can set the test reporter to a custom module or
+on of the modules in nodeunit/lib/reporters, when omitted, the default test runner
+is used.
+* __--config FILE__ - load config options from a JSON file, allows
+the customisation of color schemes for the default test reporter etc. See
+bin/nodeunit.json for current available options.
+* __--version__ or __-v__ - report nodeunit version
+* __--help__ - show nodeunit help
 
 
-Writing a Test Runner
+Writing a Test Reporter
 ---------------------
 
 Nodeunit exports runTest(fn, options), runModule(mod, options) and
@@ -320,8 +259,8 @@ The __assertionList__ object:
   * __failures__ - the number of assertions which failed
   * __duration__ - the time taken for the test to complete in msecs
 
-For a reference implementation of a test runner, see lib/testrunner.js in the
-nodeunit project directory.
+For a reference implementation of a test reporter, see lib/reporters/default.js in
+the nodeunit project directory.
 
 
 Sandbox utility
