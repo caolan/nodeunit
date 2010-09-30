@@ -18,10 +18,8 @@ build: stamp-build
 stamp-build: $(wildcard  deps/* lib/*.js)
 	touch $@;
 	mkdir -p $(BUILDDIR)/nodeunit
-	cp -R deps lib/*.js $(BUILDDIR)/nodeunit
-	find $(BUILDDIR)/nodeunit/ -type f | xargs sed -i 's/\.\.\/deps/.\/deps/'
-	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/cli.js $$@' > $(BUILDDIR)/nodeunit.sh
-	printf "module.exports = require('$(PACKAGE)/nodeunit')" > $(BUILDDIR)/nodeunit.js
+	cp -R bin deps lib package.json $(BUILDDIR)/nodeunit
+	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/bin/nodeunit $$@' > $(BUILDDIR)/nodeunit.sh
 
 test:
 	./bin/nodeunit test
@@ -29,7 +27,6 @@ test:
 install: build
 	install --directory $(NODEJSLIBDIR)
 	cp -a $(BUILDDIR)/nodeunit $(NODEJSLIBDIR)
-	install --mode=0644 $(BUILDDIR)/nodeunit.js $(NODEJSLIBDIR)
 	install --mode=0755 $(BUILDDIR)/nodeunit.sh $(BINDIR)/nodeunit
 
 uninstall:
