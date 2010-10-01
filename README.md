@@ -225,6 +225,61 @@ bin/nodeunit.json for current available options.
 * __--help__ - show nodeunit help
 
 
+Adding nodeunit to Your Projects
+--------------------------------
+
+If you don't want people to have to install the nodeunit command-line tool,
+you'll want to create a script that runs the tests for your project with the
+correct require paths set up. Here's an example test script, with a deps
+directory containing the projects dependencies:
+
+    #!/usr/bin/env node
+    require.paths.unshift(__dirname + '/deps');
+
+    var reporter = require('nodeunit').reporters.default;
+    reporter.run(['test']);
+
+If you're using git, you might find it useful to include nodeunit as a
+submodule. Using submodules makes it easy for developers to download nodeunit
+and run your test suite, without cluttering up your repository with
+the source code. To add nodeunit as a git submodule do the following:
+
+    git submodule add git://github.com/caolan/nodeunit.git deps/nodeunit
+
+This will add nodeunit to the deps folder of your project. Now, when cloning
+the repository, nodeunit can be downloaded by doing the following:
+
+    git submodule init
+    git submodule update
+
+Let's update the test script above with a helpful hint on how to get nodeunit,
+if its missing:
+
+    #!/usr/bin/env node
+
+    require.paths.unshift(__dirname + '/deps');
+
+    try {
+        var reporter = require('nodeunit').reporters.default;
+    }
+    catch(e) {
+        var sys = require('sys');
+        sys.puts("Cannot find nodeunit module.");
+        sys.puts("You can download submodules for this project by doing:");
+        sys.puts("");
+        sys.puts("    git submodule init");
+        sys.puts("    git submodule update");
+        sys.puts("");
+        process.exit();
+    }
+
+    process.chdir(__dirname);
+    reporter.run(['test']);
+
+Now if someone attempts to run your test suite without nodeunit installed they
+will be prompted to download the submodules for your project.
+
+
 Writing a Test Reporter
 ---------------------
 
