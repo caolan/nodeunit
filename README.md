@@ -11,12 +11,21 @@ A simple unit testing tool based on the node.js assert module.
 
 __Contributors__
 
-* [sstephenson](http://github.com/sstephenson) - coffee-script support
-* [azatoth](http://github.com/azatoth) - debian-friendly Makefile, now
-  supports both 'node' and 'nodejs' executables, also added sandbox utility
-* [Sannis](http://github.com/Sannis) - adding 'make lint' and fixing nodelint
-  errors.
-* [coffeemate](http://github.com/coffeemate) - improvements to default test reporter
+* [alexkwolfe](http://github.com/alexkwolfe)
+  * HTML reporter
+* [azatoth](http://github.com/azatoth)
+  * debian-friendly Makefile, supports both 'node' and 'nodejs' executables
+  * sandbox utility
+  * minimal test reporter
+* [coffeemate](http://github.com/coffeemate)
+  * improvements to default test reporter
+* [Sannis](http://github.com/Sannis)
+  * adding 'make lint' and fixing nodelint errors
+  * skip passed reporter
+  * option parsing, --help text and config file support
+  * reporters option for command-line tool
+* [sstephenson](http://github.com/sstephenson)
+  * coffee-script support
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
