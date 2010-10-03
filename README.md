@@ -12,26 +12,18 @@ A simple unit testing tool based on the node.js assert module.
 __Contributors__
 
 * [alexkwolfe](http://github.com/alexkwolfe)
-  * HTML reporter
 * [azatoth](http://github.com/azatoth)
-  * debian-friendly Makefile, supports both 'node' and 'nodejs' executables
-  * sandbox utility
-  * minimal test reporter
 * [coffeemate](http://github.com/coffeemate)
-  * improvements to default test reporter
 * [Sannis](http://github.com/Sannis)
-  * adding 'make lint' and fixing nodelint errors
-  * skip passed reporter
-  * option parsing, --help text and config file support
-  * reporters option for command-line tool
 * [sstephenson](http://github.com/sstephenson)
-  * coffee-script support
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
 
 Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
+
+More contributor information can be found at the end of the README.
 
 Usage
 -----
@@ -369,3 +361,21 @@ we're following a consistent coding style.
 When running 'make lint', you can ignore errors about 'global' and
 'console.log', they are prerequired variables not yet included in nodelint.
 [Sannis](http://github.com/Sannis) has sent a patch to include them.
+
+__Past contributions__
+
+* [alexkwolfe](http://github.com/alexkwolfe)
+  * HTML reporter
+* [azatoth](http://github.com/azatoth)
+  * debian-friendly Makefile, supports both 'node' and 'nodejs' executables
+  * sandbox utility
+  * minimal test reporter
+* [coffeemate](http://github.com/coffeemate)
+  * improvements to default test reporter
+* [Sannis](http://github.com/Sannis)
+  * adding 'make lint' and fixing nodelint errors
+  * skip passed reporter
+  * option parsing, --help text and config file support
+  * reporters option for command-line tool
+* [sstephenson](http://github.com/sstephenson)
+  * coffee-script support
