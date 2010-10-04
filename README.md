@@ -358,10 +358,6 @@ Contributions to the project are most welcome, so feel free to fork and
 improve. When submitting a pull request, please run 'make lint' first to ensure
 we're following a consistent coding style.
 
-When running 'make lint', you can ignore errors about 'global' and
-'console.log', they are prerequired variables not yet included in nodelint.
-[Sannis](http://github.com/Sannis) has sent a patch to include them.
-
 __Past contributions__
 
 * [alexkwolfe](http://github.com/alexkwolfe)
