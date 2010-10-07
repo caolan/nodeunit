@@ -11,18 +11,19 @@ A simple unit testing tool based on the node.js assert module.
 
 __Contributors__
 
-* [sstephenson](http://github.com/sstephenson) - coffee-script support
-* [azatoth](http://github.com/azatoth) - debian-friendly Makefile, now
-  supports both 'node' and 'nodejs' executables, also added sandbox utility
-* [Sannis](http://github.com/Sannis) - adding 'make lint' and fixing nodelint
-  errors.
-* [coffeemate](http://github.com/coffeemate) - improvements to testrunner
+* [alexkwolfe](http://github.com/alexkwolfe)
+* [azatoth](http://github.com/azatoth)
+* [coffeemate](http://github.com/coffeemate)
+* [Sannis](http://github.com/Sannis)
+* [sstephenson](http://github.com/sstephenson)
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).
 
 Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
+
+More contributor information can be found at the end of the README.
 
 Usage
 -----
@@ -40,7 +41,7 @@ Here is an example unit test module:
         test.done();
     };
 
-When run using the included testrunner, this will output the following:
+When run using the included test runner, this will output the following:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
@@ -201,28 +202,28 @@ using 'sudo make install'. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
 
-The testrunner uses color output, because I think that's more fun :) I intend
-to add a no-color option in future. To give you a feeling of the fun you'll be
-having writing tests, lets fix the example at the start of the README:
+The default test reporter uses color output, because I think that's more fun :) I
+intend to add a no-color option in future. To give you a feeling of the fun you'll
+be having writing tests, lets fix the example at the start of the README:
 
 <img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
 
 Ahhh, Doesn't that feel better?
 
-You can also add some code to the bottom of your test modules so they can be
-run directly from the command-line:
-
-    if(module.id == '.'){
-        var testrunner = require('nodeunit').testrunner;
-        testrunner.run([__filename]);
-    }
-
-NOTE: this requires nodeunit to be in your require paths. You can make nodeunit
-available to all your projects by copying it to ~/.node-libraries or installing
-it via npm.
-
 When using the included test runner, it will exit using the failed number of
 assertions as the exit code. Exiting with 0 when all tests pass.
+
+
+### Command-line Options
+
+* __--reporter FILE__ - you can set the test reporter to a custom module or
+on of the modules in nodeunit/lib/reporters, when omitted, the default test runner
+is used.
+* __--config FILE__ - load config options from a JSON file, allows
+the customisation of color schemes for the default test reporter etc. See
+bin/nodeunit.json for current available options.
+* __--version__ or __-v__ - report nodeunit version
+* __--help__ - show nodeunit help
 
 
 Adding nodeunit to Your Projects
@@ -230,18 +231,14 @@ Adding nodeunit to Your Projects
 
 If you don't want people to have to install the nodeunit command-line tool,
 you'll want to create a script that runs the tests for your project with the
-correct require paths set up. Here's an example test script, with deps, lib and
-test directories:
+correct require paths set up. Here's an example test script, with a deps
+directory containing the projects dependencies:
 
     #!/usr/bin/env node
+    require.paths.unshift(__dirname + '/deps');
 
-    require.paths.push(__dirname);
-    require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/lib');
-    var testrunner = require('nodeunit').testrunner;
-
-    process.chdir(__dirname);
-    testrunner.run(['test']);
+    var reporter = require('nodeunit').reporters.default;
+    reporter.run(['test']);
 
 If you're using git, you might find it useful to include nodeunit as a
 submodule. Using submodules makes it easy for developers to download nodeunit
@@ -261,12 +258,10 @@ if its missing:
 
     #!/usr/bin/env node
 
-    require.paths.push(__dirname);
-    require.paths.push(__dirname + '/deps');
-    require.paths.push(__dirname + '/lib');
+    require.paths.unshift(__dirname + '/deps');
 
     try {
-        var testrunner = require('nodeunit').testrunner;
+        var reporter = require('nodeunit').reporters.default;
     }
     catch(e) {
         var sys = require('sys');
@@ -280,13 +275,13 @@ if its missing:
     }
 
     process.chdir(__dirname);
-    testrunner.run(['test']);
+    reporter.run(['test']);
 
 Now if someone attempts to run your test suite without nodeunit installed they
 will be prompted to download the submodules for your project.
 
 
-Writing a Test Runner
+Writing a Test Reporter
 ---------------------
 
 Nodeunit exports runTest(fn, options), runModule(mod, options) and
@@ -320,8 +315,8 @@ The __assertionList__ object:
   * __failures__ - the number of assertions which failed
   * __duration__ - the time taken for the test to complete in msecs
 
-For a reference implementation of a test runner, see lib/testrunner.js in the
-nodeunit project directory.
+For a reference implementation of a test reporter, see lib/reporters/default.js in
+the nodeunit project directory.
 
 
 Sandbox utility
@@ -363,6 +358,20 @@ Contributions to the project are most welcome, so feel free to fork and
 improve. When submitting a pull request, please run 'make lint' first to ensure
 we're following a consistent coding style.
 
-When running 'make lint', you can ignore errors about 'global' and
-'console.log', they are prerequired variables not yet included in nodelint.
-[Sannis](http://github.com/Sannis) has sent a patch to include them.
+__Past contributions__
+
+* [alexkwolfe](http://github.com/alexkwolfe)
+  * HTML reporter
+* [azatoth](http://github.com/azatoth)
+  * debian-friendly Makefile, supports both 'node' and 'nodejs' executables
+  * sandbox utility
+  * minimal test reporter
+* [coffeemate](http://github.com/coffeemate)
+  * improvements to default test reporter
+* [Sannis](http://github.com/Sannis)
+  * adding 'make lint' and fixing nodelint errors
+  * skip passed reporter
+  * option parsing, --help text and config file support
+  * reporters option for command-line tool
+* [sstephenson](http://github.com/sstephenson)
+  * coffee-script support
