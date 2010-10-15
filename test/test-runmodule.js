@@ -97,18 +97,18 @@ exports.testNestedTests = function (test) {
     };
     nodeunit.runModule('modulename', m, {
         testStart: function (name) {
-            call_order.push('testStart ' + name);
+            call_order.push(['testStart'].concat(name));
         },
         testDone: function (name, assertions) {
-            call_order.push('testDone ' + name);
+            call_order.push(['testDone'].concat(name));
         }
     }, function () {
         test.same(call_order, [
-            'testStart test1', 'testDone test1',
-            'testStart suite - t1', 'testDone suite - t1',
-            'testStart suite - t2', 'testDone suite - t2',
-            'testStart suite - another_suite - t3',
-            'testDone suite - another_suite - t3'
+            ['testStart', 'test1'], ['testDone', 'test1'],
+            ['testStart', 'suite', 't1'], ['testDone', 'suite', 't1'],
+            ['testStart', 'suite', 't2'], ['testDone', 'suite', 't2'],
+            ['testStart', 'suite', 'another_suite', 't3'],
+            ['testDone', 'suite', 'another_suite', 't3']
         ]);
         test.done();
     });
