@@ -23,7 +23,7 @@ __Contributors__
 Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
 
-More contributor information can be found at the end of the README.
+More contributor information can be found in the CONTRIBUTORS.md file.
 
 Usage
 -----
@@ -354,24 +354,7 @@ to v0.2.1 fixes this.
 Contributing
 ------------
 
-Contributions to the project are most welcome, so feel free to fork and
-improve. When submitting a pull request, please run 'make lint' first to ensure
+Contributions to the project are most welcome, so feel free to fork and improve.
+When submitting a pull request, please run 'make lint' first to ensure
 we're following a consistent coding style.
 
-__Past contributions__
-
-* [alexkwolfe](http://github.com/alexkwolfe)
-  * HTML reporter
-* [azatoth](http://github.com/azatoth)
-  * debian-friendly Makefile, supports both 'node' and 'nodejs' executables
-  * sandbox utility
-  * minimal test reporter
-* [coffeemate](http://github.com/coffeemate)
-  * improvements to default test reporter
-* [Sannis](http://github.com/Sannis)
-  * adding 'make lint' and fixing nodelint errors
-  * skip passed reporter
-  * option parsing, --help text and config file support
-  * reporters option for command-line tool
-* [sstephenson](http://github.com/sstephenson)
-  * coffee-script support
