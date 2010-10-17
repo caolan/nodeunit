@@ -1,0 +1,66 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NODEUNIT" "1" "October 2010" "" ""
+.
+.SH "NAME"
+\fBnodeunit\fR \-\- simple node\.js unit testing tool
+.
+.SH "SYNOPSIS"
+.
+.nf
+nodeunit [options] <testmodule1\.js|testfolder1> [\.\.\.]
+.
+.fi
+.
+.SH "DESCRIPTION"
+Nodeunit is a simple unit testing tool based on the node\.js assert module\.
+.
+.IP "\(bu" 4
+Simple to use
+.
+.IP "\(bu" 4
+Just export the tests from a module
+.
+.IP "\(bu" 4
+Helps you avoid common pitfalls when testing asynchronous code
+.
+.IP "\(bu" 4
+Easy to add test cases with setUp and tearDown functions if you wish
+.
+.IP "\(bu" 4
+Allows the use of mocks and stubs
+.
+.IP "" 0
+.
+.SH "OPTIONS"
+.
+.IP "\(bu" 4
+\fB\-\-reporter FILE\fR \- you can set the test reporter to a custom module or
+on of the modules in nodeunit/lib/reporters, when omitted, the default test runner
+is used\.
+.
+.IP "\(bu" 4
+\fB\-\-config FILE\fR \- load config options from a JSON file, allows
+the customisation of color schemes for the default test reporter etc\. See
+bin/nodeunit\.json for current available options\.
+.
+.IP "\(bu" 4
+\fB\-\-version\fR or \fB\-v\fR \- report nodeunit version
+.
+.IP "\(bu" 4
+\fB\-\-help\fR \- show nodeunit help
+.
+.IP "" 0
+.
+.SH "AUTHORS"
+Written by Caolan McMahon and other nodeunit contributors\.
+.
+.SH "REPORTING BUGS"
+Report nodeunit bugs to \fIhttp://github\.com/caolan/nodeunit/issues\fR\|\.
+.
+.SH "COPYRIGHT"
+Copyright © 2010 Caolan McMahon\. License MIT: \fIhttp://github\.com/caolan/nodeunit/raw/master/LICENSE\fR\|\.
+.
+.SH "SEE ALSO"
+node(1)

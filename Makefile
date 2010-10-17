@@ -9,6 +9,12 @@ NODEJSLIBDIR ?= $(LIBDIR)/$(NODEJS)
 
 BUILDDIR = dist
 
+DOCS = $(shell find doc -name '*.md' \
+				|sed 's|.md|.1|g' \
+				|sed 's|doc/|man1/|g' \
+				)
+
+
 $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
 all: build
@@ -37,5 +43,15 @@ clean:
 
 lint:
 	nodelint --config nodelint.cfg ./index.js ./bin/nodeunit ./bin/nodeunit.json ./lib/*.js ./lib/reporters/*.js ./test/*.js
+
+doc: man1 $(DOCS)
+	@true
+
+man1:
+	@if ! test -d man1 ; then mkdir -p man1 ; fi
+
+# use `npm install ronn` for this to work.
+man1/%.1: doc/%.md
+	ronn --roff $< > $@
 
 .PHONY: test install uninstall build all
