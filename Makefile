@@ -4,6 +4,7 @@ NODEJS = $(if $(shell test -f /usr/bin/nodejs && echo "true"),nodejs,node)
 PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
 DATADIR ?= $(PREFIX)/share
+MANDIR ?= $(PREFIX)/share/man
 LIBDIR ?= $(PREFIX)/lib
 NODEJSLIBDIR ?= $(LIBDIR)/$(NODEJS)
 
@@ -17,7 +18,7 @@ DOCS = $(shell find doc -name '*.md' \
 
 $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
-all: build
+all: build doc
 
 build: stamp-build
 
@@ -34,9 +35,12 @@ install: build
 	install --directory $(NODEJSLIBDIR)
 	cp -a $(BUILDDIR)/nodeunit $(NODEJSLIBDIR)
 	install --mode=0755 $(BUILDDIR)/nodeunit.sh $(BINDIR)/nodeunit
+	install --directory $(MANDIR)/man1/
+	cp -a man1/nodeunit.1 $(MANDIR)/man1/
 
 uninstall:
 	rm -rf $(NODEJSLIBDIR)/nodeunit $(NODEJSLIBDIR)/nodeunit.js $(BINDIR)/nodeunit
+	rm -rf $(MANDIR)/man1/nodeunit.1
 
 clean:
 	rm -rf $(BUILDDIR) stamp-build
