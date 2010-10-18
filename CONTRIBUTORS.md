@@ -23,6 +23,7 @@ Nodeunit contributors (sorted alphabeticaly)
 * **[Kadir Pekel](http://github.com/coffeemate)**
 
   * Improvements to default test reporter
+  * HTTP test utility
 
 * **[Oleg Efimov](http://github.com/Sannis)**
 
