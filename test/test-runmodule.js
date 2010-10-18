@@ -28,14 +28,18 @@ exports.testRunModule = function (test) {
         testStart: function (name) {
             call_order.push('testStart');
             test.ok(
-                name == 'test1' || name == 'test2' || name == 'test3',
+                name.toString() === 'test1' ||
+                name.toString() === 'test2' ||
+                name.toString() === 'test3',
                 'testStart called with test name '
             );
         },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.ok(
-                name == 'test1' || name == 'test2' || name == 'test3',
+                name.toString() === 'test1' ||
+                name.toString() === 'test2' ||
+                name.toString() === 'test3',
                 'testDone called with test name'
             );
         },
