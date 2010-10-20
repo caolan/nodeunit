@@ -3,7 +3,7 @@ nodeunit(1) -- simple node.js unit testing tool
 
 ## SYNOPSIS
 
-    nodeunit [options] <testmodule1.js|testfolder1> [...]
+    nodeunit [options] <file-or-directory> [<file-or-directory> ...]
 
 ## DESCRIPTION
 
@@ -17,18 +17,29 @@ Nodeunit is a simple unit testing tool based on the node.js assert module.
 
 ## OPTIONS
 
-* __--reporter FILE__ - you can set the test reporter to a custom module or
-on of the modules in nodeunit/lib/reporters, when omitted, the default test runner
-is used.
-* __--config FILE__ - load config options from a JSON file, allows
-the customisation of color schemes for the default test reporter etc. See
-bin/nodeunit.json for current available options.
-* __--version__ or __-v__ - report nodeunit version
-* __--help__ - show nodeunit help
+  __--config FILE__:  
+      Load config options from a JSON file, allows the customisation
+      of color schemes for the default test reporter etc.
+      See bin/nodeunit.json for current available options.
+
+  __--reporter FILE__:  
+      You can set the test reporter to a custom module or on of the modules
+      in nodeunit/lib/reporters, when omitted, the default test runner is used.
+
+  __-h__, __--help__:  
+      Display the help and exit.
+
+  __-v__, __--version__:  
+      Output version information and exit.
+
+  __<file-or-directory>__:
+      You can run nodeunit on specific files or on all *\*.js* files inside  
+      a directory.
 
 ## AUTHORS
 
-Written by Caolan McMahon and other nodeunit contributors.
+Written by Caolan McMahon and other nodeunit contributors.  
+Contributors list: <http://github.com/caolan/nodeunit/contributors>.
 
 ## REPORTING BUGS
 
@@ -36,7 +47,9 @@ Report nodeunit bugs to <http://github.com/caolan/nodeunit/issues>.
 
 ## COPYRIGHT
 
-Copyright © 2010 Caolan McMahon. License MIT: <http://github.com/caolan/nodeunit/raw/master/LICENSE>.
+Copyright © 2010 Caolan McMahon.  
+Nodeunit has been released under the MIT license:  
+<http://github.com/caolan/nodeunit/raw/master/LICENSE>.
 
 ## SEE ALSO
 
