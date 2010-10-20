@@ -17,8 +17,10 @@ var testrunner,
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "Options:\n\n" +
-            "  --config FILE    the path to a JSON file with options\n" +
-            "  --reporter FILE  optional path to a reporter file to customize the output";
+            "  --config FILE     the path to a JSON file with options\n" +
+            "  --reporter FILE   optional path to a reporter file to customize the output\n" +
+            "  -h, --help        display this help and exit\n" +
+            "  -v, --version     output version information and exit";
 
 // a very basic pseudo --options parser
 args.forEach(function (arg) {
