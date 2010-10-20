@@ -26,6 +26,9 @@ Nodeunit is a simple unit testing tool based on the node.js assert module.
       You can set the test reporter to a custom module or on of the modules
       in nodeunit/lib/reporters, when omitted, the default test runner is used.
 
+  __--list-reporters__:  
+      List available build-in reporters.
+
   __-h__, __--help__:  
       Display the help and exit.
 
