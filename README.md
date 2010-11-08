@@ -16,6 +16,7 @@ __Contributors__
 * [coffeemate](http://github.com/coffeemate)
 * [Sannis](http://github.com/Sannis)
 * [sstephenson](http://github.com/sstephenson)
+* [thegreatape](http://github.com/thegreatape)
 * and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](http://github.com/cjohansen/nodeunit).

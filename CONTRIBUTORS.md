@@ -39,5 +39,9 @@ Nodeunit contributors (sorted alphabeticaly)
 
   * Coffee-script support
 
+* **[Thomas Mayfield](http://github.com/thegreatape)**
+
+  * Async setUp and tearDown support for testCase
+
 **[Full contributors list](http://github.com/caolan/nodeunit/contributors).**
 
