@@ -5,16 +5,16 @@ exports.testTestCase = function (test) {
     test.expect(7);
     var call_order = [];
     var s = testCase({
-        setUp: function (t) {
+        setUp: function (callback) {
             call_order.push('setUp');
             test.equals(this.one, undefined);
             this.one = 1;
-            t.done();
+            callback();
         },
-        tearDown: function (t) {
+        tearDown: function (callback) {
             call_order.push('tearDown');
             test.ok(true, 'tearDown called');
-            t.done();
+            callback();
         },
         test1: function (t) {
             call_order.push('test1');
@@ -40,9 +40,9 @@ exports.testTestCase = function (test) {
 exports.tearDownAfterError = function (test) {
     test.expect(1);
     var s = testCase({
-        tearDown: function (t) {
+        tearDown: function (callback) {
             test.ok(true, 'tearDown called');
-            t.done();
+            callback();
         },
         test: function (t) {
             throw new Error('some error');
