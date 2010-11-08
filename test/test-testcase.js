@@ -52,3 +52,99 @@ exports.tearDownAfterError = function (test) {
         test.done();
     });
 };
+
+exports.catchSetUpError = function (test) {
+    test.expect(2);
+    var test_error = new Error('test error');
+    var s = testCase({
+        setUp: function (callback) {
+            throw test_error;
+            callback();
+        },
+        test: function (t) {
+            test.ok(false, 'test function should not be called');
+            t.done();
+        }
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.equal(assertions.length, 1);
+        test.equal(assertions[0].error, test_error);
+        test.done();
+    });
+};
+
+exports.setUpErrorCallback = function (test) {
+    test.expect(2);
+    var test_error = new Error('test error');
+    var s = testCase({
+        setUp: function (callback) {
+            callback(test_error);
+        },
+        test: function (t) {
+            test.ok(false, 'test function should not be called');
+            t.done();
+        }
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.equal(assertions.length, 1);
+        test.equal(assertions[0].error, test_error);
+        test.done();
+    });
+};
+
+exports.catchTearDownError = function (test) {
+    test.expect(2);
+    var test_error = new Error('test error');
+    var s = testCase({
+        tearDown: function (callback) {
+            throw test_error;
+            callback();
+        },
+        test: function (t) {
+            t.done();
+        }
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.equal(assertions.length, 1);
+        test.equal(assertions[0].error, test_error);
+        test.done();
+    });
+};
+
+exports.tearDownErrorCallback = function (test) {
+    test.expect(2);
+    var test_error = new Error('test error');
+    var s = testCase({
+        tearDown: function (callback) {
+            callback(test_error);
+        },
+        test: function (t) {
+            t.done();
+        }
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.equal(assertions.length, 1);
+        test.equal(assertions[0].error, test_error);
+        test.done();
+    });
+};
+
+exports.testErrorAndtearDownError = function (test) {
+    test.expect(3);
+    var error1 = new Error('test error one');
+    var error2 = new Error('test error two');
+    var s = testCase({
+        tearDown: function (callback) {
+            callback(error2);
+        },
+        test: function (t) {
+            t.done(error1);
+        }
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.equal(assertions.length, 2);
+        test.equal(assertions[0].error, error1);
+        test.equal(assertions[1].error, error2);
+        test.done();
+    });
+};
