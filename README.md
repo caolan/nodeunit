@@ -11,17 +11,18 @@ A simple unit testing tool based on the node.js assert module.
 
 __Contributors__
 
-* [alexkwolfe](http://github.com/alexkwolfe)
-* [azatoth](http://github.com/azatoth)
-* [coffeemate](http://github.com/coffeemate)
-* [Sannis](http://github.com/Sannis)
-* [sstephenson](http://github.com/sstephenson)
-* [thegreatape](http://github.com/thegreatape)
-* and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
+* [alexgorbatchev](https://github.com/alexgorbatchev)
+* [alexkwolfe](https://github.com/alexkwolfe)
+* [azatoth](https://github.com/azatoth)
+* [coffeemate](https://github.com/coffeemate)
+* [Sannis](https://github.com/Sannis)
+* [sstephenson](https://github.com/sstephenson)
+* [thegreatape](https://github.com/thegreatape)
+* and thanks to [cjohansen](https://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
-  [cjohansen's fork](http://github.com/cjohansen/nodeunit).
+  [cjohansen's fork](https://github.com/cjohansen/nodeunit).
 
-Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
+Also, check out gerad's [nodeunit-dsl](https://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
 
 More contributor information can be found in the CONTRIBUTORS.md file.
@@ -44,14 +45,14 @@ Here is an example unit test module:
 
 When run using the included test runner, this will output the following:
 
-<img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
 Installation
 ------------
 
 There are two options for installing nodeunit:
 
-1. Clone / download nodeunit from [github](http://github.com/caolan/nodeunit),
+1. Clone / download nodeunit from [github](https://github.com/caolan/nodeunit),
    then:
 
     make && sudo make install
@@ -209,7 +210,7 @@ The default test reporter uses color output, because I think that's more fun :) 
 intend to add a no-color option in future. To give you a feeling of the fun you'll
 be having writing tests, lets fix the example at the start of the README:
 
-<img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
 
 Ahhh, Doesn't that feel better?
 
