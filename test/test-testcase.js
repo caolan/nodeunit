@@ -59,7 +59,6 @@ exports.catchSetUpError = function (test) {
     var s = testCase({
         setUp: function (callback) {
             throw test_error;
-            callback();
         },
         test: function (t) {
             test.ok(false, 'test function should not be called');
@@ -98,7 +97,6 @@ exports.catchTearDownError = function (test) {
     var s = testCase({
         tearDown: function (callback) {
             throw test_error;
-            callback();
         },
         test: function (t) {
             t.done();
