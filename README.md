@@ -7,6 +7,7 @@ A simple unit testing tool based on the node.js assert module.
 * Just export the tests from a module
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
+* Flexible reporters for custom output, built-in support for HTML and jUnit XML
 * Allows the use of mocks and stubs
 
 __Contributors__
@@ -284,6 +285,16 @@ if its missing:
 
 Now if someone attempts to run your test suite without nodeunit installed they
 will be prompted to download the submodules for your project.
+
+
+Built-in Test Reporters
+-----------------------
+
+* __default__ - The standard reporter seen in the nodeunit screenshots
+* __minimal__ - Pretty, minimal output, shows errors and progress only
+* __html__ - Outputs a HTML report to stdout
+* __junit__ - Creates jUnit compatible XML reports, which can be used with
+  continuous integration tools such as [Hudson](http://hudson-ci.org/).
 
 
 Writing a Test Reporter
