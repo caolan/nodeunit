@@ -14,7 +14,7 @@ exports.testDoneCallback = function (test) {
     test.expect(4);
     nodeunit.runTest('testname', exports.testArgs, {
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 5, 'length');
             test.ok(typeof assertions.duration === "number");
             test.equals(name, 'testname');
@@ -33,7 +33,7 @@ exports.testThrowError = function (test) {
             test.same(assertion.error, err, 'assertion.error');
         },
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 1);
+            test.equals(assertions.failures(), 1);
             test.equals(assertions.length, 1);
         }
     }, test.done);
@@ -63,7 +63,7 @@ exports.testFailingLog = function (test) {
             throw ignored_error;
         },
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 1, 'total');
             process.removeListener('uncaughtException', err_handler);
         }
@@ -90,7 +90,7 @@ exports.testFailingTestDone = function (test) {
             test.ok(false, 'log should not be called');
         },
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 0, 'total');
             process.nextTick(function () {
                 process.removeListener('uncaughtException', err_handler);
@@ -113,7 +113,7 @@ exports.testAssertionObj = function (test) {
             test.ok(assertion.failed() === false, 'assertion.failed');
         },
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 1, 'total');
         }
     }, test.done);
@@ -127,7 +127,7 @@ exports.testLogOptional = function (test) {
     };
     nodeunit.runTest('testname', testfn, {
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 1, 'total');
         }
     }, test.done);
@@ -145,7 +145,7 @@ exports.testExpectWithFailure = function (test) {
             test.equals(assertion.method, 'ok', 'assertion.method');
         },
         testDone: function (name, assertions) {
-            test.equals(assertions.failures, 1, 'failures');
+            test.equals(assertions.failures(), 1, 'failures');
             test.equals(assertions.length, 1, 'total');
         }
     }, test.done);

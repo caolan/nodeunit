@@ -65,7 +65,7 @@ var makeTest = function (method, args_pass, args_fail) {
             },
             {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
-                assert.equal(assertions.failures, 0);
+                assert.equal(assertions.failures(), 0);
             }},
             function () {
                 test1_called = true;
@@ -81,7 +81,7 @@ var makeTest = function (method, args_pass, args_fail) {
             },
             {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
-                assert.equal(assertions.failures, 1);
+                assert.equal(assertions.failures(), 1);
             }},
             function () {
                 test2_called = true;
@@ -151,7 +151,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 2);
-            test.equals(assertions.failures, 0);
+            test.equals(assertions.failures(), 0);
         }},
         function () {
             test1_called = true;
@@ -167,7 +167,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 1);
-            test.equals(assertions.failures, 1);
+            test.equals(assertions.failures(), 1);
         }},
         function () {
             test2_called = true;
@@ -186,7 +186,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 4);
-            test.equals(assertions.failures, 1);
+            test.equals(assertions.failures(), 1);
         }},
         function () {
             test3_called = true;
