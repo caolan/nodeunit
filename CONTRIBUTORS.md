@@ -36,6 +36,10 @@ Nodeunit contributors (sorted alphabeticaly)
   * Option parsing, --help text and config file support
   * Reporters option for command-line tool
 
+* **[Orlando Vazquez](https://github.com/orlandov)**
+
+  * Added jUnit XML reporter
+
 * **[Ryan Dahl](https://github.com/ry)**
 
   * Add package.json
