@@ -117,22 +117,3 @@ exports.testNestedTests = function (test) {
         test.done();
     });
 };
-
-exports['asdf'] = function (test) {
-    test.deepEqual([
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-        {some: {nested: [1,2,3]}},
-    ],
-    {blah: 'test'},
-    'message');
-    test.done();
-};
