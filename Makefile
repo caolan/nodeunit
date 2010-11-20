@@ -23,6 +23,7 @@ all: build doc
 browser:
 	# super hacky build script for browser version!
 	rm -f browser.js
+	cat deps/json2.js >> browser.js
 	echo "nodeunit = (function(){" >> browser.js
 	echo "var assert = {};" >> browser.js
 	echo "var types = {};" >> browser.js
