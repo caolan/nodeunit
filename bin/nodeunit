@@ -2,7 +2,8 @@
 
 var
     fs = require('fs'),
-    sys = require('sys');
+    sys = require('sys'),
+    path = require('path');
 
 require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
@@ -97,11 +98,8 @@ if (config_file) {
     }
 }
 
-try {
-    testrunner = require('../lib/reporters/' + reporter_file);
-} catch (e) {
-    testrunner = require(reporter_file);
-}
-
-testrunner.run(files, options);
-
+var default_path = __dirname + '/../lib/reporters/' + reporter_file;
+path.exists(default_path + '.js', function (exists) {
+    testrunner = exists ? require(default_path): require(reporter_file);
+    testrunner.run(files, options);
+});
