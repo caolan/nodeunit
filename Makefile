@@ -20,6 +20,27 @@ $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
 all: build doc
 
+browser:
+	# super hacky build script for browser version!
+	rm -f browser.js
+	echo "nodeunit = (function(){" >> browser.js
+	echo "var assert = {};" >> browser.js
+	echo "var types = {};" >> browser.js
+	echo "var core = {};" >> browser.js
+	cat deps/async.js >> browser.js
+	echo "(function(exports){" >> browser.js
+	cat lib/assert.js >> browser.js
+	echo "})(assert);" >> browser.js
+	echo "(function(exports){" >> browser.js
+	cat lib/types.js >> browser.js
+	echo "})(types);" >> browser.js
+	echo "(function(exports){" >> browser.js
+	cat lib/core.js >> browser.js
+	echo "})(core);" >> browser.js
+	echo "return core; })();" >> browser.js
+	#sed -i "/ = require/d" browser.js
+	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" browser.js
+
 build: stamp-build
 
 stamp-build: $(wildcard  deps/* lib/*.js)
@@ -58,4 +79,4 @@ man1:
 man1/%.1: doc/%.md
 	ronn --roff $< > $@
 
-.PHONY: test install uninstall build all
+.PHONY: browser test install uninstall build all
