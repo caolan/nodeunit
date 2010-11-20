@@ -22,26 +22,26 @@ all: build doc
 
 browser:
 	# super hacky build script for browser version!
-	rm -f browser.js
-	cat deps/json2.js >> browser.js
-	echo "nodeunit = (function(){" >> browser.js
-	echo "var assert = {};" >> browser.js
-	echo "var types = {};" >> browser.js
-	echo "var core = {};" >> browser.js
-	cat deps/async.js >> browser.js
-	echo "(function(exports){" >> browser.js
-	cat lib/assert.js >> browser.js
-	echo "})(assert);" >> browser.js
-	echo "(function(exports){" >> browser.js
-	cat lib/types.js >> browser.js
-	echo "})(types);" >> browser.js
-	echo "(function(exports){" >> browser.js
-	cat lib/core.js >> browser.js
-	echo "})(core);" >> browser.js
-	echo "core.assert = assert;" >> browser.js
-	echo "return core; })();" >> browser.js
-	#sed -i "/ = require/d" browser.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" browser.js
+	mkdir -p $(BUILDDIR)/browser
+	rm -f $(BUILDDIR)/browser/nodeunit.js
+	cat deps/json2.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "nodeunit = (function(){" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "var assert = {};" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "var types = {};" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "var core = {};" >> $(BUILDDIR)/browser/nodeunit.js
+	cat deps/async.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
+	cat lib/assert.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "})(assert);" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
+	cat lib/types.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "})(types);" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
+	cat lib/core.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "})(core);" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "core.assert = assert;" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "return core; })();" >> $(BUILDDIR)/browser/nodeunit.js
+	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
 
 build: stamp-build
 
