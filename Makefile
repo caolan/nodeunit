@@ -38,6 +38,7 @@ browser:
 	echo "(function(exports){" >> browser.js
 	cat lib/core.js >> browser.js
 	echo "})(core);" >> browser.js
+	echo "core.assert = assert;" >> browser.js
 	echo "return core; })();" >> browser.js
 	#sed -i "/ = require/d" browser.js
 	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" browser.js
