@@ -24,8 +24,9 @@ browser:
 	# super hacky build script for browser version!
 	mkdir -p $(BUILDDIR)/browser
 	rm -f $(BUILDDIR)/browser/nodeunit.js
-	cat deps/json2.js >> $(BUILDDIR)/browser/nodeunit.js
+	cat share/license.js >> $(BUILDDIR)/browser/nodeunit.js
 	echo "nodeunit = (function(){" >> $(BUILDDIR)/browser/nodeunit.js
+	cat deps/json2.js >> $(BUILDDIR)/browser/nodeunit.js
 	echo "var assert = {};" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "var types = {};" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "var core = {};" >> $(BUILDDIR)/browser/nodeunit.js
@@ -49,6 +50,7 @@ browser:
 	echo "nodeunit.reporter = reporter;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "return nodeunit; })();" >> $(BUILDDIR)/browser/nodeunit.js
 	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
+	uglifyjs $(BUILDDIR)/browser/nodeunit.js > $(BUILDDIR)/browser/nodeunit.min.js
 
 build: stamp-build
 
