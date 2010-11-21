@@ -59,7 +59,6 @@ exports.testCalled = function (test) {
 // generates test functions for nodeunit assertions
 var makeTest = function (method, args_pass, args_fail) {
     return function (test) {
-        console.log('test for: ' + method);
         var test1_called = false;
         var test2_called = false;
 
@@ -71,9 +70,7 @@ var makeTest = function (method, args_pass, args_fail) {
                 test.done();
             },
             {testDone: function (name, assertions) {
-                console.log('a1');
                 assert.equal(assertions.length, 1);
-                console.log('a2');
                 assert.equal(assertions.failures(), 0);
             }},
             function () {
@@ -89,9 +86,7 @@ var makeTest = function (method, args_pass, args_fail) {
                 test.done();
             },
             {testDone: function (name, assertions) {
-                console.log('a3');
                 assert.equal(assertions.length, 1);
-                console.log('a4');
                 assert.equal(assertions.failures(), 1);
             }},
             function () {
@@ -221,4 +216,4 @@ waitFor(function () {
     assert.ok(tests_called.equals);
     assert.ok(tests_called.same);
     assert.ok(tests_called.expect);
-}, 2000);
+}, 10000);
