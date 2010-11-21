@@ -235,8 +235,8 @@ bin/nodeunit.json for current available options.
 * __--help__ - show nodeunit help
 
 
-Running unit tests in the browser
----------------------------------
+Running tests in the browser
+----------------------------
 
 Nodeunit tests can also be run inside the browser. For example usage, see
 the examples/browser folder. The basic syntax is as follows:
