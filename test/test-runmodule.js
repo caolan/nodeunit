@@ -1,4 +1,10 @@
-var nodeunit = require('../lib/nodeunit');
+/*  THIS FILE SHOULD BE BROWSER-COMPATIBLE JS!
+ *  You can use @REMOVE_LINE_FOR_BROWSER to remove code from the browser build.
+ *  Only code on that line will be removed, its mostly to avoid requiring code
+ *  that is node specific
+ */
+
+var nodeunit = require('../lib/nodeunit'); // @REMOVE_LINE_FOR_BROWSER
 
 
 exports.testRunModule = function (test) {
@@ -46,7 +52,7 @@ exports.testRunModule = function (test) {
         moduleDone: function (name, assertions) {
             call_order.push('moduleDone');
             test.equals(assertions.length, 3);
-            test.equals(assertions.failures, 2);
+            test.equals(assertions.failures(), 2);
             test.equals(name, 'testmodule');
             test.ok(typeof assertions.duration === "number");
             test.same(call_order, [
@@ -72,7 +78,7 @@ exports.testRunModuleEmpty = function (test) {
         },
         moduleDone: function (name, assertions) {
             test.equals(assertions.length, 0);
-            test.equals(assertions.failures, 0);
+            test.equals(assertions.failures(), 0);
             test.equals(name, 'module with no exports');
             test.ok(typeof assertions.duration === "number");
         }

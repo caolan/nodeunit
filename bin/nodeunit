@@ -2,7 +2,8 @@
 
 var
     fs = require('fs'),
-    sys = require('sys');
+    sys = require('sys'),
+    path = require('path');
 
 require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
@@ -97,11 +98,11 @@ if (config_file) {
     }
 }
 
-try {
-    testrunner = require('../lib/reporters/' + reporter_file);
-} catch (e) {
+var builtin_reporters = require(__dirname + '/../lib/reporters');
+if (reporter_file in builtin_reporters) {
+    testrunner = builtin_reporters[reporter_file];
+}
+else {
     testrunner = require(reporter_file);
 }
-
 testrunner.run(files, options);
-
