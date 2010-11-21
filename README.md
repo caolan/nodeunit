@@ -279,6 +279,10 @@ why nodeunit does not currently provide this out of the box.
 
 In the example above, the tests will run when the page is loaded.
 
+The browser-version of nodeunit.js is created in dist/browser when you do, 'make
+browser'. You'll need [UglifyJS](https://github.com/mishoo/UglifyJS) installed in
+order for it to automatically create nodeunit.min.js.
+
 
 Adding nodeunit to Your Projects
 --------------------------------
