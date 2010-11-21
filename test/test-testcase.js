@@ -1,4 +1,10 @@
-var nodeunit = require('../lib/nodeunit');
+/*  THIS FILE SHOULD BE BROWSER-COMPATIBLE JS!
+ *  You can use @REMOVE_LINE_FOR_BROWSER to remove code from the browser build.
+ *  Only code on that line will be removed, its mostly to avoid requiring code
+ *  that is node specific
+ */
+
+var nodeunit = require('../lib/nodeunit'); // @REMOVE_LINE_FOR_BROWSER
 var testCase = nodeunit.testCase;
 
 exports.testTestCase = function (test) {

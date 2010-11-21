@@ -2,10 +2,16 @@
  *  This module is not a plain nodeunit test suite, but instead uses the
  *  assert module to ensure a basic level of functionality is present,
  *  allowing the rest of the tests to be written using nodeunit itself.
+ *
+ *  THIS FILE SHOULD BE BROWSER-COMPATIBLE JS!
+ *  You can use @REMOVE_LINE_FOR_BROWSER to remove code from the browser build.
+ *  Only code on that line will be removed, its mostly to avoid requiring code
+ *  that is node specific
  */
 
-var assert = require('assert'),
-    nodeunit = require('../lib/nodeunit');
+var assert = require('assert'),             // @REMOVE_LINE_FOR_BROWSER
+    async = require('../deps/async'),       // @REMOVE_LINE_FOR_BROWSER
+    nodeunit = require('../lib/nodeunit');  // @REMOVE_LINE_FOR_BROWSER
 
 
 // NOT A TEST - util function to make testing faster.
@@ -25,7 +31,7 @@ var waitFor = function (fn, timeout, callback, start) {
                 throw e;
             }
             else {
-                process.nextTick(function () {
+                async.nextTick(function () {
                     waitFor(fn, timeout, callback, start);
                 });
             }
@@ -53,6 +59,7 @@ exports.testCalled = function (test) {
 // generates test functions for nodeunit assertions
 var makeTest = function (method, args_pass, args_fail) {
     return function (test) {
+        console.log('test for: ' + method);
         var test1_called = false;
         var test2_called = false;
 
@@ -64,7 +71,9 @@ var makeTest = function (method, args_pass, args_fail) {
                 test.done();
             },
             {testDone: function (name, assertions) {
+                console.log('a1');
                 assert.equal(assertions.length, 1);
+                console.log('a2');
                 assert.equal(assertions.failures(), 0);
             }},
             function () {
@@ -80,7 +89,9 @@ var makeTest = function (method, args_pass, args_fail) {
                 test.done();
             },
             {testDone: function (name, assertions) {
+                console.log('a3');
                 assert.equal(assertions.length, 1);
+                console.log('a4');
                 assert.equal(assertions.failures(), 1);
             }},
             function () {
