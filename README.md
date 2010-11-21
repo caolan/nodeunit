@@ -1,10 +1,12 @@
 Nodeunit
 ========
 
-A simple unit testing tool based on the node.js assert module.
+Simple syntax, powerful tools. Nodeunit provides easy async unit testing for
+node.js and the browser.
 
 * Simple to use
 * Just export the tests from a module
+* Works with node.js and in the browser.
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
 * Flexible reporters for custom output, built-in support for HTML and jUnit XML
@@ -231,6 +233,51 @@ the customisation of color schemes for the default test reporter etc. See
 bin/nodeunit.json for current available options.
 * __--version__ or __-v__ - report nodeunit version
 * __--help__ - show nodeunit help
+
+
+Running unit tests in the browser
+---------------------------------
+
+Nodeunit tests can also be run inside the browser. For example usage, see
+the examples/browser folder. The basic syntax is as follows:
+
+__test.html__
+
+    <html>
+      <head>
+        <title>My tests</title>
+        <script src="nodeunit.js"></script>
+        <script src="suite1.js"></script>
+        <script src="suite2.js"></script>
+      </head>
+      <body>
+        <script>
+          nodeunit.run({
+            'suite1': suite1,
+            'suite2': suite2
+          });
+        </script>
+      </body>
+    </html>
+
+Here, suite1 and suite2 are just object literals containing test functions or
+groups, as would be returned if you did require('test-suite') in node.js:
+
+__suite1.js__
+
+    this.suite1 = {
+        'example test': function (test) {
+            test.ok(true, 'everything is ok');
+            test.done();
+        }
+    };
+
+If you wish to use a commonjs format for your test suites (using exports), it is
+up to you to define the commonjs tools for the browser. There are a number of
+alternatives and its important it fits with your existing code, which is
+why nodeunit does not currently provide this out of the box.
+
+In the example above, the tests will run when the page is loaded.
 
 
 Adding nodeunit to Your Projects
