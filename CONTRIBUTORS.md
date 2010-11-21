@@ -10,16 +10,16 @@ Nodeunit contributors (sorted alphabeticaly)
 
   * HTML test reporter
 
-* **[Azatoth](https://github.com/azatoth)**
-
-  * Debian-friendly Makefile, supports both 'node' and 'nodejs' executables
-  * Sandbox utility
-  * Minimal test reporter
-
 * **[Caolan McMahon](https://github.com/caolan)**
 
   * Author and maintainer
   * Most features develpopment
+
+* **[Carl Fürstenberg](https://github.com/azatoth)**
+
+  * Debian-friendly Makefile, supports both 'node' and 'nodejs' executables
+  * Sandbox utility
+  * Minimal test reporter
 
 * **[Gerad Suyderhoud](https://github.com/gerad)**
 
