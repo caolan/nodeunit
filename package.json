@@ -1,9 +1,9 @@
 { "name": "nodeunit"
-, "description": "Easy unit testing in node.js, based on the assert module."
+, "description": "Easy unit testing for node.js and the browser."
 , "main": "./index"
 , "directories": {"lib": "./lib"}
 , "author": "Caolan McMahon"
-, "version": "0.4.1"
+, "version": "0.5.0"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
