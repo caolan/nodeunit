@@ -98,8 +98,11 @@ if (config_file) {
     }
 }
 
-var default_path = __dirname + '/../lib/reporters/' + reporter_file;
-path.exists(default_path + '.js', function (exists) {
-    testrunner = exists ? require(default_path): require(reporter_file);
-    testrunner.run(files, options);
-});
+var builtin_reporters = require(__dirname + '/../lib/reporters');
+if (reporter_file in builtin_reporters) {
+    testrunner = builtin_reporters[reporter_file];
+}
+else {
+    testrunner = require(reporter_file);
+}
+testrunner.run(files, options);
