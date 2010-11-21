@@ -380,7 +380,7 @@ The __assertion__ object:
 The __assertionList__ object:
 
 * An array-like object with the following new attributes:
-  * __failures__ - the number of assertions which failed
+  * __failures()__ - the number of assertions which failed
   * __duration__ - the time taken for the test to complete in msecs
 
 For a reference implementation of a test reporter, see lib/reporters/default.js in
