@@ -29,6 +29,8 @@ browser:
 	echo "var assert = {};" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "var types = {};" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "var core = {};" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "var nodeunit = {};" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "var reporter = {};" >> $(BUILDDIR)/browser/nodeunit.js
 	cat deps/async.js >> $(BUILDDIR)/browser/nodeunit.js
 	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
 	cat lib/assert.js >> $(BUILDDIR)/browser/nodeunit.js
@@ -39,8 +41,13 @@ browser:
 	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
 	cat lib/core.js >> $(BUILDDIR)/browser/nodeunit.js
 	echo "})(core);" >> $(BUILDDIR)/browser/nodeunit.js
-	echo "core.assert = assert;" >> $(BUILDDIR)/browser/nodeunit.js
-	echo "return core; })();" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/browser/nodeunit.js
+	cat lib/reporters/browser.js >> $(BUILDDIR)/browser/nodeunit.js
+	echo "})(reporter);" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "nodeunit = core;" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "nodeunit.assert = assert;" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "nodeunit.reporter = reporter;" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "return nodeunit; })();" >> $(BUILDDIR)/browser/nodeunit.js
 	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
 
 build: stamp-build
