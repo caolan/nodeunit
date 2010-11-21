@@ -7,7 +7,10 @@
   </head>
   <body>
     <script>
-      nodeunit.reporter.run('suite1', suite1);
+      nodeunit.run({
+        'suite1': suite1,
+        'suite2': suite2
+      });
     </script>
   </body>
 </html>

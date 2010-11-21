@@ -48,6 +48,7 @@ browser:
 	echo "nodeunit = core;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "nodeunit.assert = assert;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "nodeunit.reporter = reporter;" >> $(BUILDDIR)/browser/nodeunit.js
+	echo "nodeunit.run = reporter.run;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "return nodeunit; })();" >> $(BUILDDIR)/browser/nodeunit.js
 	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
 	uglifyjs $(BUILDDIR)/browser/nodeunit.js > $(BUILDDIR)/browser/nodeunit.min.js

@@ -1557,6 +1557,31 @@ exports.runModule = function (name, mod, opt, callback) {
     });
 };
 
+/**
+ * Treats an object literal as a list of modules keyed by name. Runs each
+ * module and finished with calling 'done'. You can think of this as a browser
+ * safe alternative to runFiles in the nodeunit module.
+ *
+ * @param {Object} modules
+ * @param {Object} opt
+ * @api public
+ */
+
+// TODO: add proper unit tests for this function
+exports.runModules = function (modules, opt) {
+    var all_assertions = [];
+    var options = types.options(opt);
+    var start = new Date().getTime();
+
+    async.concatSeries(_keys(modules), function (k, cb) {
+        exports.runModule(k, modules[k], options, cb);
+    },
+    function (err, all_assertions) {
+        var end = new Date().getTime();
+        options.done(types.assertionList(all_assertions, end - start));
+    });
+};
+
 
 /**
  * Utility for wrapping a suite of test functions with setUp and tearDown
@@ -1577,6 +1602,7 @@ exports.testCase = function (suite) {
 
     var keys = _keys(suite);
 
+    // TODO: replace reduce here with browser-safe alternative
     return keys.reduce(function (tests, k) {
         tests[k] = function (test) {
             var context = {};
@@ -1672,12 +1698,12 @@ exports.addStyles = function () {
  * @api public
  */
 
-exports.run = function (name, module, options) {
+exports.run = function (modules, options) {
     var start = new Date().getTime();
     exports.addStyles();
 
     var html = '';
-    nodeunit.runModule(name, module, {
+    nodeunit.runModules(modules, {
         moduleStart: function (name) {
             html += '<h2>' + name + '</h2>';
             html += '<ol>';
@@ -1706,26 +1732,26 @@ exports.run = function (name, module, options) {
         },
         moduleDone: function () {
             html += '</ol>';
+        },
+        done: function (assertions) {
+            var end = new Date().getTime();
+            var duration = end - start;
+            if (assertions.failures()) {
+                html += '<h3>FAILURES: '  + assertions.failures() +
+                    '/' + assertions.length + ' assertions failed (' +
+                    assertions.duration + 'ms)</h3>';
+            }
+            else {
+                html += '<h3>OK: ' + assertions.length +
+                    ' assertions (' + assertions.duration + 'ms)</h3>';
+            }
+            document.body.innerHTML += html;
         }
-    },
-    //done: function (assertions) {
-    function (err, assertions) {
-        var end = new Date().getTime();
-        var duration = end - start;
-        if (assertions.failures()) {
-            html += '<h3>FAILURES: '  + assertions.failures() +
-                '/' + assertions.length + ' assertions failed (' +
-                assertions.duration + 'ms)</h3>';
-        }
-        else {
-            html += '<h3>OK: ' + assertions.length +
-                ' assertions (' + assertions.duration + 'ms)</h3>';
-        }
-        document.body.innerHTML += html;
     });
 };
 })(reporter);
 nodeunit = core;
 nodeunit.assert = assert;
 nodeunit.reporter = reporter;
+nodeunit.run = reporter.run;
 return nodeunit; })();
