@@ -1,7 +1,7 @@
 { "name": "nodeunit"
 , "description": "Easy unit testing for node.js and the browser."
 , "maintainers":
-  [ { "name": "Caolan McMahon",
+  [ { "name": "Caolan McMahon"
     , "web": "https://github.com/caolan"
     }
   ]
