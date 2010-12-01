@@ -53,6 +53,8 @@ browser:
 	echo "nodeunit.run = reporter.run;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "return nodeunit; })();" >> $(BUILDDIR)/browser/nodeunit.js
 	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
+	# copy nodeunit.css
+	cp share/nodeunit.css $(BUILDDIR)/browser/nodeunit.css
 	# create nodeunit.min.js
 	uglifyjs $(BUILDDIR)/browser/nodeunit.js > $(BUILDDIR)/browser/nodeunit.min.js
 	# create test scripts
@@ -81,6 +83,7 @@ browser:
 	# copy nodeunit.js to dist/browser/test to make it easier for me to host and
 	# run on windows VMs with IE
 	cp $(BUILDDIR)/browser/nodeunit.js $(BUILDDIR)/browser/test/nodeunit.js
+	cp $(BUILDDIR)/browser/nodeunit.css $(BUILDDIR)/browser/test/nodeunit.css
 
 build: stamp-build
 

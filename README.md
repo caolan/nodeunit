@@ -245,16 +245,18 @@ __test.html__
 
     <html>
       <head>
-        <title>My tests</title>
+        <title>Example Test Suite</title>
+        <link rel="stylesheet" href="nodeunit.css" type="text/css" />
         <script src="nodeunit.js"></script>
         <script src="suite1.js"></script>
         <script src="suite2.js"></script>
       </head>
       <body>
+        <h1 id="nodeunit-header>Example Test Suite</h1>
         <script>
           nodeunit.run({
-            'suite1': suite1,
-            'suite2': suite2
+            'Suite One': suite1,
+            'Suite Two': suite2
           });
         </script>
       </body>
