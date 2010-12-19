@@ -79,14 +79,14 @@
     //// exported async module functions ////
 
     //// nextTick implementation with browser-compatible fallback ////
-    async.nextTick = function (fn) {
-        if (typeof process === 'undefined' || !(process.nextTick)) {
+    if (typeof process === 'undefined' || !(process.nextTick)) {
+        async.nextTick = function (fn) {
             setTimeout(fn, 0);
-        }
-        else {
-            process.nextTick(fn);
-        }
-    };
+        };
+    }
+    else {
+        async.nextTick = process.nextTick;
+    }
 
     async.forEach = function (arr, iterator, callback) {
         if (!arr.length) {
@@ -598,5 +598,26 @@
     /*async.info = _console_fn('info');
     async.warn = _console_fn('warn');
     async.error = _console_fn('error');*/
+
+    async.memoize = function (fn, hasher) {
+        var memo = {};
+        hasher = hasher || function (x) {
+            return x;
+        };
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            var callback = args.pop();
+            var key = hasher.apply(null, args);
+            if (key in memo) {
+                callback.apply(null, memo[key]);
+            }
+            else {
+                fn.apply(null, args.concat([function () {
+                    memo[key] = arguments;
+                    callback.apply(null, arguments);
+                }]));
+            }
+        };
+    };
 
 }());
