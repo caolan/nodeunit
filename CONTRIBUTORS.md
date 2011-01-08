@@ -30,6 +30,10 @@ Nodeunit contributors (sorted alphabeticaly)
   * Improvements to default test reporter
   * HTTP test utility
 
+* **[Matthias Lübken](https://github.com/luebken)**
+
+  * Utility functions for tracking incomplete tests on exit
+
 * **[Oleg Efimov](https://github.com/Sannis)**
 
   * Adding 'make lint' and fixing nodelint errors

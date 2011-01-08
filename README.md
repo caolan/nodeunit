@@ -18,6 +18,7 @@ __Contributors__
 * [alexkwolfe](https://github.com/alexkwolfe)
 * [azatoth](https://github.com/azatoth)
 * [coffeemate](https://github.com/coffeemate)
+* [luebken](https://github.com/luebken)
 * [orlandov](https://github.com/orlandov)
 * [Sannis](https://github.com/Sannis)
 * [sstephenson](https://github.com/sstephenson)
