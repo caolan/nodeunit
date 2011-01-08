@@ -30,7 +30,9 @@ __Contributors__
 Also, check out gerad's [nodeunit-dsl](https://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
 
-More contributor information can be found in the CONTRIBUTORS.md file.
+More contributor information can be found in the
+[CONTRIBUTORS.md](https://github.com/caolan/nodeunit/blob/master/CONTRIBUTORS.md)
+file.
 
 Usage
 -----
