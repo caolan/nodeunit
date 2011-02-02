@@ -97,10 +97,10 @@ test:
 	$(NODEJS) ./bin/nodeunit test
 
 install: build
-	install --directory $(NODEJSLIBDIR)
+	install -d $(NODEJSLIBDIR)
 	cp -a $(BUILDDIR)/nodeunit $(NODEJSLIBDIR)
-	install --mode=0755 $(BUILDDIR)/nodeunit.sh $(BINDIR)/nodeunit
-	install --directory $(MANDIR)/man1/
+	install -m 0755 $(BUILDDIR)/nodeunit.sh $(BINDIR)/nodeunit
+	install -d $(MANDIR)/man1/
 	cp -a man1/nodeunit.1 $(MANDIR)/man1/
 
 uninstall:
