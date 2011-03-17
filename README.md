@@ -72,7 +72,7 @@ API Documentation
 -----------------
 
 Nodeunit uses the functions available in the node.js
-[assert module](http://nodejs.org/api.html#assert-280):
+[assert module](http://nodejs.org/docs/v0.4.2/api/assert.html):
 
 * __ok(value, [message])__ - Tests if value is a true value.
 * __equal(actual, expected, [message])__ - Tests shallow, coercive equality
