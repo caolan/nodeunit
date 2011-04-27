@@ -5,7 +5,6 @@ var
     sys = require('sys'),
     path = require('path');
 
-require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
 
 var files = [];
@@ -15,13 +14,17 @@ var testrunner,
     config_param_found = false,
     output_param_found = false,
     reporter_file = 'default',
-    reporter_param_found = false;
+    reporter_param_found = false,
+    watch_flag = false,
+    watch_files = [];
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "Options:\n\n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  --watch           watch for test files and rerun tests on any changes\n" +
+            "  --watch=FILE      extra file or dir for watching, auto enable --watch\n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
@@ -29,6 +32,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
 // load default options
 var content = fs.readFileSync(__dirname + '/nodeunit.json', 'utf8');
 var options = JSON.parse(content);
+var args_without_watch = [process.ARGV[1]];
 
 // a very basic pseudo --options parser
 args.forEach(function (arg) {
@@ -68,6 +72,11 @@ args.forEach(function (arg) {
             sys.puts('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
         });
         process.exit(0);
+    } else if (arg.slice(0, 8) === "--watch=") {
+        watch_files.push(arg.slice(8));
+        watch_flag = true;
+    } else if (arg === '--watch') {
+        watch_flag = true;
     } else if ((arg === '-v') || (arg === '--version')) {
         var content = fs.readFileSync(__dirname + '/../package.json', 'utf8');
         var pkg = JSON.parse(content);
@@ -78,6 +87,10 @@ args.forEach(function (arg) {
         process.exit(0);
     } else {
         files.push(arg);
+    }
+    
+    if (arg.slice(0, 7) !== "--watch") {
+        args_without_watch.push(arg);
     }
 });
 
@@ -101,8 +114,84 @@ if (config_file) {
 var builtin_reporters = require(__dirname + '/../lib/reporters');
 if (reporter_file in builtin_reporters) {
     testrunner = builtin_reporters[reporter_file];
-}
-else {
+} else {
     testrunner = require(reporter_file);
 }
-testrunner.run(files, options);
+
+var last_run_time = new Date(0); // Jan 01 1970
+
+function runNodeunit() {
+    if ((new Date() - last_run_time) < options.watch_min_interval_in_ms) {
+        setTimeout(runNodeunit, options.watch_min_interval_in_ms);
+        return;
+    }
+    
+    var
+        spawn = require('child_process').spawn,
+        child = spawn(process.ARGV[0], args_without_watch);
+    
+    last_run_time = new Date();
+    
+    child.stdout.addListener('data', function (data) {
+        sys.print(data);
+    });
+    
+    child.stderr.addListener('data', function (data) {
+        sys.print(data);
+    });
+    
+    child.addListener('exit', function (code) {
+        last_run_time = new Date();
+    });
+}
+
+function watchCallback(f, curr, prev) {
+    function bold(str) {
+        return options.bold_prefix + str + options.bold_suffix;
+    }
+    
+    // First tests run
+    if (typeof f === "object" && prev === null && curr === null) {
+        return;
+    }
+    // Ignore dotfiles
+    var basename = path.basename(f);
+    if (basename[0] === '.') {
+        return;
+    }
+    // Ignore gedit/vim/etc. backup files
+    if (basename[basename.length - 1] === '~') {
+        return;
+    }
+    
+    if (prev === null) {
+        sys.puts(bold("New file " + f + ". Rerun tests:"));
+    } else if (curr === null) {
+        sys.puts(bold("File " + f + " was removed. Rerun tests:"));
+    } else {
+        sys.puts(bold("File " + f + " was changed. Rerun tests:"));
+    }
+    
+    // Run tests
+    runNodeunit();
+}
+
+if (watch_flag) {
+    var watch = require('../deps/watch');
+    
+    files.concat(watch_files).forEach(function (f) {
+        watch.watchTree(f, watchCallback);
+    });
+    
+    // First tests run
+    runNodeunit();
+    
+    /*
+    process.on('SIGQUIT', function () {
+        console.log('Got SIGQUIT. Exiting.');
+        process.exit(0);
+    });
+    */
+} else {
+    testrunner.run(files, options);
+}
