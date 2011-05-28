@@ -12,6 +12,7 @@ var args = process.ARGV.slice(2);
 
 //global indicators for Code Coverage
 codeCoverage = {};
+codeCoverage.paths = ['lib-cov'];
 
 var files = [];
 
@@ -87,6 +88,9 @@ args.forEach(function (arg) {
         codeCoverage.verbose = true;
     } else if(arg === '-cr') {
         codeCoverage.verbose = true;
+    } else if(arg === '-ci') {
+        codeCoverage.ignored = true;
+        codeCoverage.paths = ['lib'];
     } else {
         codeCoverage.enabled = true;
         setUpCodeCoverage();

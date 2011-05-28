@@ -50,4 +50,7 @@
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
+, "dependencies": {
+      "qbox": ">= 0.1.3"
+   }
 }
