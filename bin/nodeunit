@@ -28,8 +28,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  --list-reporters  list available build-in reporters\n" +
-            "  -c                add code coverage support and display summary \n" +
-            "  -cv               add code coverage support and display results in details (verbose mode) \n" +
+            "  -cr, --coverage-results     display Code Coverage results in details (verbose mode) \n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
@@ -84,14 +83,13 @@ args.forEach(function (arg) {
     } else if ((arg === '-h') || (arg === '--help')) {
         sys.puts(usage);
         process.exit(0);
-    } else if(arg === '-c') {
-        codeCoverage.enabled = true;
-        setUpCodeCoverage();
-    } else if(arg === '-cv') {
-        codeCoverage.enabled = true;
+    } else if(arg === '--coverage-results') {
         codeCoverage.verbose = true;
-        setUpCodeCoverage();
+    } else if(arg === '-cr') {
+        codeCoverage.verbose = true;
     } else {
+        codeCoverage.enabled = true;
+        setUpCodeCoverage();
         files.push(arg);
     }
 });
@@ -106,7 +104,7 @@ function setUpCodeCoverage() {
     });
 }
 
-if(codeCoverage) {
+if(codeCoverage.enabled) {
     $.ready(function() {
         startTesting();
     });
