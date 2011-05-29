@@ -30,6 +30,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  -cr, --coverage-results     display Code Coverage results in details (verbose mode) \n" +
+            "  -ci, --coverage-ignored     ignore code coverage support (ideal for identify real line numbers when error occured) \n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
