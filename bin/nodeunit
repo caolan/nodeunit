@@ -2,8 +2,13 @@
 
 var
     fs = require('fs'),
-    sys = require('sys'),
     path = require('path');
+
+// TODO: remove this when https://github.com/joyent/node/pull/1312
+//       lands in core.
+//
+// Until then, use console.log from npm (https://gist.github.com/1077544)
+require('console.log');
 
 require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
@@ -62,19 +67,19 @@ args.forEach(function (arg) {
         }).filter(function (reporter_file) {
             return reporter_file !== 'index';
         });
-        sys.puts('Build-in reporters: ');
+        console.log('Build-in reporters: ');
         reporters.forEach(function (reporter_file) {
             var reporter = require('../lib/reporters/' + reporter_file);
-            sys.puts('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
+            console.log('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
         });
         process.exit(0);
     } else if ((arg === '-v') || (arg === '--version')) {
         var content = fs.readFileSync(__dirname + '/../package.json', 'utf8');
         var pkg = JSON.parse(content);
-        sys.puts(pkg.version);
+        console.log(pkg.version);
         process.exit(0);
     } else if ((arg === '-h') || (arg === '--help')) {
-        sys.puts(usage);
+        console.log(usage);
         process.exit(0);
     } else {
         files.push(arg);
@@ -82,8 +87,8 @@ args.forEach(function (arg) {
 });
 
 if (files.length === 0) {
-    sys.puts('Files required.');
-    sys.puts(usage);
+    console.log('Files required.');
+    console.log(usage);
     process.exit(1);
 }
 
