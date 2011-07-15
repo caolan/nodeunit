@@ -53,7 +53,4 @@
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
-, "dependencies" : {
-    "console.log" : "0.1.2"
-  }
 }
