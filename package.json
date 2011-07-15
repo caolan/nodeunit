@@ -36,6 +36,9 @@
   , { "name": "Thomas Mayfield"
     , "web": "https://github.com/thegreatape"
     }
+  , { "name": "Elijah Insua <tmpvar@gmail.com>",
+      "web": "http://tmpvar.com"
+    }
   ]
 , "version": "0.5.1"
 , "repository" :
@@ -50,4 +53,7 @@
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
+, "dependencies" : {
+    "console.log" : "0.1.2"
+  }
 }
