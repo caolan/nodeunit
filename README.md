@@ -327,13 +327,12 @@ if its missing:
         var reporter = require('nodeunit').reporters.default;
     }
     catch(e) {
-        var sys = require('sys');
-        sys.puts("Cannot find nodeunit module.");
-        sys.puts("You can download submodules for this project by doing:");
-        sys.puts("");
-        sys.puts("    git submodule init");
-        sys.puts("    git submodule update");
-        sys.puts("");
+        console.log("Cannot find nodeunit module.");
+        console.log("You can download submodules for this project by doing:");
+        console.log("");
+        console.log("    git submodule init");
+        console.log("    git submodule update");
+        console.log("");
         process.exit();
     }
 
