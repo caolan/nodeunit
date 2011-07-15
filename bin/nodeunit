@@ -15,13 +15,15 @@ var testrunner,
     config_param_found = false,
     output_param_found = false,
     reporter_file = 'default',
-    reporter_param_found = false;
+    reporter_param_found = false,
+    testspec_param_found = false;
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "Options:\n\n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  -t name,          specify a test to run\n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
@@ -53,6 +55,11 @@ args.forEach(function (arg) {
     } else if (reporter_param_found) {
         reporter_file = arg;
         reporter_param_found = false;
+    } else if (arg === '-t') {
+        testspec_param_found = true;
+    } else if (testspec_param_found) {
+        options.testspec = arg;
+        testspec_param_found = false;
     } else if (arg === '--list-reporters') {
         var reporters = fs.readdirSync(__dirname + '/../lib/reporters');
         reporters = reporters.filter(function (reporter_file) {
