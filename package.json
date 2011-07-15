@@ -36,6 +36,9 @@
   , { "name": "Thomas Mayfield"
     , "web": "https://github.com/thegreatape"
     }
+  , { "name": "Elijah Insua <tmpvar@gmail.com>",
+      "web": "http://tmpvar.com"
+    }
   ]
 , "version": "0.5.2"
 , "repository" :
