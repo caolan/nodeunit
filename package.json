@@ -36,8 +36,11 @@
   , { "name": "Thomas Mayfield"
     , "web": "https://github.com/thegreatape"
     }
+  , { "name": "Elijah Insua <tmpvar@gmail.com>",
+      "web": "http://tmpvar.com"
+    }
   ]
-, "version": "0.5.1"
+, "version": "0.5.3"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"

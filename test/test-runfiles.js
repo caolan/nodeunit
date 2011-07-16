@@ -1,5 +1,4 @@
 var assert = require('assert'),
-    sys = require('sys'),
     fs = require('fs'),
     path = require('path'),
     nodeunit = require('../lib/nodeunit');
