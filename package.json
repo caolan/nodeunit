@@ -1,9 +1,46 @@
 { "name": "nodeunit"
-, "description": "Easy unit testing in node.js, based on the assert module."
-, "main": "./index"
-, "directories": {"lib": "./lib"}
-, "author": "Caolan McMahon"
-, "version": "0.4.0"
+, "description": "Easy unit testing for node.js and the browser."
+, "maintainers":
+  [ { "name": "Caolan McMahon"
+    , "web": "https://github.com/caolan"
+    }
+  ]
+, "contributors" :
+  [ { "name": "Alex Gorbatchev"
+    , "web": "https://github.com/alexgorbatchev"
+    }
+  , { "name": "Alex Wolfe"
+    , "web": "https://github.com/alexkwolfe"
+    }
+  , { "name": "Carl Fürstenberg"
+    , "web": "https://github.com/azatoth"
+    }
+  , { "name": "Gerad Suyderhoud"
+    , "web": "https://github.com/gerad"
+    }
+  , { "name": "Kadir Pekel"
+    , "web": "https://github.com/coffeemate"
+    }
+  , { "name": "Oleg Efimov"
+    , "web": "https://github.com/Sannis"
+    }
+  , { "name": "Orlando Vazquez"
+    , "web": "https://github.com/orlandov"
+    }
+  , { "name": "Ryan Dahl"
+    , "web": "https://github.com/ry"
+    }
+  , { "name": "Sam Stephenson"
+    , "web": "https://github.com/sstephenson"
+    }
+  , { "name": "Thomas Mayfield"
+    , "web": "https://github.com/thegreatape"
+    }
+  , { "name": "Elijah Insua <tmpvar@gmail.com>",
+      "web": "http://tmpvar.com"
+    }
+  ]
+, "version": "0.5.3"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
@@ -14,6 +51,6 @@
     , "url" : "http://github.com/caolan/nodeunit/raw/master/LICENSE"
     }
   ]
-, "directories" : { "doc" : "./doc", "man" : "./man1" }
+, "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
 }

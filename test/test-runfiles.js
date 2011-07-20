@@ -1,5 +1,4 @@
 var assert = require('assert'),
-    sys = require('sys'),
     fs = require('fs'),
     path = require('path'),
     nodeunit = require('../lib/nodeunit');
@@ -41,7 +40,7 @@ exports.testRunFiles = setup(function (test) {
             return 'log';
         },
         done: function (assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 4, 'length');
             test.ok(typeof assertions.duration === "number");
 
@@ -96,7 +95,7 @@ exports.testRunFilesEmpty = function (test) {
             test.ok(false, 'should not be called');
         },
         done: function (assertions) {
-            test.equals(assertions.failures, 0, 'failures');
+            test.equals(assertions.failures(), 0, 'failures');
             test.equals(assertions.length, 0, 'length');
             test.ok(typeof assertions.duration === "number");
             test.done();
@@ -111,7 +110,7 @@ exports.testEmptyDir = function (test) {
     // git doesn't like empty directories, so we have to create one
     path.exists(dir2, function (exists) {
         if (!exists) {
-            fs.mkdirSync(dir2, 777);
+            fs.mkdirSync(dir2, 0777);
         }
 
         // runFiles on empty directory:
@@ -129,7 +128,7 @@ exports.testEmptyDir = function (test) {
                 test.ok(false, 'should not be called');
             },
             done: function (assertions) {
-                test.equals(assertions.failures, 0, 'failures');
+                test.equals(assertions.failures(), 0, 'failures');
                 test.equals(assertions.length, 0, 'length');
                 test.ok(typeof assertions.duration === "number");
                 test.done();
@@ -173,7 +172,7 @@ if (CoffeeScript) {
                 return 'log';
             },
             done: function (assertions) {
-                test.equals(assertions.failures, 0, 'failures');
+                test.equals(assertions.failures(), 0, 'failures');
                 test.equals(assertions.length, 1, 'length');
                 test.ok(typeof assertions.duration === "number");
 

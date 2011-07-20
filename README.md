@@ -1,30 +1,38 @@
 Nodeunit
 ========
 
-A simple unit testing tool based on the node.js assert module.
+Simple syntax, powerful tools. Nodeunit provides easy async unit testing for
+node.js and the browser.
 
 * Simple to use
 * Just export the tests from a module
+* Works with node.js and in the browser.
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
+* Flexible reporters for custom output, built-in support for HTML and jUnit XML
 * Allows the use of mocks and stubs
 
 __Contributors__
 
-* [alexkwolfe](http://github.com/alexkwolfe)
-* [azatoth](http://github.com/azatoth)
-* [coffeemate](http://github.com/coffeemate)
-* [Sannis](http://github.com/Sannis)
-* [sstephenson](http://github.com/sstephenson)
-* [thegreatape](http://github.com/thegreatape)
-* and thanks to [cjohansen](http://github.com/cjohansen) for input and advice
+* [alexgorbatchev](https://github.com/alexgorbatchev)
+* [alexkwolfe](https://github.com/alexkwolfe)
+* [azatoth](https://github.com/azatoth)
+* [coffeemate](https://github.com/coffeemate)
+* [luebken](https://github.com/luebken)
+* [orlandov](https://github.com/orlandov)
+* [Sannis](https://github.com/Sannis)
+* [sstephenson](https://github.com/sstephenson)
+* [thegreatape](https://github.com/thegreatape)
+* and thanks to [cjohansen](https://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
-  [cjohansen's fork](http://github.com/cjohansen/nodeunit).
+  [cjohansen's fork](https://github.com/cjohansen/nodeunit).
 
-Also, check out gerad's [nodeunit-dsl](http://github.com/gerad/nodeunit-dsl)
+Also, check out gerad's [nodeunit-dsl](https://github.com/gerad/nodeunit-dsl)
 project, which implements a 'pretty dsl on top of nodeunit'.
 
-More contributor information can be found in the CONTRIBUTORS.md file.
+More contributor information can be found in the
+[CONTRIBUTORS.md](https://github.com/caolan/nodeunit/blob/master/CONTRIBUTORS.md)
+file.
 
 Usage
 -----
@@ -44,14 +52,14 @@ Here is an example unit test module:
 
 When run using the included test runner, this will output the following:
 
-<img src="http://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
 Installation
 ------------
 
 There are two options for installing nodeunit:
 
-1. Clone / download nodeunit from [github](http://github.com/caolan/nodeunit),
+1. Clone / download nodeunit from [github](https://github.com/caolan/nodeunit),
    then:
 
     make && sudo make install
@@ -64,7 +72,7 @@ API Documentation
 -----------------
 
 Nodeunit uses the functions available in the node.js
-[assert module](http://nodejs.org/api.html#assert-280):
+[assert module](http://nodejs.org/docs/v0.4.2/api/assert.html):
 
 * __ok(value, [message])__ - Tests if value is a true value.
 * __equal(actual, expected, [message])__ - Tests shallow, coercive equality
@@ -209,7 +217,7 @@ The default test reporter uses color output, because I think that's more fun :) 
 intend to add a no-color option in future. To give you a feeling of the fun you'll
 be having writing tests, lets fix the example at the start of the README:
 
-<img src="http://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_pass.png" />
 
 Ahhh, Doesn't that feel better?
 
@@ -228,6 +236,57 @@ the customisation of color schemes for the default test reporter etc. See
 bin/nodeunit.json for current available options.
 * __--version__ or __-v__ - report nodeunit version
 * __--help__ - show nodeunit help
+
+
+Running tests in the browser
+----------------------------
+
+Nodeunit tests can also be run inside the browser. For example usage, see
+the examples/browser folder. The basic syntax is as follows:
+
+__test.html__
+
+    <html>
+      <head>
+        <title>Example Test Suite</title>
+        <link rel="stylesheet" href="nodeunit.css" type="text/css" />
+        <script src="nodeunit.js"></script>
+        <script src="suite1.js"></script>
+        <script src="suite2.js"></script>
+      </head>
+      <body>
+        <h1 id="nodeunit-header>Example Test Suite</h1>
+        <script>
+          nodeunit.run({
+            'Suite One': suite1,
+            'Suite Two': suite2
+          });
+        </script>
+      </body>
+    </html>
+
+Here, suite1 and suite2 are just object literals containing test functions or
+groups, as would be returned if you did require('test-suite') in node.js:
+
+__suite1.js__
+
+    this.suite1 = {
+        'example test': function (test) {
+            test.ok(true, 'everything is ok');
+            test.done();
+        }
+    };
+
+If you wish to use a commonjs format for your test suites (using exports), it is
+up to you to define the commonjs tools for the browser. There are a number of
+alternatives and its important it fits with your existing code, which is
+why nodeunit does not currently provide this out of the box.
+
+In the example above, the tests will run when the page is loaded.
+
+The browser-version of nodeunit.js is created in dist/browser when you do, 'make
+browser'. You'll need [UglifyJS](https://github.com/mishoo/UglifyJS) installed in
+order for it to automatically create nodeunit.min.js.
 
 
 Adding nodeunit to Your Projects
@@ -268,13 +327,12 @@ if its missing:
         var reporter = require('nodeunit').reporters.default;
     }
     catch(e) {
-        var sys = require('sys');
-        sys.puts("Cannot find nodeunit module.");
-        sys.puts("You can download submodules for this project by doing:");
-        sys.puts("");
-        sys.puts("    git submodule init");
-        sys.puts("    git submodule update");
-        sys.puts("");
+        console.log("Cannot find nodeunit module.");
+        console.log("You can download submodules for this project by doing:");
+        console.log("");
+        console.log("    git submodule init");
+        console.log("    git submodule update");
+        console.log("");
         process.exit();
     }
 
@@ -283,6 +341,16 @@ if its missing:
 
 Now if someone attempts to run your test suite without nodeunit installed they
 will be prompted to download the submodules for your project.
+
+
+Built-in Test Reporters
+-----------------------
+
+* __default__ - The standard reporter seen in the nodeunit screenshots
+* __minimal__ - Pretty, minimal output, shows errors and progress only
+* __html__ - Outputs a HTML report to stdout
+* __junit__ - Creates jUnit compatible XML reports, which can be used with
+  continuous integration tools such as [Hudson](http://hudson-ci.org/).
 
 
 Writing a Test Reporter
@@ -316,7 +384,7 @@ The __assertion__ object:
 The __assertionList__ object:
 
 * An array-like object with the following new attributes:
-  * __failures__ - the number of assertions which failed
+  * __failures()__ - the number of assertions which failed
   * __duration__ - the time taken for the test to complete in msecs
 
 For a reference implementation of a test reporter, see lib/reporters/default.js in

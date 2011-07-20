@@ -2,10 +2,16 @@
  *  This module is not a plain nodeunit test suite, but instead uses the
  *  assert module to ensure a basic level of functionality is present,
  *  allowing the rest of the tests to be written using nodeunit itself.
+ *
+ *  THIS FILE SHOULD BE BROWSER-COMPATIBLE JS!
+ *  You can use @REMOVE_LINE_FOR_BROWSER to remove code from the browser build.
+ *  Only code on that line will be removed, its mostly to avoid requiring code
+ *  that is node specific
  */
 
-var assert = require('assert'),
-    nodeunit = require('../lib/nodeunit');
+var assert = require('assert'),             // @REMOVE_LINE_FOR_BROWSER
+    async = require('../deps/async'),       // @REMOVE_LINE_FOR_BROWSER
+    nodeunit = require('../lib/nodeunit');  // @REMOVE_LINE_FOR_BROWSER
 
 
 // NOT A TEST - util function to make testing faster.
@@ -25,7 +31,7 @@ var waitFor = function (fn, timeout, callback, start) {
                 throw e;
             }
             else {
-                process.nextTick(function () {
+                async.nextTick(function () {
                     waitFor(fn, timeout, callback, start);
                 });
             }
@@ -65,7 +71,7 @@ var makeTest = function (method, args_pass, args_fail) {
             },
             {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
-                assert.equal(assertions.failures, 0);
+                assert.equal(assertions.failures(), 0);
             }},
             function () {
                 test1_called = true;
@@ -81,7 +87,7 @@ var makeTest = function (method, args_pass, args_fail) {
             },
             {testDone: function (name, assertions) {
                 assert.equal(assertions.length, 1);
-                assert.equal(assertions.failures, 1);
+                assert.equal(assertions.failures(), 1);
             }},
             function () {
                 test2_called = true;
@@ -151,7 +157,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 2);
-            test.equals(assertions.failures, 0);
+            test.equals(assertions.failures(), 0);
         }},
         function () {
             test1_called = true;
@@ -167,7 +173,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 1);
-            test.equals(assertions.failures, 1);
+            test.equals(assertions.failures(), 1);
         }},
         function () {
             test2_called = true;
@@ -186,7 +192,7 @@ exports.testExpect = function (test) {
         },
         {testDone: function (name, assertions) {
             test.equals(assertions.length, 4);
-            test.equals(assertions.failures, 1);
+            test.equals(assertions.failures(), 1);
         }},
         function () {
             test3_called = true;
@@ -210,4 +216,4 @@ waitFor(function () {
     assert.ok(tests_called.equals);
     assert.ok(tests_called.same);
     assert.ok(tests_called.expect);
-}, 2000);
+}, 10000);
