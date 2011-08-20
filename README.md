@@ -238,6 +238,33 @@ bin/nodeunit.json for current available options.
 * __--help__ - show nodeunit help
 
 
+### Debugging
+
+A tests module may be converted to a self-contained script by adding the following
+line to the end of the module:
+
+    require('nodeunit').test();
+
+For example, `selfContained.js` might look like this
+
+    test1: function (test) {
+        test.equals(this.foo, 'bar');
+        test.done();
+    }
+
+    require('nodeunit').test();
+
+To run a self-contained script:
+
+    node selfContained.js
+
+Or, to debug:
+
+    node debug selfContained.js
+
+Self-contained scripts are also compatible with `nodeunit`.
+
+
 Running tests in the browser
 ----------------------------
 
@@ -416,7 +443,7 @@ module to ensure that test functions are actually run, and a basic level of
 nodeunit functionality is available.
 
 To run the nodeunit tests do:
-    
+
     make test
 
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
