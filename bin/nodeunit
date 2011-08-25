@@ -10,7 +10,7 @@ var
 // Until then, use console.log from npm (https://gist.github.com/1077544)
 require('../deps/console.log');
 
-require.paths.push(process.cwd());
+//require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
 
 var files = [];
@@ -102,7 +102,7 @@ if (files.length === 0) {
 if (config_file) {
     content = fs.readFileSync(config_file, 'utf8');
     var custom_options = JSON.parse(content);
-    
+
     for (var option in custom_options) {
         if (typeof option === 'string') {
             options[option] = custom_options[option];
