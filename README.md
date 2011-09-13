@@ -179,14 +179,11 @@ This would be run as:
     group - test2
     group - test3
 
-Using these groups its possible to add setUp and tearDown functions to your
-tests. Nodeunit has a utility function called testCase which allows you to
-define a setUp function, which is run before each test, and a tearDown
-function, which is run after each test calls test.done():
+Using these groups, Nodeunit allows you to define a `setUp` function, which is
+run before each test, and a `tearDown` function, which is run after each test
+calls `test.done()`:
 
-    var testCase = require('nodeunit').testCase;
-
-    module.exports = testCase({
+    module.exports = {
         setUp: function (callback) {
             this.foo = 'bar';
             callback();
@@ -199,7 +196,7 @@ function, which is run after each test calls test.done():
             test.equals(this.foo, 'bar');
             test.done();
         }
-    });
+    };
 
 In this way, its possible to have multiple groups of tests in a module, each
 group with its own setUp and tearDown functions.
