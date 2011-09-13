@@ -85,6 +85,39 @@ browser:
 	cp $(BUILDDIR)/browser/nodeunit.js $(BUILDDIR)/browser/test/nodeunit.js
 	cp $(BUILDDIR)/browser/nodeunit.css $(BUILDDIR)/browser/test/nodeunit.css
 
+commonjs:
+	# super hacky build script for browser commonjs version!
+	##### make commonjs browser module ######
+	mkdir -p $(BUILDDIR)/commonjs
+	mkdir -p $(BUILDDIR)/commonjs/deps
+	cp deps/json2.js $(BUILDDIR)/commonjs/deps
+	cp deps/async.js $(BUILDDIR)/commonjs/deps
+	echo "var async = require('async');" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "var assert = {};" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "var types = {};" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "var core = {};" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "var nodeunit = {};" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "var reporter = {};" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/commonjs/nodeunit.js
+	cat lib/assert.js >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "})(assert);" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/commonjs/nodeunit.js
+	cat lib/types.js >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "})(types);" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "(function(exports){" >> $(BUILDDIR)/commonjs/nodeunit.js
+	cat lib/core.js >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "})(core);" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "module.exports = core;" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "(function(exports, nodeunit){" >> $(BUILDDIR)/commonjs/nodeunit.js
+	cat lib/reporters/browser.js >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "})(reporter, module.exports);" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "module.exports.assert = assert;" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "module.exports.reporter = reporter;" >> $(BUILDDIR)/commonjs/nodeunit.js
+	echo "module.exports.run = reporter.run;" >> $(BUILDDIR)/commonjs/nodeunit.js
+	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/commonjs/nodeunit.js
+	sed -i "/\@REMOVE_LINE_FOR_COMMONJS/d" $(BUILDDIR)/commonjs/nodeunit.js
+	##### end of commonjs browser module #####
+
 build: stamp-build
 
 stamp-build: $(wildcard  deps/* lib/*.js)
