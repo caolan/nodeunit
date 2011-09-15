@@ -56,5 +56,9 @@ Nodeunit contributors (sorted alphabeticaly)
 
   * Async setUp and tearDown support for testCase
 
+* **[Maciej Małecki](https://github.com/mmalecki)**
+
+  * Removal of `testCase`
+
 **[Full contributors list](https://github.com/caolan/nodeunit/contributors).**
 
