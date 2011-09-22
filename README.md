@@ -294,12 +294,10 @@ Adding nodeunit to Your Projects
 
 If you don't want people to have to install the nodeunit command-line tool,
 you'll want to create a script that runs the tests for your project with the
-correct require paths set up. Here's an example test script, with a deps
-directory containing the projects dependencies:
+correct require paths set up. Here's an example test script, that assumes you
+have nodeunit in a suitably located node_modules directory.
 
     #!/usr/bin/env node
-    require.paths.unshift(__dirname + '/deps');
-
     var reporter = require('nodeunit').reporters.default;
     reporter.run(['test']);
 
@@ -308,10 +306,10 @@ submodule. Using submodules makes it easy for developers to download nodeunit
 and run your test suite, without cluttering up your repository with
 the source code. To add nodeunit as a git submodule do the following:
 
-    git submodule add git://github.com/caolan/nodeunit.git deps/nodeunit
+    git submodule add git://github.com/caolan/nodeunit.git node_modules/nodeunit
 
-This will add nodeunit to the deps folder of your project. Now, when cloning
-the repository, nodeunit can be downloaded by doing the following:
+This will add nodeunit to the node_modules folder of your project. Now, when
+cloning the repository, nodeunit can be downloaded by doing the following:
 
     git submodule init
     git submodule update
@@ -320,20 +318,16 @@ Let's update the test script above with a helpful hint on how to get nodeunit,
 if its missing:
 
     #!/usr/bin/env node
-
-    require.paths.unshift(__dirname + '/deps');
-
     try {
         var reporter = require('nodeunit').reporters.default;
     }
     catch(e) {
-        var sys = require('sys');
-        sys.puts("Cannot find nodeunit module.");
-        sys.puts("You can download submodules for this project by doing:");
-        sys.puts("");
-        sys.puts("    git submodule init");
-        sys.puts("    git submodule update");
-        sys.puts("");
+        console.log("Cannot find nodeunit module.");
+        console.log("You can download submodules for this project by doing:");
+        console.log("");
+        console.log("    git submodule init");
+        console.log("    git submodule update");
+        console.log("");
         process.exit();
     }
 
@@ -417,7 +411,7 @@ module to ensure that test functions are actually run, and a basic level of
 nodeunit functionality is available.
 
 To run the nodeunit tests do:
-    
+
     make test
 
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
@@ -430,4 +424,3 @@ Contributing
 Contributions to the project are most welcome, so feel free to fork and improve.
 When submitting a pull request, please run 'make lint' first to ensure
 we're following a consistent coding style.
-
