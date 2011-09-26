@@ -13,7 +13,7 @@ var
 // Until then, use console.log from npm (https://gist.github.com/1077544)
 require('../deps/console.log');
 
-require.paths.push(process.cwd());
+//require.paths.push(process.cwd());
 var args = process.ARGV.slice(2);
 
 //global indicators for Code Coverage
@@ -161,9 +161,18 @@ function startTesting() {
 
 function setUpCodeCoverage() {
     
-    childProcess.exec('rm -fr lib-cov && node-jscoverage lib lib-cov', function(err){
-            if (err) throw err;
-            require.paths.unshift('lib-cov');
-            $.start();
+    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov', function(err){
+            
+            if (err) {
+
+                if(err.message.match('jscoverage')) {
+                    console.log('Install node-jscoverage from\n\thttps://github.com/visionmedia/node-jscoverage ');
+                } else {
+                    throw err; 
+                }
+            } else {
+                require.paths.unshift('lib-cov');
+                $.start();
+            }
     });
 }
