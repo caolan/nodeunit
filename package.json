@@ -1,4 +1,4 @@
-{ "name": "nodeunit22"
+{ "name": "nodeunit2"
 , "description": "Easy unit testing for node.js and the browser."
 , "maintainers":
   [ { "name": "Caolan McMahon"
