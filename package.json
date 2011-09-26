@@ -40,7 +40,7 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.5.5"
+, "version": "0.1.1"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
@@ -52,7 +52,7 @@
     }
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
-, "bin" : { "nodeunit" : "./bin/nodeunit" }
+, "bin" : { "nodeunit2" : "./bin/nodeunit" }
 , "dependencies": {
       "qbox": ">= 0.1.3"
    }
