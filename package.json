@@ -52,7 +52,7 @@
     }
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
-, "bin" : { "nodeunit2" : "./bin/nodeunit" }
+, "bin" : { "nodeunit" : "./bin/nodeunit" }
 , "dependencies": {
       "qbox": ">= 0.1.3"
    }
