@@ -18,6 +18,7 @@ __Contributors__
 * [alexkwolfe](https://github.com/alexkwolfe)
 * [azatoth](https://github.com/azatoth)
 * [coffeemate](https://github.com/coffeemate)
+* [lambdalisue](https://github.com/lambdalisue)
 * [luebken](https://github.com/luebken)
 * [orlandov](https://github.com/orlandov)
 * [Sannis](https://github.com/Sannis)
@@ -346,6 +347,8 @@ Built-in Test Reporters
 * __html__ - Outputs a HTML report to stdout
 * __junit__ - Creates jUnit compatible XML reports, which can be used with
   continuous integration tools such as [Hudson](http://hudson-ci.org/).
+* __machineout__ - Simple reporter for machine analysis. There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim)
+  which is useful for TDD on VIM
 
 
 Writing a Test Reporter
@@ -417,6 +420,22 @@ To run the nodeunit tests do:
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
 to v0.2.1 fixes this.
 
+
+__machineout__ reporter
+----------------------------------------------
+
+The default reporter is really readable for human but for machinally analysis. 
+When you want to analyze the output of nodeunit, use __machineout__ reporter and you will get
+
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_machineout.png" />
+
+
+nodeunit with vim
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
+That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen)
+
+    
 
 Contributing
 ------------
