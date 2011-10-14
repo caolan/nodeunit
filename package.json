@@ -1,4 +1,4 @@
-{ "name": "nodeunit"
+{ "name": "nodeunit-complete"
 , "description": "Easy unit testing for node.js and the browser."
 , "maintainers":
   [ { "name": "Caolan McMahon"
