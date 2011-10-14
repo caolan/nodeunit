@@ -1,4 +1,4 @@
-{ "name": "nodeunit-complete"
+{ "name": "nodeunit"
 , "description": "Easy unit testing for node.js and the browser."
 , "maintainers":
   [ { "name": "Caolan McMahon"
@@ -6,7 +6,10 @@
     }
   ]
 , "contributors" :
-  [ { "name": "Alex Gorbatchev"
+  [ { "name": "Romain Beauxis"
+    , "web": "https://github.com/toots"
+    }
+  , { "name": "Alex Gorbatchev"
     , "web": "https://github.com/alexgorbatchev"
     }
   , { "name": "Alex Wolfe"
