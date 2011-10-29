@@ -90,6 +90,13 @@ browser:
 	cp $(BUILDDIR)/browser/test/test-testcase.js $(BUILDDIR)/browser/.test-testcase.js
 	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-testcase.js > $(BUILDDIR)/browser/test/test-testcase.js
 	rm $(BUILDDIR)/browser/.test-testcase.js
+	# test-testcase-legacy.js
+	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	cat test/test-testcase-legacy.js >> $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	echo "})(this.test_testcase_legacy = {});" >> $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	cp $(BUILDDIR)/browser/test/test-testcase-legacy.js $(BUILDDIR)/browser/.test-testcase-legacy.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-testcase-legacy.js > $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	rm $(BUILDDIR)/browser/.test-testcase-legacy.js
 	# copy nodeunit.js to dist/browser/test to make it easier for me to host and
 	# run on windows VMs with IE
 	cp $(BUILDDIR)/browser/nodeunit.js $(BUILDDIR)/browser/test/nodeunit.js
