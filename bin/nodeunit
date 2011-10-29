@@ -117,4 +117,9 @@ if (reporter_file in builtin_reporters) {
 else {
     testrunner = require(reporter_file);
 }
-testrunner.run(files, options);
+
+testrunner.run(files, options, function(err) {
+    if (err) {
+        process.exit(1);
+    }
+});
