@@ -1,7 +1,8 @@
 var testCase  = require('nodeunit').testCase;
 /* 
  This is an example test suite to demonstrate the nested test reporter.
- Run with --reporter nested.
+ Run with --reporter nested, e.g.,
+ nodeunit --reporter nested nested_reporter_test.unit.js
 
  The test output should be something like:
 
