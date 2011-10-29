@@ -6,7 +6,10 @@
     }
   ]
 , "contributors" :
-  [ { "name": "Alex Gorbatchev"
+  [ { "name": "Romain Beauxis"
+    , "web": "https://github.com/toots"
+    }
+  , { "name": "Alex Gorbatchev"
     , "web": "https://github.com/alexgorbatchev"
     }
   , { "name": "Alex Wolfe"
