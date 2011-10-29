@@ -30,6 +30,10 @@ Nodeunit contributors (sorted alphabeticaly)
   * Improvements to default test reporter
   * HTTP test utility
 
+* **[Λlisue](https://github.com/lambdalisue)**
+
+  * Add machineout reporter
+
 * **[Matthias Lübken](https://github.com/luebken)**
 
   * Utility functions for tracking incomplete tests on exit
