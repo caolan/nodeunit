@@ -45,7 +45,7 @@
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
   }
-, "bugs" : { "web" : "http://github.com/caolan/nodeunit/issues" }
+, "bugs" : { "url" : "http://github.com/caolan/nodeunit/issues" }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/caolan/nodeunit/raw/master/LICENSE"
