@@ -53,4 +53,8 @@
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
+, "dependencies" :
+  { "tap-assert": ">=0.0.9"
+  , "tap-producer": ">=0.0.1"
+  }
 }
