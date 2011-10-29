@@ -140,7 +140,7 @@ build: stamp-build
 stamp-build: $(wildcard  deps/* lib/*.js)
 	touch $@;
 	mkdir -p $(BUILDDIR)/nodeunit
-	cp -R bin deps index.js lib package.json share $(BUILDDIR)/nodeunit
+	cp -R bin node_modules deps index.js lib package.json share $(BUILDDIR)/nodeunit
 	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/bin/nodeunit $$@' > $(BUILDDIR)/nodeunit.sh
 
 test:
