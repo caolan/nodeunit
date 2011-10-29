@@ -11,7 +11,7 @@ var
 require('../deps/console.log');
 
 //require.paths.push(process.cwd());
-var args = process.ARGV.slice(2);
+var args = (process.ARGV || process.argv).slice(2);
 
 var files = [];
 
