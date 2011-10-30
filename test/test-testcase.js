@@ -12,7 +12,7 @@ exports.testTestCase = function (test) {
     var s = {
         setUp: function (callback) {
             call_order.push('setUp');
-            test.equals(this.one, undefined);
+            test.equals(this.one, undefined, 'in setUp, this.one not set');
             this.one = 1;
             callback();
         },
@@ -23,13 +23,13 @@ exports.testTestCase = function (test) {
         },
         test1: function (t) {
             call_order.push('test1');
-            test.equals(this.one, 1);
+            test.equals(this.one, 1, 'in test1, this.one is 1');
             this.one = 2;
             t.done();
         },
         test2: function (t) {
             call_order.push('test2');
-            test.equals(this.one, 1);
+            test.equals(this.one, 1, 'in test2, this.one is still 1');
             t.done();
         }
     };
@@ -228,6 +228,29 @@ exports.nestedTestCases = function (test) {
             'group1.tearDown',
             'tearDown'
         ]);
+        test.done();
+    });
+};
+
+exports.deepNestedTestCases = function (test) {
+    var val = 'foo';
+    var s = {
+        setUp: function (callback) {
+            val = 'bar';
+            callback();
+        },
+        group1: {
+            test: {
+                test2: function (test) {
+                    test.equal(val, 'bar');
+                    test.done();
+                }
+            }
+        }
+    };
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.ok(!assertions[0].failed());
+        test.equal(assertions.length, 1);
         test.done();
     });
 };

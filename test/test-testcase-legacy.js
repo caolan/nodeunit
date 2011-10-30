@@ -232,3 +232,26 @@ exports.nestedTestCases = function (test) {
         test.done();
     });
 };
+
+exports.deepNestedTestCases = function (test) {
+    var val = 'foo';
+    var s = testCase({
+        setUp: function (callback) {
+            val = 'bar';
+            callback();
+        },
+        group1: testCase({
+            test: testCase({
+                test2: function (test) {
+                    test.equal(val, 'bar');
+                    test.done();
+                }
+            })
+        })
+    });
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.ok(!assertions[0].failed());
+        test.equal(assertions.length, 1);
+        test.done();
+    });
+};
