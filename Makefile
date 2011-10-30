@@ -138,6 +138,8 @@ commonjs:
 build: stamp-build
 
 stamp-build: $(wildcard  deps/* lib/*.js)
+	git submodule init
+	git submodule update
 	touch $@;
 	mkdir -p $(BUILDDIR)/nodeunit
 	cp -R bin node_modules deps index.js lib package.json share $(BUILDDIR)/nodeunit
