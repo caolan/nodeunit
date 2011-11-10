@@ -17,7 +17,7 @@ __Contributors__
 * [alexgorbatchev](https://github.com/alexgorbatchev)
 * [alexkwolfe](https://github.com/alexkwolfe)
 * [azatoth](https://github.com/azatoth)
-* [coffeemate](https://github.com/coffeemate)
+* [kadirpekel](https://github.com/kadirpekel)
 * [lambdalisue](https://github.com/lambdalisue)
 * [luebken](https://github.com/luebken)
 * [orlandov](https://github.com/orlandov)
