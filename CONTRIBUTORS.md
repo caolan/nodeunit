@@ -25,7 +25,7 @@ Nodeunit contributors (sorted alphabeticaly)
 
   * First comand-line tool
 
-* **[Kadir Pekel](https://github.com/coffeemate)**
+* **[Kadir Pekel](https://github.com/kadirpekel)**
 
   * Improvements to default test reporter
   * HTTP test utility
