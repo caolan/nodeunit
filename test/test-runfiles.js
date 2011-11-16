@@ -76,13 +76,14 @@ exports.testRunFiles = setup(function (test) {
         [__dirname + '/fixtures/mock_module1.js',
          __dirname + '/fixtures/mock_module2.js',
          __dirname + '/fixtures/dir'],
+        false,
         opts
     );
 });
 
 exports.testRunFilesEmpty = function (test) {
     test.expect(3);
-    nodeunit.runFiles([], {
+    nodeunit.runFiles([], false, {
         moduleStart: function () {
             test.ok(false, 'should not be called');
         },
@@ -115,7 +116,7 @@ exports.testEmptyDir = function (test) {
         }
 
         // runFiles on empty directory:
-        nodeunit.runFiles([dir2], {
+        nodeunit.runFiles([dir2], false, {
             moduleStart: function () {
                 test.ok(false, 'should not be called');
             },
@@ -207,7 +208,8 @@ if (CoffeeScript) {
         };
 
         nodeunit.runFiles(
-            [__dirname + 'fixtures/coffee/mock_coffee_module.coffee'],
+            [__dirname + '/fixtures/coffee/mock_coffee_module.coffee'],
+            false,
             opts
         );
     };

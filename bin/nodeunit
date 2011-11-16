@@ -29,6 +29,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  -t name,          specify a test to run\n" +
+            "  -r, --recursive   run tests from directories recursively" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
 
@@ -80,6 +81,8 @@ args.forEach(function (arg) {
             console.log('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
         });
         process.exit(0);
+    } else if ((arg === '-r') || (arg === '--recursive')) {
+        options.recursive = true;
     } else if ((arg === '-v') || (arg === '--version')) {
         var content = fs.readFileSync(__dirname + '/../package.json', 'utf8');
         var pkg = JSON.parse(content);
