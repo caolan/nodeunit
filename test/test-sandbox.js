@@ -1,6 +1,4 @@
-var nodeunit = require('../lib/nodeunit');
 var sandbox = require('../lib/utils').sandbox;
-var testCase = nodeunit.testCase;
 
 exports.testSimpleSandbox = function (test) {
     var raw_jscode1 = sandbox(__dirname + '/fixtures/raw_jscode1.js');
@@ -26,6 +24,6 @@ exports.testSandboxMultiple = function (test) {
         __dirname + '/fixtures/raw_jscode3.js',
         __dirname + '/fixtures/raw_jscode3.js'
     ]);
-    test.equal(raw_jscode3.t, 3, 'two files loaded');
+    test.equal(raw_jscode3.t, 3, 'three files loaded');
     test.done();
 };

@@ -353,7 +353,7 @@ Writing a Test Reporter
 ---------------------
 
 Nodeunit exports runTest(fn, options), runModule(mod, options) and
-runFiles(paths, options). You'll most likely want to run test suites from
+runFiles(paths, recursive, options). You'll most likely want to run test suites from
 files, which can be done using the latter function. The _options_ argument can
 contain callbacks which run during testing. Nodeunit provides the following
 callbacks:
