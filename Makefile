@@ -15,6 +15,12 @@ DOCS = $(shell find doc -name '*.md' \
 				|sed 's|doc/|man1/|g' \
 				)
 
+LINT_FILES = ./index.js \
+             ./bin/nodeunit \
+             ./bin/nodeunit.json \
+             ./lib/nodeunit.js \
+             ./test/*.js \
+             ./lib/reporters/nested.js
 
 $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
@@ -161,7 +167,7 @@ clean:
 	rm -rf $(BUILDDIR) stamp-build
 
 lint:
-	./node_modules/nodelint/nodelint --config nodelint.cfg ./index.js ./bin/nodeunit ./bin/nodeunit.json ./lib/*.js ./lib/reporters/*.js ./test/*.js
+	./node_modules/nodelint/nodelint --config nodelint.cfg $(LINT_FILES)
 
 doc: man1 $(DOCS)
 	@true
