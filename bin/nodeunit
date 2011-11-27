@@ -102,8 +102,9 @@ if (files.length === 0) {
 if (config_file) {
     content = fs.readFileSync(config_file, 'utf8');
     var custom_options = JSON.parse(content);
+    var option;
 
-    for (var option in custom_options) {
+    for (option in custom_options) {
         if (typeof option === 'string') {
             options[option] = custom_options[option];
         }
@@ -111,7 +112,7 @@ if (config_file) {
 }
 
 var builtin_reporters = require(__dirname + '/../lib/reporters');
-if (reporter_file in builtin_reporters) {
+if (builtin_reporters.hasOwnProperty(reporter_file)) {
     testrunner = builtin_reporters[reporter_file];
 }
 else {
