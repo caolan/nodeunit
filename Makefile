@@ -20,6 +20,8 @@ LINT_FILES = ./index.js \
              ./bin/nodeunit.json \
              ./lib/nodeunit.js \
              ./lib/reporters/default.js \
+             ./lib/reporters/junit.js \
+             ./lib/reporters/minimal.js \
              ./lib/reporters/nested.js \
              ./lib/track.js \
              ./lib/types.js \
