@@ -20,6 +20,7 @@ LINT_FILES = ./index.js \
              ./bin/nodeunit.json \
              ./lib/nodeunit.js \
              ./lib/track.js \
+             ./lib/types.js \
              ./test/*.js \
              ./lib/reporters/nested.js
 
