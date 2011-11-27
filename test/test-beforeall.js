@@ -10,13 +10,13 @@ exports.testBeforeAllDeepNested = function (test) {
     var val1 = 'foo';
     var val2 = 'fizz';
     var val3 = 'flah';
-    var beforeAllCallCount_1 = 0;
-    var beforeAllCallCount_2 = 0;
+    var parentBeforeAllCount = 0;
+    var childBeforeAllCount = 0;
 
     var suite = {
         beforeAll: function (callback) {
             val3 = 'blah';
-            beforeAllCallCount_1++;
+            parentBeforeAllCount++;
             callback();
         },
 
@@ -33,7 +33,7 @@ exports.testBeforeAllDeepNested = function (test) {
             test.equal(val1, 'bar');
             test.equal(val2, 'fizz');
             test.equal(val3, 'blah');
-            test.equal(beforeAllCallCount_1, 1);
+            test.equal(parentBeforeAllCount, 1);
             test.done();
         },
 
@@ -45,7 +45,7 @@ exports.testBeforeAllDeepNested = function (test) {
 
             subgroup: {
                 beforeAll: function (callback) {
-                    beforeAllCallCount_2++;
+                    childBeforeAllCount++;
                     callback();
                 },
 
@@ -53,13 +53,13 @@ exports.testBeforeAllDeepNested = function (test) {
                     test.equal(val1, 'bar');
                     test.equal(val2, 'buzz');
                     test.equal(val3, 'blah');
-                    test.equal(beforeAllCallCount_1, 1);
-                    test.equal(beforeAllCallCount_2, 1);
+                    test.equal(parentBeforeAllCount, 1);
+                    test.equal(childBeforeAllCount, 1);
                     test.done();
                 },
 
                 test3: function (test) {
-                    test.equal(beforeAllCallCount_2, 1);
+                    test.equal(childBeforeAllCount, 1);
                     test.done();
                 }
             }
