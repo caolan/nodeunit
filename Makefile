@@ -24,7 +24,9 @@ LINT_FILES = ./index.js \
              ./lib/reporters/junit.js \
              ./lib/reporters/minimal.js \
              ./lib/reporters/nested.js \
+             ./lib/reporters/skip_passed.js \
              ./lib/reporters/tap.js \
+             ./lib/reporters/verbose.js \
              ./lib/track.js \
              ./lib/types.js \
              ./lib/utils.js \
