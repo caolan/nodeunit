@@ -19,10 +19,12 @@ LINT_FILES = ./index.js \
              ./bin/nodeunit \
              ./bin/nodeunit.json \
              ./lib/nodeunit.js \
+             ./lib/reporters/default.js \
+             ./lib/reporters/nested.js \
              ./lib/track.js \
              ./lib/types.js \
+             ./lib/utils.js \
              ./test/*.js \
-             ./lib/reporters/nested.js
 
 $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
