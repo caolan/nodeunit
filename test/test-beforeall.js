@@ -10,12 +10,13 @@ exports.testBeforeAllDeepNested = function (test) {
     var val1 = 'foo';
     var val2 = 'fizz';
     var val3 = 'flah';
-    var beforeAllCallCount = 0;
+    var beforeAllCallCount_1 = 0;
+    var beforeAllCallCount_2 = 0;
 
     var suite = {
         beforeAll: function (callback) {
             val3 = 'blah';
-            beforeAllCallCount++;
+            beforeAllCallCount_1++;
             callback();
         },
 
@@ -32,7 +33,7 @@ exports.testBeforeAllDeepNested = function (test) {
             test.equal(val1, 'bar');
             test.equal(val2, 'fizz');
             test.equal(val3, 'blah');
-            test.equal(beforeAllCallCount, 1);
+            test.equal(beforeAllCallCount_1, 1);
             test.done();
         },
 
@@ -42,12 +43,23 @@ exports.testBeforeAllDeepNested = function (test) {
                 callback();
             },
 
-            test: {
+            subgroup: {
+                beforeAll: function (callback) {
+                    beforeAllCallCount_2++;
+                    callback();
+                },
+
                 test2: function (test) {
                     test.equal(val1, 'bar');
                     test.equal(val2, 'buzz');
                     test.equal(val3, 'blah');
-                    test.equal(beforeAllCallCount, 1);
+                    test.equal(beforeAllCallCount_1, 1);
+                    test.equal(beforeAllCallCount_2, 1);
+                    test.done();
+                },
+
+                test3: function (test) {
+                    test.equal(beforeAllCallCount_2, 1);
                     test.done();
                 }
             }
@@ -56,7 +68,7 @@ exports.testBeforeAllDeepNested = function (test) {
 
     nodeunit.runSuite(null, suite, {}, function (err, assertions) {
         test.ok(!assertions[0].failed());
-        test.equal(assertions.length, 8);
+        test.equal(assertions.length, 10);
         test.done();
     });
 };
