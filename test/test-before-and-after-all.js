@@ -12,11 +12,18 @@ exports.testBeforeAllDeepNested = function (test) {
     var val3 = 'flah';
     var parentBeforeAllCount = 0;
     var childBeforeAllCount = 0;
+    var parentAfterAllCount = 0;
 
     var suite = {
         beforeAll: function (callback) {
             val3 = 'blah';
             parentBeforeAllCount++;
+            callback();
+        },
+
+        afterAll: function (callback) {
+            val3 = 'flah-afterall';
+            parentAfterAllCount++;
             callback();
         },
 
@@ -26,6 +33,7 @@ exports.testBeforeAllDeepNested = function (test) {
         },
 
         tearDown: function (callback) {
+            val3 = 'flah-teardown';
             callback();
         },
 
@@ -67,6 +75,8 @@ exports.testBeforeAllDeepNested = function (test) {
     };
 
     nodeunit.runSuite(null, suite, {}, function (err, assertions) {
+        test.equal(parentAfterAllCount, 1);
+        test.equal(val3, 'flah-afterall');
         test.ok(!assertions[0].failed());
         test.equal(assertions.length, 10);
         test.done();
