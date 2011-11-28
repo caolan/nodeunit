@@ -111,7 +111,7 @@ exports.testEmptyDir = function (test) {
     // git doesn't like empty directories, so we have to create one
     path.exists(dir2, function (exists) {
         if (!exists) {
-            fs.mkdirSync(dir2, 0777);
+            fs.mkdirSync(dir2, '0777');
         }
 
         // runFiles on empty directory:
@@ -207,7 +207,7 @@ if (CoffeeScript) {
         };
 
         nodeunit.runFiles(
-            [__dirname + 'fixtures/coffee/mock_coffee_module.coffee'],
+            [__dirname + '/fixtures/coffee/mock_coffee_module.coffee'],
             opts
         );
     };

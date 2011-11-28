@@ -49,7 +49,10 @@
   , "url" : "http://github.com/caolan/nodeunit.git"
   }
 , "devDependencies":
-  { "uglify-js": ">=1.1.0" }
+  { 
+  "uglify-js": ">=1.1.0"
+, "nodelint": ">=0.5.2"
+  }
 , "bugs" : { "url" : "http://github.com/caolan/nodeunit/issues" }
 , "licenses" :
   [ { "type" : "MIT"

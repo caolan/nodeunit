@@ -3,3 +3,5 @@ stamp-build
 *~
 gmon.out
 v8.log
+node_modules/nodelint
+node_modules/.bin/nodelint
