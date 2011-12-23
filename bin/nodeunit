@@ -4,8 +4,7 @@ var
     fs = require('fs'),
     sys = require('sys'),
     path = require('path'),
-    childProcess = require('child_process'),
-    $ = require('qbox').create();
+    childProcess = require('child_process');
 
 // TODO: remove this when https://github.com/joyent/node/pull/1312
 //       lands in core.
@@ -121,11 +120,7 @@ if (files.length === 0) {
     process.exit(1);
 }
 
-if(codeCoverage.enabled) {
-    $.ready(function() {
-        startTesting();
-    });
-} else {
+if(!codeCoverage.enabled) {
     startTesting();
 }
 
@@ -170,7 +165,7 @@ function setUpCodeCoverage() {
             
             } else {
                 require.paths.unshift('lib-cov');
-                $.start();
+               	startTesting();
             }
     });
 }
