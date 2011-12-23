@@ -52,11 +52,13 @@ browser:
 	echo "nodeunit.reporter = reporter;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "nodeunit.run = reporter.run;" >> $(BUILDDIR)/browser/nodeunit.js
 	echo "return nodeunit; })();" >> $(BUILDDIR)/browser/nodeunit.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/nodeunit.js
+	cp $(BUILDDIR)/browser/nodeunit.js $(BUILDDIR)/browser/.nodeunit.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.nodeunit.js > $(BUILDDIR)/browser/nodeunit.js
+	rm $(BUILDDIR)/browser/.nodeunit.js
 	# copy nodeunit.css
 	cp share/nodeunit.css $(BUILDDIR)/browser/nodeunit.css
 	# create nodeunit.min.js
-	uglifyjs $(BUILDDIR)/browser/nodeunit.js > $(BUILDDIR)/browser/nodeunit.min.js
+	node_modules/uglify-js/bin/uglifyjs $(BUILDDIR)/browser/nodeunit.js > $(BUILDDIR)/browser/nodeunit.min.js
 	# create test scripts
 	mkdir -p $(BUILDDIR)/browser/test
 	cp test/test.html $(BUILDDIR)/browser/test/test.html
@@ -64,22 +66,37 @@ browser:
 	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-base.js
 	cat test/test-base.js >> $(BUILDDIR)/browser/test/test-base.js
 	echo "})(this.test_base = {});" >> $(BUILDDIR)/browser/test/test-base.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/test/test-base.js
+	cp $(BUILDDIR)/browser/test/test-base.js $(BUILDDIR)/browser/.test-base.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-base.js > $(BUILDDIR)/browser/test/test-base.js
+	rm $(BUILDDIR)/browser/.test-base.js
 	# test-runmodule.js
 	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-runmodule.js
 	cat test/test-runmodule.js >> $(BUILDDIR)/browser/test/test-runmodule.js
 	echo "})(this.test_runmodule = {});" >> $(BUILDDIR)/browser/test/test-runmodule.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/test/test-runmodule.js
+	cp $(BUILDDIR)/browser/test/test-runmodule.js $(BUILDDIR)/browser/.test-runmodule.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-runmodule.js > $(BUILDDIR)/browser/test/test-runmodule.js
+	rm $(BUILDDIR)/browser/.test-runmodule.js
 	# test-runtest.js
 	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-runtest.js
 	cat test/test-runtest.js >> $(BUILDDIR)/browser/test/test-runtest.js
 	echo "})(this.test_runtest = {});" >> $(BUILDDIR)/browser/test/test-runtest.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/test/test-runtest.js
+	cp $(BUILDDIR)/browser/test/test-runtest.js $(BUILDDIR)/browser/.test-runtest.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-runtest.js > $(BUILDDIR)/browser/test/test-runtest.js
+	rm $(BUILDDIR)/browser/.test-runtest.js
 	# test-testcase.js
 	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-testcase.js
 	cat test/test-testcase.js >> $(BUILDDIR)/browser/test/test-testcase.js
 	echo "})(this.test_testcase = {});" >> $(BUILDDIR)/browser/test/test-testcase.js
-	sed -i "/\@REMOVE_LINE_FOR_BROWSER/d" $(BUILDDIR)/browser/test/test-testcase.js
+	cp $(BUILDDIR)/browser/test/test-testcase.js $(BUILDDIR)/browser/.test-testcase.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-testcase.js > $(BUILDDIR)/browser/test/test-testcase.js
+	rm $(BUILDDIR)/browser/.test-testcase.js
+	# test-testcase-legacy.js
+	echo "(function (exports) {" > $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	cat test/test-testcase-legacy.js >> $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	echo "})(this.test_testcase_legacy = {});" >> $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	cp $(BUILDDIR)/browser/test/test-testcase-legacy.js $(BUILDDIR)/browser/.test-testcase-legacy.js
+	sed "/\@REMOVE_LINE_FOR_BROWSER/d" <$(BUILDDIR)/browser/.test-testcase-legacy.js > $(BUILDDIR)/browser/test/test-testcase-legacy.js
+	rm $(BUILDDIR)/browser/.test-testcase-legacy.js
 	# copy nodeunit.js to dist/browser/test to make it easier for me to host and
 	# run on windows VMs with IE
 	cp $(BUILDDIR)/browser/nodeunit.js $(BUILDDIR)/browser/test/nodeunit.js
@@ -123,7 +140,7 @@ build: stamp-build
 stamp-build: $(wildcard  deps/* lib/*.js)
 	touch $@;
 	mkdir -p $(BUILDDIR)/nodeunit
-	cp -R bin deps index.js lib package.json $(BUILDDIR)/nodeunit
+	cp -R bin node_modules deps index.js lib package.json share $(BUILDDIR)/nodeunit
 	printf '#!/bin/sh\n$(NODEJS) $(NODEJSLIBDIR)/$(PACKAGE)/bin/nodeunit $$@' > $(BUILDDIR)/nodeunit.sh
 
 test:

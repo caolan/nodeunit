@@ -20,12 +20,14 @@ __Contributors__
 * [alexgorbatchev](https://github.com/alexgorbatchev)
 * [alexkwolfe](https://github.com/alexkwolfe)
 * [azatoth](https://github.com/azatoth)
-* [coffeemate](https://github.com/coffeemate)
+* [kadirpekel](https://github.com/kadirpekel)
+* [lambdalisue](https://github.com/lambdalisue)
 * [luebken](https://github.com/luebken)
 * [orlandov](https://github.com/orlandov)
 * [Sannis](https://github.com/Sannis)
 * [sstephenson](https://github.com/sstephenson)
 * [thegreatape](https://github.com/thegreatape)
+* [mmalecki](https://github.com/mmalecki)
 * and thanks to [cjohansen](https://github.com/cjohansen) for input and advice
   on implementing setUp and tearDown functions. See
   [cjohansen's fork](https://github.com/cjohansen/nodeunit).
@@ -182,14 +184,11 @@ This would be run as:
     group - test2
     group - test3
 
-Using these groups its possible to add setUp and tearDown functions to your
-tests. Nodeunit has a utility function called testCase which allows you to
-define a setUp function, which is run before each test, and a tearDown
-function, which is run after each test calls test.done():
+Using these groups, Nodeunit allows you to define a `setUp` function, which is
+run before each test, and a `tearDown` function, which is run after each test
+calls `test.done()`:
 
-    var testCase = require('nodeunit').testCase;
-
-    module.exports = testCase({
+    module.exports = {
         setUp: function (callback) {
             this.foo = 'bar';
             callback();
@@ -202,7 +201,7 @@ function, which is run after each test calls test.done():
             test.equals(this.foo, 'bar');
             test.done();
         }
-    });
+    };
 
 In this way, its possible to have multiple groups of tests in a module, each
 group with its own setUp and tearDown functions.
@@ -349,6 +348,8 @@ Built-in Test Reporters
 * __html__ - Outputs a HTML report to stdout
 * __junit__ - Creates jUnit compatible XML reports, which can be used with
   continuous integration tools such as [Hudson](http://hudson-ci.org/).
+* __machineout__ - Simple reporter for machine analysis. There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim)
+  which is useful for TDD on VIM
 
 
 Writing a Test Reporter
@@ -420,6 +421,22 @@ To run the nodeunit tests do:
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
 to v0.2.1 fixes this.
 
+
+__machineout__ reporter
+----------------------------------------------
+
+The default reporter is really readable for human but for machinally analysis. 
+When you want to analyze the output of nodeunit, use __machineout__ reporter and you will get
+
+<img src="https://github.com/caolan/nodeunit/raw/master/img/example_machineout.png" />
+
+
+nodeunit with vim
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
+That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen)
+
+    
 
 Contributing
 ------------

@@ -6,7 +6,10 @@
     }
   ]
 , "contributors" :
-  [ { "name": "Alex Gorbatchev"
+  [ { "name": "Romain Beauxis"
+    , "web": "https://github.com/toots"
+    }
+  , { "name": "Alex Gorbatchev"
     , "web": "https://github.com/alexgorbatchev"
     }
   , { "name": "Alex Wolfe"
@@ -40,12 +43,15 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.1.1"
+, "version": "0.2.0"
+
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
   }
-, "bugs" : { "web" : "http://github.com/caolan/nodeunit/issues" }
+, "devDependencies":
+  { "uglify-js": ">=1.1.0" }
+, "bugs" : { "url" : "http://github.com/caolan/nodeunit/issues" }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/caolan/nodeunit/raw/master/LICENSE"
@@ -54,6 +60,9 @@
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit2" : "./bin/nodeunit" }
 , "dependencies": {
-      "qbox": ">= 0.1.3"
+      "qbox": ">= 0.1.3",
+      "tap-assert": ">=0.0.9",
+      "tap-producer": ">=0.0.1"
    }
+
 }
