@@ -165,11 +165,9 @@ function setUpCodeCoverage() {
             
             if (err) {
 
-                if(err.message.match('jscoverage')) {
-                    console.log('Install node-jscoverage from\n\thttps://github.com/visionmedia/node-jscoverage ');
-                } else {
-                    throw err; 
-                }
+                console.log(err.message);
+                console.log('Install node-jscoverage from\n\thttps://github.com/visionmedia/node-jscoverage ');
+            
             } else {
                 require.paths.unshift('lib-cov');
                 $.start();
