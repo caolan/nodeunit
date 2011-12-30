@@ -156,7 +156,7 @@ function startTesting() {
 
 function setUpCodeCoverage() {
     
-    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && mv lib-cov/* node_modules/', function(err){
+    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && cp -rf lib-cov/* node_modules/', function(err){
             
             if (err) {
 
