@@ -156,7 +156,7 @@ function startTesting() {
 
 function setUpCodeCoverage() {
     
-    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov', function(err){
+    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && mv lib-cov/* node_modules/', function(err){
             
             if (err) {
 
@@ -164,7 +164,7 @@ function setUpCodeCoverage() {
                 console.log('Install node-jscoverage from\n\thttps://github.com/visionmedia/node-jscoverage ');
             
             } else {
-                require.paths.unshift('lib-cov');
+        
                	startTesting();
             }
     });
