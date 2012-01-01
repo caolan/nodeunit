@@ -156,7 +156,13 @@ function startTesting() {
 
 function setUpCodeCoverage() {
     
-    childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && cp -rf lib-cov/* node_modules/', function(err){
+    if(codeCoverage.ignored) {
+        childProcess.exec('mkdir -p node_modules  && cd node_modules && rm -rf `ls ../lib` && cd .. && cp -rf lib/* node_modules/', afterCommandExecuted);       
+    } else {
+        childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && cp -rf lib-cov/* node_modules/', afterCommandExecuted);   
+    }
+
+    function afterCommandExecuted(err){
             
             if (err) {
 
@@ -165,7 +171,7 @@ function setUpCodeCoverage() {
             
             } else {
         
-               	startTesting();
+                startTesting();
             }
-    });
+    }
 }
