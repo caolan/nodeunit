@@ -22,6 +22,7 @@ var testrunner,
     reporter_file = 'default',
     reporter_param_found = false,
     testspec_param_found = false;
+    testFullSpec_param_found = false;
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "Options:\n\n" +
@@ -29,8 +30,10 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  -t name,          specify a test to run\n" +
+            "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  + 
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
+            
 
 
 // load default options
@@ -65,6 +68,11 @@ args.forEach(function (arg) {
     } else if (testspec_param_found) {
         options.testspec = arg;
         testspec_param_found = false;
+    } else if (arg === '-f') {
+        testFullSpec_param_found = true;
+    } else if (testFullSpec_param_found) {
+        options.testFullSpec= arg;
+        testFullSpec_param_found = false;
     } else if (arg === '--list-reporters') {
         var reporters = fs.readdirSync(__dirname + '/../lib/reporters');
         reporters = reporters.filter(function (reporter_file) {
