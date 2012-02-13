@@ -43,13 +43,15 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.6.4"
+, "version": "0.7.1"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
   }
 , "devDependencies":
-  { "uglify-js": ">=1.1.0" }
+  { "uglify-js": ">=1.1.0"
+  , "should" : ">=0.4.2"
+  }
 , "bugs" : { "url" : "http://github.com/caolan/nodeunit/issues" }
 , "licenses" :
   [ { "type" : "MIT"
