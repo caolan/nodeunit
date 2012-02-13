@@ -43,7 +43,7 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.7.0"
+, "version": "0.7.1"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
