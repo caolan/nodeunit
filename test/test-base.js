@@ -130,6 +130,26 @@ exports.testThrows = makeTest('throws',
         return;
     }]
 );
+exports.testThrowsWithReGex = makeTest('throws',
+    [function () {
+        throw new Error('test');
+    }, /test/],
+    [function () {
+        throw new Error('test');
+    }, /fail/]
+);
+exports.testThrowsWithErrorValidation = makeTest('throws',
+    [function () {
+        throw new Error('test');
+    }, function(err) {
+        return true;
+    }],
+    [function () {
+        throw new Error('test');
+    }, function(err) {
+        return false;
+    }]
+);
 exports.testDoesNotThrows = makeTest('doesNotThrow',
     [function () {
         return;
@@ -205,7 +225,7 @@ exports.testExpect = function (test) {
         assert.ok(test2_called);
         assert.ok(test3_called);
         tests_called.expect = true;
-    }, 500, test.done);
+    }, 1000, test.done);
 };
 
 
