@@ -130,6 +130,30 @@ exports.testThrows = makeTest('throws',
         return;
     }]
 );
+exports.testThrowsWithReGex = makeTest('throws',
+    [function () {
+        throw new Error('test');
+    }, /test/],
+    [function () {
+        throw new Error('test');
+    }, /fail/]
+);
+exports.testThrowsWithErrorValidation = makeTest('throws',
+    [function () {
+        throw new Error('test');
+    }, function(err) {
+        if ( (err instanceof Error) && /test/.test(err) ) {
+            return true;
+        }
+    }],
+    [function () {
+        throw new Error('test');
+    }, function(err) {
+        if ( (err instanceof Error) && /fail/.test(err) ) {
+            return true;
+        }
+    }]
+);
 exports.testDoesNotThrows = makeTest('doesNotThrow',
     [function () {
         return;
