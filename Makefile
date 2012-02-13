@@ -15,6 +15,22 @@ DOCS = $(shell find doc -name '*.md' \
 				|sed 's|doc/|man1/|g' \
 				)
 
+LINT_FILES = ./index.js \
+             ./bin/nodeunit \
+             ./bin/nodeunit.json \
+             ./lib/nodeunit.js \
+             ./lib/reporters/default.js \
+             ./lib/reporters/eclipse.js \
+             ./lib/reporters/junit.js \
+             ./lib/reporters/minimal.js \
+             ./lib/reporters/nested.js \
+             ./lib/reporters/skip_passed.js \
+             ./lib/reporters/tap.js \
+             ./lib/reporters/verbose.js \
+             ./lib/track.js \
+             ./lib/types.js \
+             ./lib/utils.js \
+             ./test/*.js \
 
 $(shell if [ ! -d $(BUILDDIR) ]; then mkdir $(BUILDDIR); fi)
 
@@ -161,7 +177,7 @@ clean:
 	rm -rf $(BUILDDIR) stamp-build
 
 lint:
-	nodelint --config nodelint.cfg ./index.js ./bin/nodeunit ./bin/nodeunit.json ./lib/*.js ./lib/reporters/*.js ./test/*.js
+	./node_modules/nodelint/nodelint --config nodelint.cfg $(LINT_FILES)
 
 doc: man1 $(DOCS)
 	@true
