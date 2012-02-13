@@ -1,4 +1,4 @@
-{ "name": "nodeunit"
+{ "name": "nodeunit2"
 , "description": "Easy unit testing for node.js and the browser."
 , "maintainers":
   [ { "name": "Caolan McMahon"
@@ -43,7 +43,8 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.6.4"
+, "version": "0.2.4"
+
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
@@ -59,9 +60,10 @@
     }
   ]
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
-, "bin" : { "nodeunit" : "./bin/nodeunit" }
-, "dependencies" :
-  { "tap-assert": ">=0.0.9"
-  , "tap-producer": ">=0.0.1"
-  }
+, "bin" : { "nodeunit2" : "./bin/nodeunit" }
+, "dependencies": {
+      "tap-assert": ">=0.0.9",
+      "tap-producer": ">=0.0.1"
+   }
+
 }

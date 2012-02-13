@@ -2,7 +2,9 @@
 
 var
     fs = require('fs'),
-    path = require('path');
+    sys = require('sys'),
+    path = require('path'),
+    childProcess = require('child_process');
 
 // TODO: remove this when https://github.com/joyent/node/pull/1312
 //       lands in core.
@@ -12,6 +14,10 @@ require('../deps/console.log');
 
 //require.paths.push(process.cwd());
 var args = (process.ARGV || process.argv).slice(2);
+
+//global indicators for Code Coverage
+codeCoverage = {};
+codeCoverage.paths = ['lib-cov'];
 
 var files = [];
 
@@ -29,6 +35,8 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  -cr, --coverage-results     display Code Coverage results in details (verbose mode) \n" +
+            "  -ci, --coverage-ignored     ignore code coverage support (ideal for identify real line numbers when error occured) \n" +
             "  -t name,          specify a test to run\n" +
             "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  + 
             "  -h, --help        display this help and exit\n" +
@@ -96,7 +104,20 @@ args.forEach(function (arg) {
     } else if ((arg === '-h') || (arg === '--help')) {
         console.log(usage);
         process.exit(0);
+    } else if(arg === '--coverage-results') {
+        reporter_file = 'codecov'
+        codeCoverage.verbose = true;
+    } else if(arg === '-cr') {
+        codeCoverage.verbose = true;
+        reporter_file = 'codecov'
+    } else if(arg === '-ci') {
+        codeCoverage.ignored = true;
+        codeCoverage.paths = ['lib'];
+        reporter_file = 'codecov'
     } else {
+        codeCoverage.enabled = true;
+        setUpCodeCoverage();
+        reporter_file = 'codecov'
         files.push(arg);
     }
 });
@@ -107,27 +128,58 @@ if (files.length === 0) {
     process.exit(1);
 }
 
-if (config_file) {
-    content = fs.readFileSync(config_file, 'utf8');
-    var custom_options = JSON.parse(content);
-
-    for (var option in custom_options) {
-        if (typeof option === 'string') {
-            options[option] = custom_options[option];
-        }
-    }
+if(!codeCoverage.enabled) {
+    startTesting();
 }
 
-var builtin_reporters = require(__dirname + '/../lib/reporters');
-if (reporter_file in builtin_reporters) {
-    testrunner = builtin_reporters[reporter_file];
-}
-else {
-    testrunner = require(reporter_file);
-}
+function startTesting() {
 
-testrunner.run(files, options, function(err) {
-    if (err) {
+    if (files.length === 0) {
+        sys.puts('Files required.');
+        sys.puts(usage);
         process.exit(1);
     }
-});
+
+    if (config_file) {
+        content = fs.readFileSync(config_file, 'utf8');
+        var custom_options = JSON.parse(content);
+        
+        for (var option in custom_options) {
+            if (typeof option === 'string') {
+                options[option] = custom_options[option];
+            }
+        }
+    }
+
+    var builtin_reporters = require(__dirname + '/../lib/reporters');
+    if (reporter_file in builtin_reporters) {
+        testrunner = builtin_reporters[reporter_file];
+    }
+    else {
+        testrunner = require(reporter_file);
+    }
+
+    testrunner.run(files, options);
+}
+
+function setUpCodeCoverage() {
+    
+    if(codeCoverage.ignored) {
+        childProcess.exec('mkdir -p node_modules  && cd node_modules && rm -rf `ls ../lib` && cd .. && cp -rf lib/* node_modules/', afterCommandExecuted);       
+    } else {
+        childProcess.exec('rm -fr lib-cov && jscoverage lib lib-cov && mkdir -p node_modules && cp -rf lib-cov/* node_modules/', afterCommandExecuted);   
+    }
+
+    function afterCommandExecuted(err){
+            
+            if (err) {
+
+                console.log(err.message);
+                console.log('Install node-jscoverage from\n\thttps://github.com/visionmedia/node-jscoverage ');
+            
+            } else {
+        
+                startTesting();
+            }
+    }
+}
