@@ -91,15 +91,15 @@ exports.testRunModuleTestSpec = function (test) {
         },
         testStart: function (name) {
             call_order.push('testStart');
-            test.ok(
-                name.toString() === 'test2',
+            test.equals(
+                name,'test2',
                 'testStart called with test name '
             );
         },
         testDone: function (name, assertions) {
             call_order.push('testDone');
-            test.ok(
-                name.toString() === 'test2',
+            test.equal(
+                name, 'test2',
                 'testDone called with test name'
             );
         },

@@ -142,16 +142,12 @@ exports.testThrowsWithErrorValidation = makeTest('throws',
     [function () {
         throw new Error('test');
     }, function(err) {
-        if ( (err instanceof Error) && /test/.test(err) ) {
-            return true;
-        }
+        return true;
     }],
     [function () {
         throw new Error('test');
     }, function(err) {
-        if ( (err instanceof Error) && /fail/.test(err) ) {
-            return true;
-        }
+        return false;
     }]
 );
 exports.testDoesNotThrows = makeTest('doesNotThrow',
@@ -229,7 +225,7 @@ exports.testExpect = function (test) {
         assert.ok(test2_called);
         assert.ok(test3_called);
         tests_called.expect = true;
-    }, 500, test.done);
+    }, 1000, test.done);
 };
 
 
