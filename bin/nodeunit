@@ -30,10 +30,10 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  -t name,          specify a test to run\n" +
-            "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  + 
+            "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
-            
+
 
 
 // load default options
