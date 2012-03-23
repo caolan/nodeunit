@@ -254,7 +254,7 @@ __test.html__
         <script src="suite2.js"></script>
       </head>
       <body>
-        <h1 id="nodeunit-header>Example Test Suite</h1>
+        <h1 id="nodeunit-header">Example Test Suite</h1>
         <script>
           nodeunit.run({
             'Suite One': suite1,
