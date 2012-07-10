@@ -1,0 +1,12 @@
+[submodule "node_modules/qbox"]
+	path = node_modules/qbox
+	url = https://github.com/arunoda/qbox.git
+[submodule "node_modules/tap-assert"]
+	path = node_modules/tap-assert
+	url = https://github.com/isaacs/tap-assert.git
+[submodule "node_modules/tap-producer"]
+	path = node_modules/tap-producer
+	url = https://github.com/isaacs/tap-producer.git
+[submodule "node_modules/uglify-js"]
+	path = node_modules/uglify-js
+	url = https://github.com/mishoo/UglifyJS.git
