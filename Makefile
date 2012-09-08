@@ -106,6 +106,7 @@ commonjs:
 	# super hacky build script for browser commonjs version!
 	##### make commonjs browser module ######
 	mkdir -p $(BUILDDIR)/commonjs
+	rm -rf $(BUILDDIR)/commonjs/*
 	mkdir -p $(BUILDDIR)/commonjs/deps
 	cp deps/json2.js $(BUILDDIR)/commonjs/deps
 	cp deps/async.js $(BUILDDIR)/commonjs/deps

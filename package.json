@@ -43,7 +43,7 @@
       "web": "http://tmpvar.com"
     }
   ]
-, "version": "0.7.1"
+, "version": "0.7.4"
 , "repository" :
   { "type" : "git"
   , "url" : "http://github.com/caolan/nodeunit.git"
@@ -61,7 +61,6 @@
 , "directories" : { "lib": "./lib", "doc" : "./doc", "man" : "./man1" }
 , "bin" : { "nodeunit" : "./bin/nodeunit" }
 , "dependencies" :
-  { "tap-assert": ">=0.0.9"
-  , "tap-producer": ">=0.0.1"
+  { "tap": ">=0.2.3"
   }
 }
