@@ -5,6 +5,7 @@
  */
 
 var nodeunit = require('../lib/nodeunit'); // @REMOVE_LINE_FOR_BROWSER
+var expectedName = 'testArgs';
 
 
 exports.testArgs = function (test) {
@@ -13,15 +14,19 @@ exports.testArgs = function (test) {
     test.ok(test.ok instanceof Function, 'test.ok');
     test.ok(test.same instanceof Function, 'test.same');
     test.ok(test.equals instanceof Function, 'test.equals');
+    test.equals(test.name, expectedName);
     test.done();
 };
 
 exports.testDoneCallback = function (test) {
     test.expect(4);
-    nodeunit.runTest('testname', exports.testArgs, {
+    var oldName = expectedName;
+    expectedName = 'testname';
+    nodeunit.runTest(expectedName, exports.testArgs, {
         testDone: function (name, assertions) {
+            expectedName = oldName;
             test.equals(assertions.failures(), 0, 'failures');
-            test.equals(assertions.length, 5, 'length');
+            test.equals(assertions.length, 6, 'length');
             test.ok(typeof assertions.duration === "number");
             test.equals(name, 'testname');
         }
