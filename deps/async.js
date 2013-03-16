@@ -79,13 +79,18 @@
     //// exported async module functions ////
 
     //// nextTick implementation with browser-compatible fallback ////
-    if (typeof process === 'undefined' || !(process.nextTick)) {
+    if (typeof setImmediate === 'function') {
+        async.nextTick = function (fn) {
+            setImmediate(fn);
+        };
+    }
+    else if (typeof process !== 'undefined' && process.nextTick) {
+        async.nextTick = process.nextTick;
+    }
+    else {
         async.nextTick = function (fn) {
             setTimeout(fn, 0);
         };
-    }
-    else {
-        async.nextTick = process.nextTick;
     }
 
     async.forEach = function (arr, iterator, callback) {
