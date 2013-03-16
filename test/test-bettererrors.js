@@ -66,7 +66,7 @@ exports.testErrorIsNotAssertion = function (test) {
         throw new Error("test error");
     } catch (error) {
         var betterErrorString = betterErrorStringFromError(error);
-        betterErrorString.should.not.include("AssertionError");
+        betterErrorString.should.not.match(/\bAssertionError/);
         betterErrorString.should.include("Error");
         betterErrorString.should.include("test error");
         betterErrorString.should.include("test-bettererrors");
