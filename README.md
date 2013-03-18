@@ -429,7 +429,8 @@ When you want to analyze the output of nodeunit, use __machineout__ reporter and
 
 
 nodeunit with vim
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------
+
 There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
 That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen)
 
