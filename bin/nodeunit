@@ -31,6 +31,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --list-reporters  list available build-in reporters\n" +
             "  -t name,          specify a test to run\n" +
             "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  + 
+            "  -nc, --nocolor    suppress colorized output\n" +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
             
@@ -70,6 +71,8 @@ args.forEach(function (arg) {
         testspec_param_found = false;
     } else if (arg === '-f') {
         testFullSpec_param_found = true;
+    } else if (arg === '-nc' || arg === '--nocolor') {
+        options.suppressReporterColor = true;
     } else if (testFullSpec_param_found) {
         options.testFullSpec= arg;
         testFullSpec_param_found = false;
