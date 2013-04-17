@@ -34,18 +34,18 @@ exports.testRunModule = function (test) {
         testStart: function (name) {
             call_order.push('testStart');
             test.ok(
-                name.toString() === 'test1' ||
-                name.toString() === 'test2' ||
-                name.toString() === 'test3',
+                name.toString() === 'testmodule - test1' ||
+                name.toString() === 'testmodule - test2' ||
+                name.toString() === 'testmodule - test3',
                 'testStart called with test name '
             );
         },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.ok(
-                name.toString() === 'test1' ||
-                name.toString() === 'test2' ||
-                name.toString() === 'test3',
+                name.toString() === 'testmodule - test1' ||
+                name.toString() === 'testmodule - test2' ||
+                name.toString() === 'testmodule - test3',
                 'testDone called with test name'
             );
         },
@@ -92,14 +92,14 @@ exports.testRunModuleTestSpec = function (test) {
         testStart: function (name) {
             call_order.push('testStart');
             test.equals(
-                name,'test2',
+                name,'testmodule - test2',
                 'testStart called with test name '
             );
         },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.equal(
-                name, 'test2',
+                name, 'testmodule - test2',
                 'testDone called with test name'
             );
         },
@@ -166,11 +166,11 @@ exports.testNestedTests = function (test) {
         }
     }, function () {
         test.same(call_order, [
-            ['testStart', 'test1'], ['testDone', 'test1'],
-            ['testStart', 'suite', 't1'], ['testDone', 'suite', 't1'],
-            ['testStart', 'suite', 't2'], ['testDone', 'suite', 't2'],
-            ['testStart', 'suite', 'another_suite', 't3'],
-            ['testDone', 'suite', 'another_suite', 't3']
+            ['testStart', 'modulename', 'test1'], ['testDone', 'modulename', 'test1'],
+            ['testStart', 'modulename', 'suite', 't1'], ['testDone', 'modulename', 'suite', 't1'],
+            ['testStart', 'modulename', 'suite', 't2'], ['testDone', 'modulename', 'suite', 't2'],
+            ['testStart', 'modulename', 'suite', 'another_suite', 't3'],
+            ['testDone', 'modulename', 'suite', 'another_suite', 't3']
         ]);
         test.done();
     });
