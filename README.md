@@ -350,7 +350,7 @@ Built-in Test Reporters
 
 
 Writing a Test Reporter
----------------------
+-----------------------
 
 Nodeunit exports runTest(fn, options), runModule(mod, options) and
 runFiles(paths, options). You'll most likely want to run test suites from
@@ -420,7 +420,7 @@ to v0.2.1 fixes this.
 
 
 __machineout__ reporter
-----------------------------------------------
+-----------------------
 
 The default reporter is really readable for human but for machinally analysis. 
 When you want to analyze the output of nodeunit, use __machineout__ reporter and you will get
@@ -429,11 +429,11 @@ When you want to analyze the output of nodeunit, use __machineout__ reporter and
 
 
 nodeunit with vim
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
-That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen)
+-----------------
 
-    
+There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
+That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen).
+
 
 Contributing
 ------------
