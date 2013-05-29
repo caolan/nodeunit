@@ -207,7 +207,7 @@ if (CoffeeScript) {
         };
 
         nodeunit.runFiles(
-            [__dirname + 'fixtures/coffee/mock_coffee_module.coffee'],
+            [__dirname + '/fixtures/coffee/mock_coffee_module.coffee'],
             opts
         );
     };
