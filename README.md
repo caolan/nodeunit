@@ -400,7 +400,20 @@ un-exported functions within a module.
 __sandbox(files, sandbox)__ - Evaluates JavaScript files in a sandbox, returning
 the context. The first argument can either be a single filename or an array of
 filenames. If multiple filenames are given their contents are concatenated before
-evalution. The second argument is an optional context to use for the sandbox.
+evaluation. The second argument is an optional context to use for the sandbox.
+
+Note: When working with the sandbox if your script depends on outside sources
+(i.e. using `require`) then you will want to pass that into the optional
+context when setting up the sandbox.
+
+    var sandbox = require('nodeunit').utils.sandbox;
+    // pass in some node globals
+    var box_globals = {
+        module: {exports: exports},
+        require: require,
+        console: console
+    };
+    var example = sandbox('example.js', box_globals );
 
 
 Running the nodeunit Tests
