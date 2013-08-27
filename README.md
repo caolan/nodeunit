@@ -417,7 +417,7 @@ context when setting up the sandbox.
         // Passing console into the sandbox will give your code access to it
         console: console
     };
-    var example = sandbox('example.js', box_globals );
+    var example = sandbox('example.js', box_globals);
 
 
 Running the nodeunit Tests
