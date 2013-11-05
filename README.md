@@ -345,8 +345,8 @@ Built-in Test Reporters
 * __html__ - Outputs a HTML report to stdout
 * __junit__ - Creates jUnit compatible XML reports, which can be used with
   continuous integration tools such as [Hudson](http://hudson-ci.org/).
-* __machineout__ - Simple reporter for machine analysis. There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim)
-  which is useful for TDD on VIM
+* __machineout__ - Simple reporter for machine analysis. There is
+  [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) which is useful for TDD on VIM.
 
 
 Writing a Test Reporter
@@ -446,9 +446,12 @@ When you want to analyze the output of nodeunit, use __machineout__ reporter and
 
 
 nodeunit with vim
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use nodeunit with VIM.
-That compiler use __machineout__ reporter and it is useful to use with [vim-makegreen](https://github.com/reinh/vim-makegreen)
+----------------------------------
+There is [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) so you can use
+nodeunit with VIM.
+
+That compiler uses __machineout__ reporter and it is useful to use
+with [vim-makegreen](https://github.com/reinh/vim-makegreen).
 
     
 
@@ -456,5 +459,5 @@ Contributing
 ------------
 
 Contributions to the project are most welcome, so feel free to fork and improve.
-When submitting a pull request, please run 'make lint' first to ensure
+When submitting a pull request, please run `make lint` first to ensure
 we're following a consistent coding style.
