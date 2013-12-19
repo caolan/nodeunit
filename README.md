@@ -68,7 +68,7 @@ There are two options for installing nodeunit:
 
 2. Install via npm:
 
-    npm install nodeunit
+    npm install nodeunit -g
 
 API Documentation
 -----------------
