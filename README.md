@@ -56,7 +56,7 @@ When run using the included test runner, this will output the following:
 
 <img src="https://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
-For more details on the exact setup, see [Basic Testing][].
+For more details on the exact setup, see [Basic Testing](#basic-testing).
 
 Installation
 ------------
@@ -121,7 +121,7 @@ Tests are simply exported from a module, but they are still run in the order
 they are defined. Tests can be defined by adding functions, containing a single
 test to run, to the exported module. These functions take a single argument,
 which is an object interfacing the nodeunit methods as described in the
-[API Documentation][].
+[API Documentation](#api-documentation).
 
 ### Minimalistic test-case
 
