@@ -56,6 +56,8 @@ When run using the included test runner, this will output the following:
 
 <img src="https://github.com/caolan/nodeunit/raw/master/img/example_fail.png" />
 
+For more details on the exact setup, see [Basic Testing][].
+
 Installation
 ------------
 
@@ -106,13 +108,77 @@ Nodeunit aims to be simple and easy to learn. This is achieved through using
 existing structures (such as node.js modules) to maximum effect, and reducing
 the API where possible, to make it easier to digest.
 
-Tests are simply exported from a module, but they are still run in the order
-they are defined.
-
 __Note:__ Users of old nodeunit versions may remember using ok, equals and same
 in the style of qunit, instead of the assert functions above. These functions
 still exist for backwards compatibility, and are simply aliases to their assert
 module counterparts.
+
+
+Basic Testing
+-------------
+
+Tests are simply exported from a module, but they are still run in the order
+they are defined. Tests can be defined by adding functions, containing a single
+test to run, to the exported module. These functions take a single argument,
+which is an object interfacing the nodeunit methods as described in the
+[API Documentation][].
+
+### Minimalistic test-case
+
+A minimalistic test-case must define a module that exports at least one test
+function. For the purpose of this example we'll assume a minimal node project
+layout is maintained. The file layout will be as follows (an example can be
+found at [tvervest/nodeunit-example](https://github.com/tvervest/nodeunit-example));
+
+```
+|-- lib           // contains the library source files
+|   `-- mylib.js  // contains the actual library we'll be testing
+`-- test          // contains the unit tests files
+    `-- pow.js  // contains the unit tests for advanced behaviour
+```
+
+__lib/mylib.js__
+```
+/*!
+ * Simple mock library file for demo purposes.
+ */
+
+module.exports = {
+  pow: function(a, b) {
+    // should return a to the power of b, but doesn't
+    return a * b;
+  }
+};
+```
+
+__test/pow.js__
+```
+/*!
+ * Test cases for the mock library file.
+ */
+var mylib = require('../lib/mylib'); // load the library we'll be testing
+
+module.exports = {
+  '2 ^ 2': function(test) {
+    var result = mylib.pow(2, 2);
+    test.equal(result, 4); // This will succeed, 2 * 2 == 2 ^ 2
+    test.done();
+  },
+
+  '3 ^ 2': function(test) {
+    var result = mylib.pow(3, 2); // this will fail, 3 * 2 != 3 ^ 2
+    test.equal(result, 9);
+    test.done();
+  }
+};
+```
+
+Now we'll run our test by executing `nodeunit test` from the root directory of
+our project. This will execute all exported modules in the files in the test
+directory.
+
+As expected, the first test will succeed, as `2 ^ 2 == 2 * 2`. However, the
+secondary test will fail, as `3 * 2 != 3 ^ 2`.
 
 
 Asynchronous Testing
