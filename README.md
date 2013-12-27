@@ -137,7 +137,8 @@ found at [tvervest/nodeunit-example](https://github.com/tvervest/nodeunit-exampl
     `-- pow.js  // contains the unit tests for advanced behaviour
 ```
 
-__lib/mylib.js__
+
+[lib/mylib.js](https://github.com/tvervest/nodeunit-example/blob/master/lib/mylib.js)
 ```
 /*!
  * Simple mock library file for demo purposes.
@@ -151,7 +152,7 @@ module.exports = {
 };
 ```
 
-__test/pow.js__
+[test/pow.js](https://github.com/tvervest/nodeunit-example/blob/master/test/pow.js)
 ```
 /*!
  * Test cases for the mock library file.
