@@ -19,7 +19,7 @@ var setup = function (fn) {
 
 
 exports.testRunFiles = setup(function (test) {
-    test.expect(24);
+    test.expect(28);
     var runModule_copy = nodeunit.runModule;
 
     var runModule_calls = [];
@@ -31,6 +31,9 @@ exports.testRunFiles = setup(function (test) {
         },
         testDone: function () {
             return 'testDone';
+        },
+        testReady: function () {
+            return 'testReady';
         },
         testStart: function () {
             return 'testStart';
@@ -61,6 +64,7 @@ exports.testRunFiles = setup(function (test) {
 
     nodeunit.runModule = function (name, mod, options, callback) {
         test.equals(options.testDone, opts.testDone);
+        test.equals(options.testReady, opts.testReady);
         test.equals(options.testStart, opts.testStart);
         test.equals(options.log, opts.log);
         test.ok(typeof name === "string");
@@ -87,6 +91,9 @@ exports.testRunFilesEmpty = function (test) {
             test.ok(false, 'should not be called');
         },
         testDone: function () {
+            test.ok(false, 'should not be called');
+        },
+        testReady: function () {
             test.ok(false, 'should not be called');
         },
         testStart: function () {
@@ -122,6 +129,9 @@ exports.testEmptyDir = function (test) {
             testDone: function () {
                 test.ok(false, 'should not be called');
             },
+            testReady: function () {
+                test.ok(false, 'should not be called');
+            },
             testStart: function () {
                 test.ok(false, 'should not be called');
             },
@@ -153,7 +163,7 @@ if (CoffeeScript) {
                                         '/fixtures/coffee/mock_coffee_module')
         };
 
-        test.expect(9);
+        test.expect(10);
         var runModule_copy = nodeunit.runModule;
 
         var runModule_calls = [];
@@ -165,6 +175,9 @@ if (CoffeeScript) {
             },
             testDone: function () {
                 return 'testDone';
+            },
+            testReady: function () {
+                return 'testReady';
             },
             testStart: function () {
                 return 'testStart';
@@ -195,6 +208,7 @@ if (CoffeeScript) {
 
         nodeunit.runModule = function (name, mod, options, callback) {
             test.equals(options.testDone, opts.testDone);
+            test.equals(options.testReady, opts.testReady);
             test.equals(options.testStart, opts.testStart);
             test.equals(options.log, opts.log);
             test.ok(typeof name === "string");

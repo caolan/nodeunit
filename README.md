@@ -68,7 +68,7 @@ There are two options for installing nodeunit:
 
 2. Install via npm:
 
-    npm install nodeunit
+    npm install nodeunit -g
 
 API Documentation
 -----------------
@@ -363,6 +363,7 @@ callbacks:
   module have completed (see assertions object reference below)
   ALL tests within the module
 * __testStart(name)__ - called before a test function is run
+* __testReady(test)__ - called before a test function is run with the test object that will be passed to the test function
 * __testDone(name, assertions)__ - called once a test function has completed
   (by calling test.done())
 * __log(assertion)__ - called whenever an assertion is made (see assertion

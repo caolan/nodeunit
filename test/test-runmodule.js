@@ -8,7 +8,7 @@ var nodeunit = require('../lib/nodeunit'); // @REMOVE_LINE_FOR_BROWSER
 
 
 exports.testRunModule = function (test) {
-    test.expect(11);
+    test.expect(59);
     var call_order = [];
     var testmodule = {
         test1: function (test) {
@@ -40,6 +40,25 @@ exports.testRunModule = function (test) {
                 'testStart called with test name '
             );
         },
+        testReady: function (tst) {
+            call_order.push('testReady');
+            test.ok(tst.done, 'testReady called with non-test object');
+            test.ok(tst.ok, 'testReady called with non-test object');
+            test.ok(tst.same, 'testReady called with non-test object');
+            test.ok(tst.expect, 'testReady called with non-test object');
+            test.ok(tst._assertion_list, 'testReady called with non-test object');
+            test.ok(tst.AssertionError, 'testReady called with non-test object');
+            test.ok(tst.fail, 'testReady called with non-test object');
+            test.ok(tst.equal, 'testReady called with non-test object');
+            test.ok(tst.notEqual, 'testReady called with non-test object');
+            test.ok(tst.deepEqual, 'testReady called with non-test object');
+            test.ok(tst.notDeepEqual, 'testReady called with non-test object');
+            test.ok(tst.strictEqual, 'testReady called with non-test object');
+            test.ok(tst.notStrictEqual, 'testReady called with non-test object');
+            test.ok(tst.throws, 'testReady called with non-test object');
+            test.ok(tst.doesNotThrow, 'testReady called with non-test object');
+            test.ok(tst.ifError, 'testReady called with non-test object');
+        },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.ok(
@@ -56,9 +75,9 @@ exports.testRunModule = function (test) {
             test.equals(name, 'testmodule');
             test.ok(typeof assertions.duration === "number");
             test.same(call_order, [
-                'testStart', 'test1', 'log', 'testDone',
-                'testStart', 'test2', 'log', 'log', 'testDone',
-                'testStart', 'test3', 'testDone',
+                'testStart', 'testReady', 'test1', 'log', 'testDone',
+                'testStart', 'testReady', 'test2', 'log', 'log', 'testDone',
+                'testStart', 'testReady', 'test3', 'testDone',
                 'moduleDone'
             ]);
         }
@@ -67,7 +86,7 @@ exports.testRunModule = function (test) {
 
 
 exports.testRunModuleTestSpec = function (test) {
-    test.expect(6);
+    test.expect(22);
     var call_order = [];
     var testmodule = {
         test1: function (test) {
@@ -96,6 +115,25 @@ exports.testRunModuleTestSpec = function (test) {
                 'testStart called with test name '
             );
         },
+        testReady: function (tst) {
+            call_order.push('testReady');
+            test.ok(tst.done, 'testReady called with non-test object');
+            test.ok(tst.ok, 'testReady called with non-test object');
+            test.ok(tst.same, 'testReady called with non-test object');
+            test.ok(tst.expect, 'testReady called with non-test object');
+            test.ok(tst._assertion_list, 'testReady called with non-test object');
+            test.ok(tst.AssertionError, 'testReady called with non-test object');
+            test.ok(tst.fail, 'testReady called with non-test object');
+            test.ok(tst.equal, 'testReady called with non-test object');
+            test.ok(tst.notEqual, 'testReady called with non-test object');
+            test.ok(tst.deepEqual, 'testReady called with non-test object');
+            test.ok(tst.notDeepEqual, 'testReady called with non-test object');
+            test.ok(tst.strictEqual, 'testReady called with non-test object');
+            test.ok(tst.notStrictEqual, 'testReady called with non-test object');
+            test.ok(tst.throws, 'testReady called with non-test object');
+            test.ok(tst.doesNotThrow, 'testReady called with non-test object');
+            test.ok(tst.ifError, 'testReady called with non-test object');
+        },
         testDone: function (name, assertions) {
             call_order.push('testDone');
             test.equal(
@@ -109,7 +147,7 @@ exports.testRunModuleTestSpec = function (test) {
             test.equals(name, 'testmodule');
             test.ok(typeof assertions.duration === "number");
             test.same(call_order, [
-                'testStart', 'test2', 'log', 'log', 'testDone',
+                'testStart', 'testReady', 'test2', 'log', 'log', 'testDone',
                 'moduleDone'
             ]);
         }
@@ -123,6 +161,9 @@ exports.testRunModuleEmpty = function (test) {
         },
         testStart: function (name) {
             test.ok(false, 'testStart should not be called');
+        },
+        testReady: function (tst) {
+            test.ok(false, 'testReady should not be called');
         },
         testDone: function (name, assertions) {
             test.ok(false, 'testDone should not be called');
@@ -161,15 +202,19 @@ exports.testNestedTests = function (test) {
         testStart: function (name) {
             call_order.push(['testStart'].concat(name));
         },
+        testReady: function (tst) {
+            call_order.push(['testReady']);
+        },
         testDone: function (name, assertions) {
             call_order.push(['testDone'].concat(name));
         }
     }, function () {
         test.same(call_order, [
-            ['testStart', 'test1'], ['testDone', 'test1'],
-            ['testStart', 'suite', 't1'], ['testDone', 'suite', 't1'],
-            ['testStart', 'suite', 't2'], ['testDone', 'suite', 't2'],
+            ['testStart', 'test1'], ['testReady'], ['testDone', 'test1'],
+            ['testStart', 'suite', 't1'], ['testReady'], ['testDone', 'suite', 't1'],
+            ['testStart', 'suite', 't2'], ['testReady'], ['testDone', 'suite', 't2'],
             ['testStart', 'suite', 'another_suite', 't3'],
+            ['testReady'],
             ['testDone', 'suite', 'another_suite', 't3']
         ]);
         test.done();
