@@ -130,49 +130,45 @@ function. For the purpose of this example we'll assume a minimal node project
 layout is maintained. The file layout will be as follows (an example can be
 found at [tvervest/nodeunit-example](https://github.com/tvervest/nodeunit-example));
 
-```
-|-- lib           // contains the library source files
-|   `-- mylib.js  // contains the actual library we'll be testing
-`-- test          // contains the unit tests files
-    `-- pow.js  // contains the unit tests for advanced behaviour
-```
+    |-- lib           // contains the library source files
+    |   `-- mylib.js  // contains the actual library we'll be testing
+    `-- test          // contains the unit tests files
+        `-- pow.js  // contains the unit tests for advanced behaviour
 
 
 [lib/mylib.js](https://github.com/tvervest/nodeunit-example/blob/master/lib/mylib.js)
-```
-/*!
- * Simple mock library file for demo purposes.
- */
 
-module.exports = {
-  pow: function(a, b) {
-    // should return a to the power of b, but doesn't
-    return a * b;
-  }
-};
-```
+    /*!
+     * Simple mock library file for demo purposes.
+     */
+    
+    module.exports = {
+      pow: function(a, b) {
+        // should return a to the power of b, but doesn't
+        return a * b;
+      }
+    };
 
 [test/pow.js](https://github.com/tvervest/nodeunit-example/blob/master/test/pow.js)
-```
-/*!
- * Test cases for the mock library file.
- */
-var mylib = require('../lib/mylib'); // load the library we'll be testing
 
-module.exports = {
-  '2 ^ 2': function(test) {
-    var result = mylib.pow(2, 2);
-    test.equal(result, 4); // This will succeed, 2 * 2 == 2 ^ 2
-    test.done();
-  },
-
-  '3 ^ 2': function(test) {
-    var result = mylib.pow(3, 2); // this will fail, 3 * 2 != 3 ^ 2
-    test.equal(result, 9);
-    test.done();
-  }
-};
-```
+    /*!
+     * Test cases for the mock library file.
+     */
+    var mylib = require('../lib/mylib'); // load the library we'll be testing
+    
+    module.exports = {
+      '2 ^ 2': function(test) {
+        var result = mylib.pow(2, 2);
+        test.equal(result, 4); // This will succeed, 2 * 2 == 2 ^ 2
+        test.done();
+      },
+    
+      '3 ^ 2': function(test) {
+        var result = mylib.pow(3, 2); // this will fail, 3 * 2 != 3 ^ 2
+        test.equal(result, 9);
+        test.done();
+      }
+    };
 
 Now we'll run our test by executing `nodeunit test` from the root directory of
 our project. This will execute all exported modules in the files in the test
