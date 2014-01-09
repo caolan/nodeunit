@@ -415,13 +415,13 @@ Built-in Test Reporters
 Writing a Test Reporter
 ---------------------
 
-Nodeunit exports runTest(fn, options), runModule(mod, options) and
-runFiles(paths, options). You'll most likely want to run test suites from
+Nodeunit exports `runTest(name, fn, options)`, `runModule(name, mod, options)` and
+`runFiles(paths, options)`. You'll most likely want to run test suites from
 files, which can be done using the latter function. The _options_ argument can
 contain callbacks which run during testing. Nodeunit provides the following
 callbacks:
 
-* __moduleStart(name)__ - called before a module is tested
+* __moduleStart([name])__ - called before a module is tested, if available a module name will be passed
 * __moduleDone(name, assertions)__ - called once all test functions within the
   module have completed (see assertions object reference below)
   ALL tests within the module
