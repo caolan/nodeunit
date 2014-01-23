@@ -1,5 +1,6 @@
 {
   "name": "nodeunit",
+  "version": "0.8.3",
   "description": "Easy unit testing for node.js and the browser.",
   "maintainers": [
     {
@@ -57,7 +58,6 @@
       "web": "http://tmpvar.com"
     }
   ],
-  "version": "0.8.2",
   "repository": {
     "type": "git",
     "url": "http://github.com/caolan/nodeunit.git"
