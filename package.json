@@ -85,5 +85,8 @@
   },
   "dependencies": {
     "tap": ">=0.2.3"
+  },
+  "scripts": {
+    "test": "node ./bin/nodeunit test"
   }
 }
