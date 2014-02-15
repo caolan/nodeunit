@@ -1,6 +1,6 @@
 {
   "name": "nodeunit",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "Easy unit testing for node.js and the browser.",
   "maintainers": [
     {
