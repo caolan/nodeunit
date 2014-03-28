@@ -229,7 +229,7 @@ assertions as the exit code. Exiting with 0 when all tests pass.
 * __--reporter FILE__ - you can set the test reporter to a custom module or
 on of the modules in nodeunit/lib/reporters, when omitted, the default test runner
 is used.
-* __--list-reporters__ - list available build-in reporters.
+* __--list-reporters__ - list available built-in reporters.
 * __--config FILE__ - load config options from a JSON file, allows
 the customisation of color schemes for the default test reporter etc. See
 bin/nodeunit.json for current available options.
