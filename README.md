@@ -134,7 +134,7 @@ in javascript is the ease of doing stubs:
 
     var _readFile = fs.readFile;
     fs.readFile = function(path, callback){
-        // its a stub!
+        // it's a stub!
     };
     // test function that uses fs.readFile
 
@@ -148,9 +148,9 @@ fast anyway.
 
 ### Explicit ending of tests
 
-When testing async code its important that tests end at the correct point, not
+When testing async code it's important that tests end at the correct point, not
 just after a given number of assertions. Otherwise your tests can run short,
-ending before all assertions have completed. Its important to detect too
+ending before all assertions have completed. It's important to detect too
 many assertions as well as too few. Combining explicit ending of tests with
 an expected number of assertions helps to avoid false test passes, so be sure
 to use the test.expect() method at the start of your test functions, and
@@ -200,7 +200,7 @@ calls `test.done()`:
         }
     };
 
-In this way, its possible to have multiple groups of tests in a module, each
+In this way, it's possible to have multiple groups of tests in a module, each
 group with its own setUp and tearDown functions.
 
 
@@ -278,7 +278,7 @@ __suite1.js__
 
 If you wish to use a commonjs format for your test suites (using exports), it is
 up to you to define the commonjs tools for the browser. There are a number of
-alternatives and its important it fits with your existing code, which is
+alternatives and it's important it fits with your existing code, which is
 why nodeunit does not currently provide this out of the box.
 
 In the example above, the tests will run when the page is loaded.
@@ -314,7 +314,7 @@ cloning the repository, nodeunit can be downloaded by doing the following:
     git submodule update
 
 Let's update the test script above with a helpful hint on how to get nodeunit,
-if its missing:
+if it's missing:
 
     #!/usr/bin/env node
     try {
