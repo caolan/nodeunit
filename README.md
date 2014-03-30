@@ -6,7 +6,7 @@ node.js and the browser.
 
 * Simple to use
 * Just export the tests from a module
-* Works with node.js and in the browser.
+* Works with node.js and in the browser
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
 * Flexible reporters for custom output, built-in support for HTML and jUnit XML
@@ -109,10 +109,10 @@ the API where possible, to make it easier to digest.
 Tests are simply exported from a module, but they are still run in the order
 they are defined.
 
-__Note:__ Users of old nodeunit versions may remember using ok, equals and same
-in the style of qunit, instead of the assert functions above. These functions
-still exist for backwards compatibility, and are simply aliases to their assert
-module counterparts.
+__Note:__ Users of old nodeunit versions may remember using `ok`, `equals` and 
+`same` in the style of qunit, instead of the assert functions above. These 
+functions still exist for backwards compatibility, and are simply aliases to 
+their assert module counterparts.
 
 
 Asynchronous Testing
@@ -134,7 +134,7 @@ in javascript is the ease of doing stubs:
 
     var _readFile = fs.readFile;
     fs.readFile = function(path, callback){
-        // its a stub!
+        // it's a stub!
     };
     // test function that uses fs.readFile
 
@@ -148,13 +148,13 @@ fast anyway.
 
 ### Explicit ending of tests
 
-When testing async code its important that tests end at the correct point, not
+When testing async code it's important that tests end at the correct point, not
 just after a given number of assertions. Otherwise your tests can run short,
-ending before all assertions have completed. Its important to detect too
+ending before all assertions have completed. It's important to detect too
 many assertions as well as too few. Combining explicit ending of tests with
 an expected number of assertions helps to avoid false test passes, so be sure
-to use the test.expect() method at the start of your test functions, and
-test.done() when finished.
+to use the `test.expect()` method at the start of your test functions, and
+`test.done()` when finished.
 
 
 Groups, setUp and tearDown
@@ -200,7 +200,7 @@ calls `test.done()`:
         }
     };
 
-In this way, its possible to have multiple groups of tests in a module, each
+In this way, it's possible to have multiple groups of tests in a module, each
 group with its own setUp and tearDown functions.
 
 
@@ -208,7 +208,7 @@ Running Tests
 -------------
 
 Nodeunit comes with a basic command-line test runner, which can be installed
-using 'sudo make install'. Example usage:
+using `sudo make install`. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
 
@@ -221,7 +221,7 @@ be having writing tests, lets fix the example at the start of the README:
 Ahhh, Doesn't that feel better?
 
 When using the included test runner, it will exit using the failed number of
-assertions as the exit code. Exiting with 0 when all tests pass.
+assertions as the exit code.  This means it exits with 0 when all tests pass.
 
 
 ### Command-line Options
@@ -264,8 +264,8 @@ __test.html__
       </body>
     </html>
 
-Here, suite1 and suite2 are just object literals containing test functions or
-groups, as would be returned if you did require('test-suite') in node.js:
+Here, `suite1` and `suite2` are just object literals containing test functions
+or groups, as would be returned if you did `require('test-suite')` in node.js:
 
 __suite1.js__
 
@@ -278,13 +278,13 @@ __suite1.js__
 
 If you wish to use a commonjs format for your test suites (using exports), it is
 up to you to define the commonjs tools for the browser. There are a number of
-alternatives and its important it fits with your existing code, which is
+alternatives and it's important it fits with your existing code, which is
 why nodeunit does not currently provide this out of the box.
 
 In the example above, the tests will run when the page is loaded.
 
-The browser-version of nodeunit.js is created in dist/browser when you do, 'make
-browser'. You'll need [UglifyJS](https://github.com/mishoo/UglifyJS) installed in
+The browser-version of nodeunit.js is created in dist/browser when you do, `make
+browser`. You'll need [UglifyJS](https://github.com/mishoo/UglifyJS) installed in
 order for it to automatically create nodeunit.min.js.
 
 
@@ -314,7 +314,7 @@ cloning the repository, nodeunit can be downloaded by doing the following:
     git submodule update
 
 Let's update the test script above with a helpful hint on how to get nodeunit,
-if its missing:
+if it's missing:
 
     #!/usr/bin/env node
     try {
@@ -440,7 +440,7 @@ to v0.2.1 fixes this.
 __machineout__ reporter
 ----------------------------------------------
 
-The default reporter is really readable for human but for machinally analysis. 
+The default reporter is readable for human but not for machine analysis. 
 When you want to analyze the output of nodeunit, use __machineout__ reporter and you will get
 
 <img src="https://github.com/caolan/nodeunit/raw/master/img/example_machineout.png" />
