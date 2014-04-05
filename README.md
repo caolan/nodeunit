@@ -89,6 +89,7 @@ Nodeunit uses the functions available in the node.js
 * __notStrictEqual(actual, expected, [message])__ - Tests strict non-equality,
   as determined by the strict not equal operator ( !== )
 * __throws(block, [error], [message])__ - Expects block to throw an error.
+* __match(regex, actual, [message])__ - Tests if `regex` matches `actual`.
 * __doesNotThrow(block, [error], [message])__ - Expects block not to throw an
   error.
 * __ifError(value)__ - Tests if value is not a false value, throws if it is a
