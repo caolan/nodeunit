@@ -29,7 +29,13 @@ Nodeunit is a simple unit testing tool based on the node.js assert module.
   __--list-reporters__:
       List available build-in reporters.
 
-  __-h__, __--help__:  
+  __-t testName__:
+      Run specifc test only.
+
+  __-f fullTestName__:
+      Run specific test only. fullTestName is built so: "outerGroup - .. - innerGroup - testName".
+
+  __-h__, __--help__:
       Display the help and exit.
 
   __-v__, __--version__:
