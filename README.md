@@ -109,9 +109,9 @@ the API where possible, to make it easier to digest.
 Tests are simply exported from a module, but they are still run in the order
 they are defined.
 
-__Note:__ Users of old nodeunit versions may remember using `ok`, `equals` and 
-`same` in the style of qunit, instead of the assert functions above. These 
-functions still exist for backwards compatibility, and are simply aliases to 
+__Note:__ Users of old nodeunit versions may remember using `ok`, `equals` and
+`same` in the style of qunit, instead of the assert functions above. These
+functions still exist for backwards compatibility, and are simply aliases to
 their assert module counterparts.
 
 
@@ -412,7 +412,7 @@ context when setting up the sandbox.
     var box_globals = {
         // Passing module.exports into the sandbox will give your code  access to it.
         module: {exports: exports},
-        // Passing require into the sandbox will give your code  access to use it AND 
+        // Passing require into the sandbox will give your code  access to use it AND
         // will share the cache with modules already required from outside the sandbox.
         require: require,
         // Passing console into the sandbox will give your code access to it
@@ -440,7 +440,7 @@ to v0.2.1 fixes this.
 __machineout__ reporter
 ----------------------------------------------
 
-The default reporter is readable for human but not for machine analysis. 
+The default reporter is readable for human but not for machine analysis.
 When you want to analyze the output of nodeunit, use __machineout__ reporter and you will get
 
 <img src="https://github.com/caolan/nodeunit/raw/master/img/example_machineout.png" />
@@ -454,7 +454,7 @@ nodeunit with VIM.
 That compiler uses __machineout__ reporter and it is useful to use
 with [vim-makegreen](https://github.com/reinh/vim-makegreen).
 
-    
+
 
 Contributing
 ------------
