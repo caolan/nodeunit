@@ -152,6 +152,9 @@ exports.testEmptyDir = function (test) {
 var CoffeeScript;
 try {
     CoffeeScript = require('coffee-script');
+    if (CoffeeScript.register != null) {
+        CoffeeScript.register();
+    }
 } catch (e) {
 }
 
