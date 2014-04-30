@@ -17,31 +17,37 @@ Nodeunit is a simple unit testing tool based on the node.js assert module.
 
 ## OPTIONS
 
-  __--config FILE__:  
+  __--config FILE__:
       Load config options from a JSON file, allows the customisation
       of color schemes for the default test reporter etc.
       See bin/nodeunit.json for current available options.
 
-  __--reporter FILE__:  
+  __--reporter FILE__:
       You can set the test reporter to a custom module or on of the modules
       in nodeunit/lib/reporters, when omitted, the default test runner is used.
 
-  __--list-reporters__:  
+  __--list-reporters__:
       List available build-in reporters.
 
-  __-h__, __--help__:  
+  __-t testName__:
+      Run specifc test only.
+
+  __-f fullTestName__:
+      Run specific test only. fullTestName is built so: "outerGroup - .. - innerGroup - testName".
+
+  __-h__, __--help__:
       Display the help and exit.
 
-  __-v__, __--version__:  
+  __-v__, __--version__:
       Output version information and exit.
 
   __<file-or-directory>__:
-      You can run nodeunit on specific files or on all *\*.js* files inside  
+      You can run nodeunit on specific files or on all *\*.js* files inside
       a directory.
 
 ## AUTHORS
 
-Written by Caolan McMahon and other nodeunit contributors.  
+Written by Caolan McMahon and other nodeunit contributors.
 Contributors list: <http://github.com/caolan/nodeunit/contributors>.
 
 ## REPORTING BUGS
@@ -50,8 +56,8 @@ Report nodeunit bugs to <http://github.com/caolan/nodeunit/issues>.
 
 ## COPYRIGHT
 
-Copyright © 2010 Caolan McMahon.  
-Nodeunit has been released under the MIT license:  
+Copyright © 2010 Caolan McMahon.
+Nodeunit has been released under the MIT license:
 <http://github.com/caolan/nodeunit/raw/master/LICENSE>.
 
 ## SEE ALSO
