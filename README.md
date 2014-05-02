@@ -212,6 +212,8 @@ using `sudo make install`. Example usage:
 
     nodeunit testmodule1.js testfolder [...]
 
+If no entry file specified, `test` defaults.
+
 The default test reporter uses color output, because I think that's more fun :) I
 intend to add a no-color option in future. To give you a feeling of the fun you'll
 be having writing tests, lets fix the example at the start of the README:
