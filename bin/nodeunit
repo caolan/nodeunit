@@ -101,10 +101,9 @@ args.forEach(function (arg) {
     }
 });
 
+// defaults to `test`
 if (files.length === 0) {
-    console.log('Files required.');
-    console.log(usage);
-    process.exit(1);
+    files = ['test'];
 }
 
 if (config_file) {
