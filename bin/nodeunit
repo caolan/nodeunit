@@ -21,7 +21,7 @@ var testrunner,
     output_param_found = false,
     reporter_file = 'default',
     reporter_param_found = false,
-    testspec_param_found = false;
+    testspec_param_found = false,
     testFullSpec_param_found = false;
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +

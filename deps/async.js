@@ -5,7 +5,7 @@
 
     // global on the server, window in the browser
     var root = this,
-        previous_async = root.async;
+        previous_async = (root) ? root.async : undefined;
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = async;
