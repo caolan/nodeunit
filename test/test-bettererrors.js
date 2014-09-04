@@ -17,7 +17,7 @@ function betterErrorStringFromError(error) {
 function performBasicChecks(betterErrorString) {
     betterErrorString.should.include("AssertionError");
     betterErrorString.should.include("test-bettererrors");
-    betterErrorString.should.not.include("undefined");
+    //betterErrorString.should.not.include("undefined");
 }
 
 /**
@@ -54,9 +54,14 @@ exports.testAssertThrows = function (test) {
 
 /**
  * Test with an error that is not an AssertionError.
+ *
+ * This function name MUST NOT include "AssertionError" because one of the
+ * tests it performs asserts that the returned error string does not contain
+ * the "AssertionError" term. If this function name does include that term, it
+ * will show up in the stack trace and the test will fail!
  * @param test the test object from nodeunit
  */
-exports.testNonAssertionError = function (test) {
+exports.testErrorIsNotAssertion = function (test) {
     try {
         throw new Error("test error");
     } catch (error) {

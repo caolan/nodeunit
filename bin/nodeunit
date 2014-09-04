@@ -29,11 +29,11 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
-            "  -t name,          specify a test to run\n" +
-            "  -f fullname,      specify a specific test to run. fullname is built so: \"outerGroup - .. - innerGroup - testName\"\n"  + 
+            "  -t testName,      specify a test to run\n" +
+            "  -f fullTestName,  specify a specific test to run. fullTestName is built so: \"outerGroup - .. - innerGroup - testName\"\n"  +
             "  -h, --help        display this help and exit\n" +
             "  -v, --version     output version information and exit";
-            
+
 
 
 // load default options
@@ -101,10 +101,9 @@ args.forEach(function (arg) {
     }
 });
 
+// defaults to `test`
 if (files.length === 0) {
-    console.log('Files required.');
-    console.log(usage);
-    process.exit(1);
+    files = ['test'];
 }
 
 if (config_file) {
