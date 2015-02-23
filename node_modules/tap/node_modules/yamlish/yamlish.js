@@ -20,7 +20,7 @@ function encode (obj, indent) {
   switch (typeof obj) {
     case "string":
       obj = obj.trim()
-      if (obj.indexOf("\n") !== -1) {
+      if (/[:\n\[\]]/g.test(obj)) {
         return "|\n" + indent + obj.split(/\r?\n/).join("\n"+indent)
       } else {
         return (obj)

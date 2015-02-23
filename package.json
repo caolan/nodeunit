@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "uglify-js": ">=1.1.0",
-    "should": ">=0.4.2"
+    "should": ">=5.0.0"
   },
   "bugs": {
     "url": "http://github.com/caolan/nodeunit/issues"
@@ -84,9 +84,9 @@
     "nodeunit": "./bin/nodeunit"
   },
   "dependencies": {
-    "tap": ">=0.2.3"
+    "tap": ">=0.6.0"
   },
   "scripts": {
-    "test": "node ./bin/nodeunit"
+    "test": "node --use_strict ./bin/nodeunit"
   }
 }
