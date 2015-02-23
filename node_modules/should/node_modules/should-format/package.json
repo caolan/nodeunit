@@ -1,0 +1,57 @@
+{
+  "name": "should-format",
+  "version": "0.0.7",
+  "description": "Formatting of objects for should.js",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shouldjs/format.git"
+  },
+  "scripts": {
+    "test": "mocha -R mocha-better-spec-reporter tests/test.js",
+    "browserify": "rm tests/browser/tests.js && browserify tests/test.js >> tests/browser/tests.js"
+  },
+  "keywords": [
+    "should",
+    "format"
+  ],
+  "author": {
+    "name": "Denis Bardadym",
+    "email": "bardadymchik@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "mocha": "^2.0.1",
+    "mocha-better-spec-reporter": "^1.1.1"
+  },
+  "dependencies": {
+    "should-type": "0.0.4"
+  },
+  "gitHead": "e165d54369588d85f32d7b8906cbecd9cf4a260f",
+  "bugs": {
+    "url": "https://github.com/shouldjs/format/issues"
+  },
+  "homepage": "https://github.com/shouldjs/format",
+  "_id": "should-format@0.0.7",
+  "_shasum": "1e2ef86bd91da9c2e0412335b56ababd9a2fde12",
+  "_from": "should-format@0.0.7",
+  "_npmVersion": "2.1.18",
+  "_nodeVersion": "0.10.35",
+  "_npmUser": {
+    "name": "btd",
+    "email": "bardadymchik@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "btd",
+      "email": "bardadymchik@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "1e2ef86bd91da9c2e0412335b56ababd9a2fde12",
+    "tarball": "http://registry.npmjs.org/should-format/-/should-format-0.0.7.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/should-format/-/should-format-0.0.7.tgz"
+}

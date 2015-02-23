@@ -1,4 +1,4 @@
-var charm = require('charm')(process);
+var charm = require('../')(process);
 charm.reset();
 
 var radius = 10;

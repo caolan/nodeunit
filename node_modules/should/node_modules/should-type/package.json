@@ -1,0 +1,46 @@
+{
+  "name": "should-type",
+  "version": "0.0.4",
+  "description": "Simple module to get instance type. Like a bit more advanced version of typeof",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shouldjs/type.git"
+  },
+  "keywords": [
+    "should",
+    "type"
+  ],
+  "author": {
+    "name": "Denis Bardadym",
+    "email": "bardadymchik@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shouldjs/type/issues"
+  },
+  "homepage": "https://github.com/shouldjs/type",
+  "gitHead": "d82e3314a20911e5227b7e480f07a7833a7dbe9a",
+  "_id": "should-type@0.0.4",
+  "scripts": {},
+  "_shasum": "0132a05417a6126866426acf116f1ed5623a5cd0",
+  "_from": "should-type@0.0.4",
+  "_npmVersion": "2.1.17",
+  "_nodeVersion": "0.10.35",
+  "_npmUser": {
+    "name": "btd",
+    "email": "bardadymchik@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "btd",
+      "email": "bardadymchik@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "0132a05417a6126866426acf116f1ed5623a5cd0",
+    "tarball": "http://registry.npmjs.org/should-type/-/should-type-0.0.4.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/should-type/-/should-type-0.0.4.tgz"
+}
