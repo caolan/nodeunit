@@ -116,8 +116,8 @@ exports.testEmptyDir = function (test) {
     var dir2 = __dirname + '/fixtures/dir2';
 
     // git doesn't like empty directories, so we have to create one
-    path.exists(dir2, function (exists) {
-        if (!exists) {
+    fs.access(dir2, function (err) {
+        if (err) {
             fs.mkdirSync(dir2, 0777);
         }
 
