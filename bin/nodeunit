@@ -29,6 +29,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  -r                recursively run tests in sub-directories\n" +
             "  -t testName,      specify a test to run\n" +
             "  -f fullTestName,  specify a specific test to run. fullTestName is built so: \"outerGroup - .. - innerGroup - testName\"\n"  +
             "  -h, --help        display this help and exit\n" +
@@ -63,6 +64,8 @@ args.forEach(function (arg) {
     } else if (reporter_param_found) {
         reporter_file = arg;
         reporter_param_found = false;
+    } else if (arg === '-r') {
+        options.recursive = true;
     } else if (arg === '-t') {
         testspec_param_found = true;
     } else if (testspec_param_found) {
