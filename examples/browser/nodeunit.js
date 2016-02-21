@@ -1941,6 +1941,8 @@ exports.info = "Browser-based test reporter";
 
 exports.run = function (modules, options) {
     var start = new Date().getTime();
+    var textareas = options.textareas;
+    var displayErrorsByDefault = options.displayErrorsByDefault;
 
     function setText(el, txt) {
         if ('innerText' in el) {
@@ -1989,8 +1991,8 @@ exports.run = function (modules, options) {
             test.appendChild(strong);
 
             var aList = document.createElement('ol');
-            aList.style.display = 'none';
-            test.onclick = function () {
+            aList.style.display = displayErrorsByDefault ? 'block' : 'none';
+            (displayErrorsByDefault ? strong : test).onclick = function () {
                 var d = aList.style.display;
                 aList.style.display = (d == 'none') ? 'block': 'none';
             };
@@ -1999,7 +2001,9 @@ exports.run = function (modules, options) {
                 var a = assertions[i];
                 if (a.failed()) {
                     li.innerHTML = (a.message || a.method || 'no message') +
-                        '<pre>' + (a.error.stack || a.error) + '</pre>';
+                        (textareas ?
+                          '<textarea rows="20" cols="100">' + (a.error.stack || a.error) + '</textarea>' :
+                          '<pre>' + (a.error.stack || a.error) + '</pre>');
                     li.className = 'fail';
                 }
                 else {
