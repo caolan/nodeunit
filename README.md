@@ -41,13 +41,13 @@ Usage
 
 Here is an example unit test module:
 
-    exports.testSomething = function(test){
+    exports.testSomething = function(test) {
         test.expect(1);
         test.ok(true, "this assertion should pass");
         test.done();
     };
 
-    exports.testSomethingElse = function(test){
+    exports.testSomethingElse = function(test) {
         test.ok(false, "this assertion should fail");
         test.done();
     };
@@ -133,7 +133,7 @@ and stubbing is pretty much impossible. One of the nicest things about testing
 in javascript is the ease of doing stubs:
 
     var _readFile = fs.readFile;
-    fs.readFile = function(path, callback){
+    fs.readFile = function(path, callback) {
         // it's a stub!
     };
     // test function that uses fs.readFile
