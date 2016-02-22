@@ -150,6 +150,14 @@ exports.testThrowsWithErrorValidation = makeTest('throws',
         return false;
     }]
 );
+exports.testMatch = makeTest('match',
+  [/^basic$/, 'basic'],
+  [/^$/, 'basic']
+);
+exports.testMatch = makeTest('match',
+  [/^[0-9a-f]{40}$/, '3ccc98002d0edd06bff9de6cdc1725eb3ae1c638'],
+  [/^[0-9a-f]{1,40}$/, '3CCC98002D0EDD06BFF9DE6CDC1725EB3AE1C638']
+);
 exports.testDoesNotThrows = makeTest('doesNotThrow',
     [function () {
         return;
