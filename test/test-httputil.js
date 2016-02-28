@@ -1,4 +1,3 @@
-var nodeunit = require('../lib/nodeunit');
 var httputil = require('../lib/utils').httputil;
 
 exports.testHttpUtilBasics = function (test) {
