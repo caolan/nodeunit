@@ -30,9 +30,11 @@ exports.testEqual = function (test) {
     } catch (error) {
         var betterErrorString = betterErrorStringFromError(error);
         performBasicChecks(betterErrorString);
+        
         betterErrorString.should.include("true");
         betterErrorString.should.include("false");
         betterErrorString.should.include("==");
+
         test.done();
     }
 };
