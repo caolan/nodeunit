@@ -13,7 +13,7 @@ var deepEqual = module.exports = function (actual, expected, opts) {
 
   // 7.3. Other pairs that do not both pass typeof value == 'object',
   // equivalence is determined by ==.
-  } else if (typeof actual != 'object' && typeof expected != 'object') {
+  } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
     return opts.strict ? actual === expected : actual == expected;
 
   // 7.4. For all other Object pairs, including Array objects, equivalence is
