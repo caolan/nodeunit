@@ -1,7 +1,9 @@
 var exec = require('child_process').exec,
-    path = require('path');
+    path = require('path'),
+    process = require('process');
 
-var bin = path.resolve(__dirname, '../bin/nodeunit');
+var bin = (process.platform === 'win32' ? 'node ' : "") +
+    path.resolve(__dirname, '../bin/nodeunit');
 var testfile_fullpath = path.resolve(__dirname, './fixtures/example_test.js');
 var fixtures_path = path.resolve(__dirname, './fixtures');
 
