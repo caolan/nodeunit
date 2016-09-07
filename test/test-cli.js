@@ -1,6 +1,5 @@
 var exec = require('child_process').exec,
-    path = require('path'),
-    process = require('process');
+    path = require('path');
 
 var bin = (process.platform === 'win32' ? 'node ' : "") +
     path.resolve(__dirname, '../bin/nodeunit');
