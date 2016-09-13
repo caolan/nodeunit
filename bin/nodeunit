@@ -4,11 +4,6 @@ var
     fs = require('fs'),
     path = require('path');
 
-// TODO: remove this when https://github.com/joyent/node/pull/1312
-//       lands in core.
-//
-// Until then, use console.log from npm (https://gist.github.com/1077544)
-require('../deps/console.log');
 
 //require.paths.push(process.cwd());
 var args = (process.ARGV || process.argv).slice(2);
