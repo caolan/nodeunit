@@ -79,6 +79,7 @@
     "nodeunit": "./bin/nodeunit"
   },
   "dependencies": {
+    "ejs": "^2.5.2",
     "tap": "^7.0.0"
   },
   "scripts": {
