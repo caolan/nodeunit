@@ -80,7 +80,7 @@ args.forEach(function (arg) {
         }).filter(function (reporter_file) {
             return reporter_file !== 'index';
         });
-        console.log('Build-in reporters: ');
+        console.log('Built-in reporters: ');
         reporters.forEach(function (reporter_file) {
             var reporter = require('../lib/reporters/' + reporter_file);
             console.log('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
