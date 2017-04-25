@@ -44,3 +44,43 @@ exports.testThrowError = function (test) {
         }
     }, test.done);
 };
+
+exports.testThrowErrorAsync = function (test) {
+    test.expect(3);
+    var err = new Error('test');
+    var testfn = function (test) {
+        process.nextTick(function() {
+            throw err;
+        });
+    };
+    nodeunit.runTest('testname', testfn, {
+        log: function (assertion) {
+            test.same(assertion.error, err, 'assertion.error');
+        },
+        testDone: function (name, assertions) {
+            test.equals(assertions.failures(), 1);
+            test.equals(assertions.length, 1);
+        }
+    }, test.done);
+};
+
+exports.testThrowErrorSyncAndAsync = function (test) {
+    test.expect(3);
+    var syncErr = new Error('sync test');
+    var asyncErr = new Error('async test');
+    var testfn = function (test) {
+        process.nextTick(function() {
+            throw asyncErr;
+        });
+        throw syncErr;
+    };
+    nodeunit.runTest('testname', testfn, {
+        log: function (assertion) {
+            test.same(assertion.error, syncErr, 'assertion.error');
+        },
+        testDone: function (name, assertions) {
+            test.equals(assertions.failures(), 1);
+            test.equals(assertions.length, 1);
+        }
+    }, test.done);
+};
