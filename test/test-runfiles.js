@@ -148,6 +148,20 @@ exports.testEmptyDir = function (test) {
     });
 };
 
+exports.testRunFilesWithDuplicate = function (test) {
+    test.expect(1);
+
+    nodeunit.runFiles([
+        __dirname + '/fixtures/mock_module5.js',
+        __dirname + '/fixtures/mock_module5.js'
+    ], {
+        done: function (assertions) {
+            test.equals(assertions.failures(), 0, 'failures');
+            test.done();
+        }
+    });
+};
+
 
 var CoffeeScript;
 try {
