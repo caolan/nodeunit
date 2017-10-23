@@ -4,10 +4,12 @@
   <testsuite name="<%= suite.name %>"
              errors="<%= suite.errorCount %>"
              failures="<%= suite.failureCount %>"
-             tests="<%= suite.tests %>">
-    <% for (var j=0; j < suite.testcases.length; j++) { %>
-      <% var testcase=suites[i].testcases[j]; %>
-      <testcase name="<%= testcase.name %>">
+             tests="<%= suite.tests %>"
+             time="<%= (suite.end - suite.start)/1000 %>"
+             >
+    <% for (var testCaseName in suite.testcases) { %>
+      <% var testcase=suite.testcases[testCaseName]; %>
+      <testcase name="<%= testcase.name %>" time="<%= (testcase.end - testcase.start)/1000 %>">
         <% if (testcase.failure) { %>
           <failure message="<%= testcase.failure.message %>">
             <% if (testcase.failure.backtrace) { %><%= testcase.failure.backtrace %><% } %>
