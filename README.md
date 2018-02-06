@@ -1,6 +1,8 @@
 Nodeunit
 ========
 
+[![Build Status](https://travis-ci.org/caolan/nodeunit.svg?branch=master)](https://travis-ci.org/caolan/nodeunit)
+
 Simple syntax, powerful tools. Nodeunit provides easy async unit testing for
 node.js and the browser.
 
@@ -235,7 +237,7 @@ is used.
 * __--config FILE__ - load config options from a JSON file, allows
 the customisation of color schemes for the default test reporter etc. See
 bin/nodeunit.json for current available options.
-* __-t testName__ - run specifc test only.
+* __-t testName__ - run specific test only.
 * __-f fullTestName__ - run specific test only. fullTestName is built so: "outerGroup - .. - innerGroup - testName".
 * __--version__ or __-v__ - report nodeunit version
 * __--help__ - show nodeunit help

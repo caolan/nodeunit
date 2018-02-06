@@ -1,6 +1,6 @@
 {
   "name": "nodeunit",
-  "version": "0.9.1",
+  "version": "0.11.2",
   "description": "Easy unit testing for node.js and the browser.",
   "maintainers": [
     {
@@ -63,18 +63,13 @@
     "url": "http://github.com/caolan/nodeunit.git"
   },
   "devDependencies": {
-    "uglify-js": ">=1.1.0",
-    "should": ">=0.4.2"
+    "should": ">=11.1.0",
+    "uglify-js": ">=2.7.3"
   },
   "bugs": {
     "url": "http://github.com/caolan/nodeunit/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/caolan/nodeunit/raw/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "directories": {
     "lib": "./lib",
     "doc": "./doc",
@@ -84,7 +79,8 @@
     "nodeunit": "./bin/nodeunit"
   },
   "dependencies": {
-    "tap": "^0.7.1"
+    "ejs": "^2.5.2",
+    "tap": "^10.0.2"
   },
   "scripts": {
     "test": "node ./bin/nodeunit"
