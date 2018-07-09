@@ -20,7 +20,8 @@ but given how many other great options there are out there, a benefit of letting
 choosing a testing solution.  *You are strongly encouraged to check out other more modern testing options.*
 
 
-__Features__
+Features
+--------
 
 * Simple to use
 * Just export the tests from a module
@@ -30,7 +31,8 @@ __Features__
 * Flexible reporters for custom output, built-in support for HTML and jUnit XML
 * Allows the use of mocks and stubs
 
-__Contributors__
+Contributors
+------------
 
 * [alexgorbatchev](https://github.com/alexgorbatchev)
 * [alexkwolfe](https://github.com/alexkwolfe)
