@@ -455,6 +455,7 @@ nodeunit functionality is available.
 
 To run the nodeunit tests do:
 
+    npm install
     make test
 
 __Note:__ There was a bug in node v0.2.0 causing the tests to hang, upgrading
