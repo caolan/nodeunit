@@ -187,6 +187,55 @@ exports.testCaseGroups = function (test) {
     });
 };
 
+
+exports.testCaseGroupsWithModuleTeardown = function (test) {
+    var call_order = [];
+    var s = {
+        setUp: function (callback) {
+            call_order.push('setUp');
+            callback();
+        },
+        tearDown: function (callback) {
+            call_order.push('tearDown');
+            callback();
+        },
+        moduleTearDown: function(callback) {
+            call_order.push('moduleTearDown');
+            callback();
+        },
+        test1: function (test) {
+            call_order.push('test1');
+            test.done();
+        },
+        group1: {
+            test2: function (test) {
+                call_order.push('group1.test2');
+                test.done();
+            },
+            test3: function (test) {
+                call_order.push('group1.test3');
+                test.done();
+            }
+        }
+    };
+    nodeunit.runSuite(null, s, {}, function (err, assertions) {
+        test.same(call_order, [
+            'setUp',
+            'test1',
+            'tearDown',
+            'setUp',
+            'group1.test2',
+            'tearDown',
+            'setUp',
+            'group1.test3',
+            'tearDown',
+            'moduleTearDown'
+        ]);
+        test.done();
+    });
+};
+
+
 exports.nestedTestCases = function (test) {
     var call_order = [];
     var s = {
