@@ -1,8 +1,27 @@
 Nodeunit
 ========
 
+[![Build Status](https://travis-ci.org/caolan/nodeunit.svg?branch=master)](https://travis-ci.org/caolan/nodeunit)
+
 Simple syntax, powerful tools. Nodeunit provides easy async unit testing for
 node.js and the browser.
+
+
+DEPRECATED PROJECT
+-----
+
+The project is very stale. We've kept it working on new versions of node, and sometimes merged small PRs that help teams relying on nodeunit.
+
+Nodeunit was the arguably first testing framework developed for node. It was very useful at the time, but there's an overwhelming number
+of other worthwhile testing solutions out there that are actively maintained. tap, ava, tape, mocha, jasmine, jest, ... the list goes on and on.
+
+If Nodeunit were truly bringing some different philosophy to the testing scene I'd say yes effort should be made to shore up it's development,
+but given how many other great options there are out there, a benefit of letting it atrophy is it's one less choice people have to make when
+choosing a testing solution.  *You are strongly encouraged to check out other more modern testing options.*
+
+
+Features
+--------
 
 * Simple to use
 * Just export the tests from a module
@@ -12,7 +31,8 @@ node.js and the browser.
 * Flexible reporters for custom output, built-in support for HTML and jUnit XML
 * Allows the use of mocks and stubs
 
-__Contributors__
+Contributors
+------------
 
 * [alexgorbatchev](https://github.com/alexgorbatchev)
 * [alexkwolfe](https://github.com/alexkwolfe)
@@ -41,13 +61,13 @@ Usage
 
 Here is an example unit test module:
 
-    exports.testSomething = function(test){
+    exports.testSomething = function(test) {
         test.expect(1);
         test.ok(true, "this assertion should pass");
         test.done();
     };
 
-    exports.testSomethingElse = function(test){
+    exports.testSomethingElse = function(test) {
         test.ok(false, "this assertion should fail");
         test.done();
     };
@@ -133,7 +153,7 @@ and stubbing is pretty much impossible. One of the nicest things about testing
 in javascript is the ease of doing stubs:
 
     var _readFile = fs.readFile;
-    fs.readFile = function(path, callback){
+    fs.readFile = function(path, callback) {
         // it's a stub!
     };
     // test function that uses fs.readFile
@@ -235,7 +255,7 @@ is used.
 * __--config FILE__ - load config options from a JSON file, allows
 the customisation of color schemes for the default test reporter etc. See
 bin/nodeunit.json for current available options.
-* __-t testName__ - run specifc test only.
+* __-t testName__ - run specific test only.
 * __-f fullTestName__ - run specific test only. fullTestName is built so: "outerGroup - .. - innerGroup - testName".
 * __--version__ or __-v__ - report nodeunit version
 * __--help__ - show nodeunit help
