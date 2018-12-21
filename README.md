@@ -311,6 +311,8 @@ The browser-version of nodeunit.js is created in dist/browser when you do, `make
 browser`. You'll need [UglifyJS](https://github.com/mishoo/UglifyJS) installed in
 order for it to automatically create nodeunit.min.js.
 
+You can run tests in the browser from the command line and get results on stdout using the [nodeunit adapter](https://github.com/karma-runner/karma-nodeunit) for the [Karma runner](http://karma-runner.github.io/).
+
 
 Adding nodeunit to Your Projects
 --------------------------------
