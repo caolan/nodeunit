@@ -10,6 +10,35 @@ var args = (process.ARGV || process.argv).slice(2);
 
 var files = [];
 
+/**
+ * Method responsible for recursive search for test files passed
+ * in arguments
+ */
+var parsePath = function (dir, files) {
+
+	var stat = fs.statSync(dir);
+	if (!stat || !stat.isDirectory()) {
+		files.push(dir);
+		return files;
+	}
+
+    fs.readdirSync(dir).forEach(function (file) {
+
+        file = dir + '/' + file;
+
+        var stat = fs.statSync(file);
+
+        if (stat && stat.isDirectory()) {
+            parsePath(file, files);
+        } else {
+            files.push(file);
+        }
+
+    });
+
+    return files;
+};
+
 var testrunner,
     config_file,
     config_param_found = false,
@@ -95,7 +124,7 @@ args.forEach(function (arg) {
         console.log(usage);
         process.exit(0);
     } else {
-        files.push(arg);
+        files = parsePath(arg, files);
     }
 });
 
