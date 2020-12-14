@@ -14,9 +14,3 @@ node_js:
   - "5.12"
   - "4.9"
   - "4.4"
-  - "0.12"
-#Excluding below versions since they are not supported by ppc64le    
-jobs: 
-  exclude:
-    - node_js: "0.10"
-      arch: ppc64le
