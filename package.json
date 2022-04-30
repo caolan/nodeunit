@@ -64,14 +64,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/caolan/nodeunit.git"
+    "url": "http://github.com/chrisjohn404/nodeunit.git"
   },
   "devDependencies": {
     "should": ">=11.1.0",
     "uglify-js": ">=2.7.3"
   },
   "bugs": {
-    "url": "http://github.com/caolan/nodeunit/issues"
+    "url": "http://github.com/chrisjohn404/nodeunit/issues"
   },
   "license": "MIT",
   "directories": {
