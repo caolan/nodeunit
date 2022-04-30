@@ -1,14 +1,18 @@
 {
   "name": "nodeunit",
-  "version": "0.11.3",
+  "version": "1.0.0",
   "description": "Easy unit testing for node.js and the browser.",
   "maintainers": [
     {
-      "name": "Caolan McMahon",
-      "web": "https://github.com/caolan"
+      "name": "Chris Johnson",
+      "web": "https://github.com/chrisjohn404"
     }
   ],
   "contributors": [
+    {
+      "name": "Caolan McMahon",
+      "web": "https://github.com/caolan"
+    },
     {
       "name": "Romain Beauxis",
       "web": "https://github.com/toots"
@@ -78,7 +82,7 @@
   "bin": {
     "nodeunit": "./bin/nodeunit"
   },
-  "dependencies": {
+  "depDependencies": {
     "ejs": "^2.5.2",
     "tap": "^16.0.1"
   },
