@@ -88,5 +88,8 @@
   },
   "scripts": {
     "test": "node ./bin/nodeunit"
+  },
+  "dependencies": {
+    "template-literal": "^1.0.4"
   }
 }

@@ -17,7 +17,7 @@ Features
 * Works with node.js and in the browser
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
-* Flexible reporters for custom output, built-in support for HTML
+* Flexible reporters for custom output, built-in support for HTML and jUnit XML
 * Allows the use of mocks and stubs
 
 Contributors
