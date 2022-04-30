@@ -7,18 +7,7 @@ Simple syntax, powerful tools. Nodeunit provides easy async unit testing for
 node.js and the browser.
 
 
-DEPRECATED PROJECT
------
-
-The project is very stale. We've kept it working on new versions of node, and sometimes merged small PRs that help teams relying on nodeunit.
-
-Nodeunit was the arguably first testing framework developed for node. It was very useful at the time, but there's an overwhelming number
-of other worthwhile testing solutions out there that are actively maintained. tap, ava, tape, mocha, jasmine, jest, ... the list goes on and on.
-
-If Nodeunit were truly bringing some different philosophy to the testing scene I'd say yes effort should be made to shore up it's development,
-but given how many other great options there are out there, a benefit of letting it atrophy is it's one less choice people have to make when
-choosing a testing solution.  *You are strongly encouraged to check out other more modern testing options.*
-
+Nodeunit was the arguably first testing framework developed for node.
 
 Features
 --------
@@ -28,12 +17,13 @@ Features
 * Works with node.js and in the browser
 * Helps you avoid common pitfalls when testing asynchronous code
 * Easy to add test cases with setUp and tearDown functions if you wish
-* Flexible reporters for custom output, built-in support for HTML and jUnit XML
+* Flexible reporters for custom output, built-in support for HTML
 * Allows the use of mocks and stubs
 
 Contributors
 ------------
 
+* [caolan](https://github.com/caolan)
 * [alexgorbatchev](https://github.com/alexgorbatchev)
 * [alexkwolfe](https://github.com/alexkwolfe)
 * [azatoth](https://github.com/azatoth)
@@ -367,8 +357,6 @@ Built-in Test Reporters
 * __default__ - The standard reporter seen in the nodeunit screenshots
 * __minimal__ - Pretty, minimal output, shows errors and progress only
 * __html__ - Outputs a HTML report to stdout
-* __junit__ - Creates jUnit compatible XML reports, which can be used with
-  continuous integration tools such as [Hudson](http://hudson-ci.org/).
 * __machineout__ - Simple reporter for machine analysis. There is
   [nodeunit.vim](https://github.com/lambdalisue/nodeunit.vim) which is useful for TDD on VIM.
 
