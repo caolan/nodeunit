@@ -63,8 +63,8 @@
     "url": "http://github.com/caolan/nodeunit.git"
   },
   "devDependencies": {
-    "should": ">=0.4.2",
-    "uglify-js": "^3.17.3"
+    "uglify-js": ">=1.1.0",
+    "should": ">=0.4.2"
   },
   "bugs": {
     "url": "http://github.com/caolan/nodeunit/issues"
