@@ -115,7 +115,8 @@ exports.testSame = makeTest('same',
 exports.testEqual = makeTest('equal', [1, 1], [1, 2]);
 exports.testNotEqual = makeTest('notEqual', [1, 2], [1, 1]);
 exports.testDeepEqual = makeTest('deepEqual',
-    [{one: 1}, {one: 1}], [{one: 1}, {two: 2}]
+  [{one: 1, two: 2}, {one: 1, two: {valueOf:function() {return 2;}}}],
+  [{one: 1, two: 2}, {two: 2}]
 );
 exports.testNotDeepEqual = makeTest('notDeepEqual',
     [{one: 1}, {two: 2}], [{one: 1}, {one: 1}]
