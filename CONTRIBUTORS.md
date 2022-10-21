@@ -1,4 +1,4 @@
-Nodeunit contributors (sorted alphabeticaly)
+Nodeunit contributors (sorted alphabetically)
 ============================================
 
 * **[Alex Gorbatchev](https://github.com/alexgorbatchev)**

@@ -19,7 +19,7 @@ var setup = function (fn) {
 
 
 exports.testRunFiles = setup(function (test) {
-    test.expect(28);
+    test.expect(33);
     var runModule_copy = nodeunit.runModule;
 
     var runModule_calls = [];
@@ -43,7 +43,7 @@ exports.testRunFiles = setup(function (test) {
         },
         done: function (assertions) {
             test.equals(assertions.failures(), 0, 'failures');
-            test.equals(assertions.length, 4, 'length');
+            test.equals(assertions.length, 5, 'length');
             test.ok(typeof assertions.duration === "number");
 
             var called_with = function (name) {
@@ -55,7 +55,7 @@ exports.testRunFiles = setup(function (test) {
             test.ok(called_with('mock_module2'), 'mock_module2 ran');
             test.ok(called_with('mock_module3'), 'mock_module3 ran');
             test.ok(called_with('mock_module4'), 'mock_module4 ran');
-            test.equals(runModule_calls.length, 4);
+            test.equals(runModule_calls.length, 5);
 
             nodeunit.runModule = runModule_copy;
             test.done();
@@ -116,8 +116,8 @@ exports.testEmptyDir = function (test) {
     var dir2 = __dirname + '/fixtures/dir2';
 
     // git doesn't like empty directories, so we have to create one
-    path.exists(dir2, function (exists) {
-        if (!exists) {
+    fs.access(dir2, function (err) {
+        if (err) {
             fs.mkdirSync(dir2, 0777);
         }
 
