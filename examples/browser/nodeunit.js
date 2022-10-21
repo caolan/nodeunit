@@ -1940,7 +1940,6 @@ exports.info = "Browser-based test reporter";
  */
 
 exports.run = function (modules, options) {
-    options = options || {};
     var start = new Date().getTime();
     var textareas = options.textareas;
     var displayErrorsByDefault = options.displayErrorsByDefault;
