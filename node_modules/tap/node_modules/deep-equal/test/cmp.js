@@ -87,3 +87,9 @@ test('booleans and arrays', function (t) {
     t.notOk(equal(true, []));
     t.end();
 })
+
+test('null == undefined', function (t) {
+    t.ok(equal(null, undefined))
+    t.notOk(equal(null, undefined, { strict: true }))
+    t.end()
+})

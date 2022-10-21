@@ -1,0 +1,55 @@
+{
+  "name": "supports-color",
+  "version": "1.3.1",
+  "description": "Detect whether a terminal supports color",
+  "license": "MIT",
+  "repository": "sindresorhus/supports-color",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "maintainers": [
+    "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
+    "Joshua Appelman <jappelman@xebia.com> (jbnicolai.com)"
+  ],
+  "bin": {
+    "supports-color": "cli.js"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "cli",
+    "bin",
+    "color",
+    "colour",
+    "colors",
+    "terminal",
+    "console",
+    "cli",
+    "ansi",
+    "styles",
+    "tty",
+    "rgb",
+    "256",
+    "shell",
+    "xterm",
+    "command-line",
+    "support",
+    "supports",
+    "capability",
+    "detect"
+  ],
+  "devDependencies": {
+    "mocha": "*",
+    "require-uncached": "^1.0.2"
+  }
+}
