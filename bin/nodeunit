@@ -4,11 +4,6 @@ var
     fs = require('fs'),
     path = require('path');
 
-// TODO: remove this when https://github.com/joyent/node/pull/1312
-//       lands in core.
-//
-// Until then, use console.log from npm (https://gist.github.com/1077544)
-require('../deps/console.log');
 
 //require.paths.push(process.cwd());
 var args = (process.ARGV || process.argv).slice(2);
@@ -21,7 +16,7 @@ var testrunner,
     output_param_found = false,
     reporter_file = 'default',
     reporter_param_found = false,
-    testspec_param_found = false;
+    testspec_param_found = false,
     testFullSpec_param_found = false;
 
 var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
@@ -29,6 +24,7 @@ var usage = "Usage: nodeunit [options] testmodule1.js testfolder [...] \n" +
             "  --config FILE     the path to a JSON file with options\n" +
             "  --reporter FILE   optional path to a reporter file to customize the output\n" +
             "  --list-reporters  list available build-in reporters\n" +
+            "  -r                recursively run tests in sub-directories\n" +
             "  -t testName,      specify a test to run\n" +
             "  -f fullTestName,  specify a specific test to run. fullTestName is built so: \"outerGroup - .. - innerGroup - testName\"\n"  +
             "  -h, --help        display this help and exit\n" +
@@ -63,6 +59,8 @@ args.forEach(function (arg) {
     } else if (reporter_param_found) {
         reporter_file = arg;
         reporter_param_found = false;
+    } else if (arg === '-r') {
+        options.recursive = true;
     } else if (arg === '-t') {
         testspec_param_found = true;
     } else if (testspec_param_found) {
@@ -82,7 +80,7 @@ args.forEach(function (arg) {
         }).filter(function (reporter_file) {
             return reporter_file !== 'index';
         });
-        console.log('Build-in reporters: ');
+        console.log('Built-in reporters: ');
         reporters.forEach(function (reporter_file) {
             var reporter = require('../lib/reporters/' + reporter_file);
             console.log('  * ' + reporter_file + (reporter.info ? ': ' + reporter.info : ''));
@@ -126,7 +124,5 @@ else {
 }
 
 testrunner.run(files, options, function(err) {
-    if (err) {
-        process.exit(1);
-    }
+    process.exit(err ? 1 : 0);
 });

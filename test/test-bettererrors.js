@@ -15,8 +15,8 @@ function betterErrorStringFromError(error) {
 }
 
 function performBasicChecks(betterErrorString) {
-    betterErrorString.should.include("AssertionError");
-    betterErrorString.should.include("test-bettererrors");
+    betterErrorString.should.containEql("AssertionError");
+    betterErrorString.should.containEql("test-bettererrors");
     //betterErrorString.should.not.include("undefined");
 }
 
@@ -30,9 +30,11 @@ exports.testEqual = function (test) {
     } catch (error) {
         var betterErrorString = betterErrorStringFromError(error);
         performBasicChecks(betterErrorString);
-        betterErrorString.should.include("true");
-        betterErrorString.should.include("false");
-        betterErrorString.should.include("==");
+        
+        betterErrorString.should.containEql("true");
+        betterErrorString.should.containEql("false");
+        betterErrorString.should.containEql("==");
+
         test.done();
     }
 };
@@ -66,11 +68,11 @@ exports.testErrorIsNotAssertion = function (test) {
         throw new Error("test error");
     } catch (error) {
         var betterErrorString = betterErrorStringFromError(error);
-        betterErrorString.should.not.include("AssertionError");
-        betterErrorString.should.include("Error");
-        betterErrorString.should.include("test error");
-        betterErrorString.should.include("test-bettererrors");
-        betterErrorString.should.not.include("undefined");
+        betterErrorString.should.not.containEql("AssertionError");
+        betterErrorString.should.containEql("Error");
+        betterErrorString.should.containEql("test error");
+        betterErrorString.should.containEql("test-bettererrors");
+        betterErrorString.should.not.containEql("undefined");
         test.done();
     }
 };
